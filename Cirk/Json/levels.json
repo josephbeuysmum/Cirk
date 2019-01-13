@@ -1,0 +1,74 @@
+{
+	"levels": [
+			   {
+				   "index": 0,
+				   "circles" : [
+							{"x": 0.3, "y": 0.5, "radius": 3, "time": 3},
+							],
+				   "unlockTime": 30
+			   },
+			   {
+				   "index": 1,
+				   "circles" : [
+					   {"x": 0.7, "y": 0.50, "radius": 3, "time": 3},
+				   ],
+				   "unlockTime": 10
+			   },
+			   {
+				   "index": 2,
+				   "circles" : [
+					   {"x": 0.5, "y": 0.5, "radius": 3, "time": 3},
+				   ],
+				   "unlockTime": 3
+			   },
+			   {
+				   "index": 3,
+				   "circles" : [
+							{"x": 0.5, "y": 0.5, "radius": 2, "time": 3},
+							],
+				   "unlockTime": 3
+			   },
+			   {
+				   "index": 4,
+				   "circles" : [
+							{"x": 0.3, "y": 0.5, "radius": 2.5, "time": 3},
+							{"x": 0.7, "y": 0.5, "radius": 2.5, "time": 3}
+							],
+				   "unlockTime": 20
+			   },
+			   {
+				   "index": 5,
+				   "circles" : [
+					   {"x": 0.25, "y": 0.5, "radius": 2.25, "time": 3},
+					   {"x": 0.75, "y": 0.5, "radius": 2.25, "time": 3}
+				   ],
+				   "unlockTime": 10
+			   },
+			   {
+				   "index": 6,
+				   "circles" : [
+					   {"x": 0.5, "y": 0.25, "radius": 3, "time": 3},
+					   {"x": 0.5, "y": 0.75, "radius": 3, "time": 3}
+				   ],
+				   "unlockTime": 10
+			   },
+			   {
+				   "index": 7,
+				   "circles" : [
+					   {"x": 0.5, "y": 0.4, "radius": 2.625, "time": 3},
+					   {"x": 0.5, "y": 0.6, "radius": 2.625, "time": 3}
+				   ],
+				   "unlockTime": 6
+			   },
+			   {
+				   "index": 8,
+				   "circles" : [
+					   {"x": 0.25, "y": 0.3, "radius": 2.5, "time": 1},
+					   {"x": 0.75, "y": 0.3, "radius": 2.5, "time": 1},
+					   {"x": 0.75, "y": 0.7, "radius": 2.5, "time": 1},
+					   {"x": 0.25, "y": 0.7, "radius": 2.5, "time": 1}
+				   ],
+				   "unlockTime": 12
+			   },
+	]
+}
