@@ -6,36 +6,21 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-public enum DTRegions: String {
+public enum Regions: String {
 	case
 	england = "en",
 	france = "fr"
 }
 
-public protocol DTSommelierProtocol {
-	var region: DTRegions { get set }
-	init(bundledJson: DTBundledJson)
-	func set(_ customer: DTCustomerForSommelier?)
-	subscript(name: String) -> String? { get }
+public protocol SommelierProtocol {
+//	var region: Regions { get set }
+//	init(bundledJson: BundledJson)
+//	func set(_ customer: CustomerForSommelier?)
+//	subscript(name: String) -> String? { get }
 }
 
-extension DTSommelier: DTSommelierProtocol {
-	public subscript(name: String) -> String? {
-		guard let wine = wines?[name] else { return nil }
-		if wine.isGlobal {
-			return wine.all
-		} else {
-			switch region.rawValue {
-			case DTRegions.england.rawValue:	return wine.en
-			case DTRegions.france.rawValue:		return wine.fr
-			default:							return nil
-			}
-		}
-	}
-}
-
-public final class DTSommelier {
-	public var region: DTRegions {
+public final class Sommelier {
+	public var region: Regions {
 		get { return region_ }
 		// todo what should happen after the region gets re-set?
 		set {
@@ -45,16 +30,16 @@ public final class DTSommelier {
 		}
 	}
 	
-	fileprivate let wines: [String: DTWine]?
+	fileprivate let wines: [String: Wine]?
 	
 	fileprivate var
-	region_: DTRegions,
-	customer: DTCustomerForSommelier?
+	region_: Regions,
+	customer: CustomerForSommelier?
 	
-	public required init(bundledJson: DTBundledJson) {
+	public required init(bundledJson: BundledJson) {
 		region_ = .england
-		if let unbottledWines = bundledJson.decode(json: "text", into: DTWines.self) {
-			var bottledWines: [String: DTWine] = [:]
+		if let unbottledWines = bundledJson.decode(json: "text", into: Wines.self) {
+			var bottledWines: [String: Wine] = [:]
 			for var unbottledWine in unbottledWines.copy {
 				if let name = unbottledWine.key {
 					unbottledWine.key = nil
@@ -67,16 +52,31 @@ public final class DTSommelier {
 		}
 	}
 	
-	public func set(_ customer: DTCustomerForSommelier?) {
+	public func set(_ customer: CustomerForSommelier?) {
 		self.customer = customer
 	}
 }
 
-internal struct DTWines: Decodable {
-	let copy: [DTWine]
+extension Sommelier: SommelierProtocol {
+	public subscript(name: String) -> String? {
+		guard let wine = wines?[name] else { return nil }
+		if wine.isGlobal {
+			return wine.all
+		} else {
+			switch region.rawValue {
+			case Regions.england.rawValue:	return wine.en
+			case Regions.france.rawValue:		return wine.fr
+			default:													return nil
+			}
+		}
+	}
 }
 
-internal struct DTWine: Decodable {
+internal struct Wines: Decodable {
+	let copy: [Wine]
+}
+
+internal struct Wine: Decodable {
 	var isGlobal: Bool { return all != nil }
 	var key: String?
 	let

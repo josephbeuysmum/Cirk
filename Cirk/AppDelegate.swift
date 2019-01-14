@@ -11,14 +11,14 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-	var maitreD: DTMaitreD!
+	var maitreD: MaitreD!
 	var window: UIWindow?
 
 	func application (
 		_ application: UIApplication,
 		didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		window = UIWindow(frame: UIScreen.main.bounds)
-		maitreD = DTMaitreD()
+		maitreD = MaitreD()
 		maitreD.greet(firstCustomer: Views.introCustomer, through: window!)
 		return true
 	}

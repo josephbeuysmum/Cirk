@@ -7,31 +7,31 @@
 
 import Foundation
 
-public protocol DTBundledJsonProtocol: DTKitchenMember {
-	var settings: DTJsonSettings? { get }
+public protocol BundledJsonProtocol: KitchenMember {
+	var settings: JsonSettings? { get }
 	func decode<T>(json fileName: String, into type: T.Type) -> T? where T : Decodable
 }
 
-public class DTBundledJson {
-	public var headChef: DTHeadChefForKitchenMember?
+public class BundledJson {
+	public var headChef: HeadChefForKitchenMember?
 	
 	fileprivate var
-	settings_: DTJsonSettings?
+	settings_: JsonSettings?
 	
-	required public init(_ kitchenStaff: [String: DTKitchenMember]? = nil) {
+	required public init(_ kitchenStaff: [String: KitchenMember]? = nil) {
 		parseSettings()
 	}
 	
 	deinit {}
 }
 
-fileprivate struct DTPrivateSetting: Decodable {
+fileprivate struct PrivateSetting: Decodable {
 	let key: String
 	let value: String
 }
 
-extension DTBundledJson: DTBundledJsonProtocol {
-	public var settings: DTJsonSettings? { return settings_ }
+extension BundledJson: BundledJsonProtocol {
+	public var settings: JsonSettings? { return settings_ }
 	
 	public func decode<T>(json fileName: String, into type: T.Type) -> T? where T : Decodable {
 		guard
@@ -65,17 +65,17 @@ extension DTBundledJson: DTBundledJsonProtocol {
 	}
 	
 	fileprivate func parseSettings() {
-		guard let decodedSettings = decode(json: DTPrivateSettings.CodingKeys.data.rawValue, into: DTPrivateSettings.self) else { return }
+		guard let decodedSettings = decode(json: PrivateSettings.CodingKeys.data.rawValue, into: PrivateSettings.self) else { return }
 		var settings: Dictionary<String, String> = [:]
 		for setting in decodedSettings.data {
 			guard settings[setting.key] == nil else { fatalError("DUPLICATED SETTING") }
 			settings[setting.key] = setting.value
 		}
-		settings_ = DTJsonSettings(settings: settings)
+		settings_ = JsonSettings(settings: settings)
 	}
 }
 
-public struct DTJsonSettings {
+public struct JsonSettings {
 	let settings: Dictionary<String, String>
 	
 	public subscript(key: String) -> String? {
@@ -83,8 +83,8 @@ public struct DTJsonSettings {
 	}
 }
 
-fileprivate struct DTPrivateSettings: Decodable {
-	let data: [DTPrivateSetting]
+fileprivate struct PrivateSettings: Decodable {
+	let data: [PrivateSetting]
 	
 	enum CodingKeys: String, CodingKey {
 		case data = "settings"

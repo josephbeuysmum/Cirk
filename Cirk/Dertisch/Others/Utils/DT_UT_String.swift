@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class DTString {
+public class StringUtils {
 	// returns the first index of the given substring, or nil if it cannot be found
 	public static func getIndexOf ( subString: String, inString string: String, startingAt startIndex: Int? = 0 ) -> Int? {
 		let
@@ -33,11 +33,11 @@ public class DTString {
 	// returns the indices of the given one-char String, or nil if none can be found
 	public static func getIndicesOf ( subString: String, inString string: String ) -> [ Int ]? {
 		var
-		subStringIndex = DTString.getIndexOf( subString: subString, inString: string, startingAt: 0 ),
+		subStringIndex = StringUtils.getIndexOf( subString: subString, inString: string, startingAt: 0 ),
 		indices: [ Int ] = []
 		while subStringIndex != nil {
 			indices.append( subStringIndex! )
-			subStringIndex = DTString.getIndexOf(
+			subStringIndex = StringUtils.getIndexOf(
 				subString: subString,
 				inString: string,
 				startingAt: subStringIndex! + 1 )
@@ -68,7 +68,7 @@ public class DTString {
 	public static func serialise ( array: [ Any ]?, withSeparator separator: String? = " " ) -> String? {
 		guard array != nil else { return nil }
 //		let countValues = values.count
-		var result = DTCChars.emptyString
+		var result = Chars.emptyString
 		// serialise first value
 		if array!.count > 0 { result = "\( array![ 0 ] )" }
 		// loop through rest serialising then adding them
@@ -91,7 +91,7 @@ public class DTString {
 			adjustedString = getSubStringOf( string: string, between: 0, and: newLength )
 		// ...otherwise keep adding a space to the end until the new length is reached
 		case adjustedString!.count < newLength:
-			let space = DTCChars.space
+			let space = Chars.space
 			while adjustedString!.count < newLength { adjustedString = "\( adjustedString! )\( space )" }
 		default: ()
 		}
@@ -119,7 +119,7 @@ public class DTString {
 		// runs through scalars scalar-by-scalar building the phrase
 		var
 		index = 0,
-		subStringByScalars = DTCChars.emptyString
+		subStringByScalars = Chars.emptyString
 		for scalar in string.unicodeScalars {
 			// keep skipping scalars until we get to the desired start index,
 			// then progressively add each char until we reach the end of the phrase

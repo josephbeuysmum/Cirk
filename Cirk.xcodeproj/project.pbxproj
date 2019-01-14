@@ -28,7 +28,7 @@
 		A9338315216B915200A2FCE3 /* DT_UT_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382E1216B915200A2FCE3 /* DT_UT_Extensions.swift */; };
 		A9338316216B915200A2FCE3 /* DT_UT_String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382E2216B915200A2FCE3 /* DT_UT_String.swift */; };
 		A9338324216B915200A2FCE3 /* DT_IG_BundledJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382F5216B915200A2FCE3 /* DT_IG_BundledJson.swift */; };
-		A9338325216B915200A2FCE3 /* DT_IG_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382F6216B915200A2FCE3 /* DT_IG_CoreData.swift */; };
+		A9338325216B915200A2FCE3 /* DT_IG_Freezer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382F6216B915200A2FCE3 /* DT_IG_Freezer.swift */; };
 		A9338326216B915200A2FCE3 /* DT_IG_UrlSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382F7216B915200A2FCE3 /* DT_IG_UrlSession.swift */; };
 		A9338327216B915200A2FCE3 /* DT_KS_HeadChef.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382F9216B915200A2FCE3 /* DT_KS_HeadChef.swift */; };
 		A933832B216B915200A2FCE3 /* DT_KS_Kitchen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382FD216B915200A2FCE3 /* DT_KS_Kitchen.swift */; };
@@ -56,7 +56,7 @@
 		A98795C4219C1CC20041CA40 /* DT_ET_StaffRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98795BE219C1CC20041CA40 /* DT_ET_StaffRelationship.swift */; };
 		A98795C5219C1CC20041CA40 /* DT_ET_Tickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98795BF219C1CC20041CA40 /* DT_ET_Tickets.swift */; };
 		A98795C6219C1CC20041CA40 /* DT_ET_SwitchesRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98795C0219C1CC20041CA40 /* DT_ET_SwitchesRelationship.swift */; };
-		A98795C7219C1CC20041CA40 /* DT_ET_ApiResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98795C1219C1CC20041CA40 /* DT_ET_ApiResult.swift */; };
+		A98795C7219C1CC20041CA40 /* DT_ET_RawIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98795C1219C1CC20041CA40 /* DT_ET_RawIngredient.swift */; };
 		A98795C8219C1CC20041CA40 /* DT_ET_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98795C2219C1CC20041CA40 /* DT_ET_CoreData.swift */; };
 		A98795CB219C3F6C0041CA40 /* BallbearingPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98795CA219C3F6C0041CA40 /* BallbearingPlayer.swift */; };
 		A98795CF219CC2920041CA40 /* tickTock.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A98795CE219CC2920041CA40 /* tickTock.mp3 */; };
@@ -113,7 +113,7 @@
 		A93382E1216B915200A2FCE3 /* DT_UT_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Extensions.swift; sourceTree = "<group>"; };
 		A93382E2216B915200A2FCE3 /* DT_UT_String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_String.swift; sourceTree = "<group>"; };
 		A93382F5216B915200A2FCE3 /* DT_IG_BundledJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_IG_BundledJson.swift; sourceTree = "<group>"; };
-		A93382F6216B915200A2FCE3 /* DT_IG_CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_IG_CoreData.swift; sourceTree = "<group>"; };
+		A93382F6216B915200A2FCE3 /* DT_IG_Freezer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_IG_Freezer.swift; sourceTree = "<group>"; };
 		A93382F7216B915200A2FCE3 /* DT_IG_UrlSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_IG_UrlSession.swift; sourceTree = "<group>"; };
 		A93382F9216B915200A2FCE3 /* DT_KS_HeadChef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_KS_HeadChef.swift; sourceTree = "<group>"; };
 		A93382FD216B915200A2FCE3 /* DT_KS_Kitchen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_KS_Kitchen.swift; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 		A98795BE219C1CC20041CA40 /* DT_ET_StaffRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_StaffRelationship.swift; sourceTree = "<group>"; };
 		A98795BF219C1CC20041CA40 /* DT_ET_Tickets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_Tickets.swift; sourceTree = "<group>"; };
 		A98795C0219C1CC20041CA40 /* DT_ET_SwitchesRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_SwitchesRelationship.swift; sourceTree = "<group>"; };
-		A98795C1219C1CC20041CA40 /* DT_ET_ApiResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_ApiResult.swift; sourceTree = "<group>"; };
+		A98795C1219C1CC20041CA40 /* DT_ET_RawIngredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_RawIngredient.swift; sourceTree = "<group>"; };
 		A98795C2219C1CC20041CA40 /* DT_ET_CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_CoreData.swift; sourceTree = "<group>"; };
 		A98795CA219C3F6C0041CA40 /* BallbearingPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallbearingPlayer.swift; sourceTree = "<group>"; };
 		A98795CE219CC2920041CA40 /* tickTock.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tickTock.mp3; sourceTree = "<group>"; };
@@ -309,7 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				A93382F5216B915200A2FCE3 /* DT_IG_BundledJson.swift */,
-				A93382F6216B915200A2FCE3 /* DT_IG_CoreData.swift */,
+				A93382F6216B915200A2FCE3 /* DT_IG_Freezer.swift */,
 				A93382F7216B915200A2FCE3 /* DT_IG_UrlSession.swift */,
 			);
 			path = Ingredients;
@@ -418,8 +418,8 @@
 		A98795BD219C1CC20041CA40 /* Entrees */ = {
 			isa = PBXGroup;
 			children = (
-				A98795C1219C1CC20041CA40 /* DT_ET_ApiResult.swift */,
 				A98795C2219C1CC20041CA40 /* DT_ET_CoreData.swift */,
+				A98795C1219C1CC20041CA40 /* DT_ET_RawIngredient.swift */,
 				A98795BE219C1CC20041CA40 /* DT_ET_StaffRelationship.swift */,
 				A98795C0219C1CC20041CA40 /* DT_ET_SwitchesRelationship.swift */,
 				A98795BF219C1CC20041CA40 /* DT_ET_Tickets.swift */,
@@ -624,14 +624,14 @@
 				A98795C6219C1CC20041CA40 /* DT_ET_SwitchesRelationship.swift in Sources */,
 				A9338316216B915200A2FCE3 /* DT_UT_String.swift in Sources */,
 				A98795C5219C1CC20041CA40 /* DT_ET_Tickets.swift in Sources */,
-				A9338325216B915200A2FCE3 /* DT_IG_CoreData.swift in Sources */,
+				A9338325216B915200A2FCE3 /* DT_IG_Freezer.swift in Sources */,
 				A9338326216B915200A2FCE3 /* DT_IG_UrlSession.swift in Sources */,
 				A9776DDF2153E3F700693C99 /* LevelsMenuItem.swift in Sources */,
 				A9776DD22153B63C00693C99 /* LevelsWaiter.swift in Sources */,
 				A933832B216B915200A2FCE3 /* DT_KS_Kitchen.swift in Sources */,
 				A9B0120121A58EC3008212C7 /* MenuCustomer.swift in Sources */,
 				A9776D9D2153962A00693C99 /* CircleRenderer.swift in Sources */,
-				A98795C7219C1CC20041CA40 /* DT_ET_ApiResult.swift in Sources */,
+				A98795C7219C1CC20041CA40 /* DT_ET_RawIngredient.swift in Sources */,
 				A9338303216B915200A2FCE3 /* DT_CT_PageCustomer.swift in Sources */,
 				A9338315216B915200A2FCE3 /* DT_UT_Extensions.swift in Sources */,
 				A94577A321E78977006C1934 /* DT_UT_Reflector.swift in Sources */,

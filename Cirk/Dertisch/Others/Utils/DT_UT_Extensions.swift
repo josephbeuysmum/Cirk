@@ -84,7 +84,7 @@ public extension Date {
 		if hours(from: date) > 0 { return "\(hours(from: date))h" }
 		if minutes(from: date) > 0 { return "\(minutes(from: date))m" }
 		if seconds(from: date) > 0 { return "\(seconds(from: date))s" }
-		return DTCChars.emptyString
+		return Chars.emptyString
 	}
 }
 

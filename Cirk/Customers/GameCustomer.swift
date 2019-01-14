@@ -13,7 +13,7 @@ import UIKit
 fileprivate typealias AlertDetails = (header: String, actions: [UIAlertAction])
 fileprivate typealias AnimDetails = (text: String, effect: Effects)
 
-class GameCustomer: DTCustomer {
+class GameCustomer: Customer {
 	@IBOutlet weak var backgroundImage: UIImageView!
 	@IBOutlet weak var levelKeyLabel: UILabel!
 	@IBOutlet weak var levelValueLabel: UILabel!
@@ -46,9 +46,9 @@ class GameCustomer: DTCustomer {
 	screenBounds: CGRect!,
 	timeInsideCircle: Float!,
 	gameTime: Float!,
-	maitreD: DTMaitreD!,
-	waiter: DTWaiterForCustomer!,
-	sommelier: DTSommelier!,
+	maitreD: MaitreD!,
+	waiter: WaiterForCustomer!,
+	sommelier: Sommelier!,
 	motionManager: CMMotionManager!,
 	ball: UIImageView!,
 	cirk: UIImageView!,
@@ -80,7 +80,7 @@ class GameCustomer: DTCustomer {
 	
 //	deinit { lo("au revoir game customer") }
 	
-	override func assign(_ waiter: DTWaiterForCustomer, maitreD: DTMaitreD, and sommelier: DTSommelier) {
+	override func assign(_ waiter: WaiterForCustomer, maitreD: MaitreD, and sommelier: Sommelier) {
 		self.waiter = waiter
 		self.maitreD = maitreD
 		self.sommelier = sommelier
@@ -126,12 +126,12 @@ class GameCustomer: DTCustomer {
 		timeValueLabel.textColor = black
 		personalBestValueLabel.textColor = teal
 		
-		ball = UIImageView(image: UIImage(named: Images.ball))
+		ball = UIImageView(image: UIImage(named: ImageNames.ball))
 		
 		let label = UILabel()
 		label.font = UIFont.systemFont(ofSize: 168)
 		countdownLabel = label
-		backgroundImage.image = UIImage(named: Images.wood)
+		backgroundImage.image = UIImage(named: ImageNames.wood)
 		
 		restartButton.addTarget(self, action: #selector(restartButtonTarget), for: .touchUpInside)
 		levelsButton.addTarget(self, action: #selector(levelsButtonTarget), for: .touchUpInside)
@@ -145,11 +145,11 @@ class GameCustomer: DTCustomer {
 	}
 	
 	override func regionChosen() {
-		levelKeyLabel.text = "\(sommelier[Sommelier.level]!):"
-		targetKeyLabel.text = "\(sommelier[Sommelier.unlockTime]!):"
-		cirksKeyLabel.text = "\(sommelier[Sommelier.cirks]!):"
-		timeKeyLabel.text = "\(sommelier[Sommelier.total]!):"
-		personalBestKeyLabel.text = "\(sommelier[Sommelier.personalBest]!):"
+		levelKeyLabel.text = "\(sommelier[SommelierKeys.level]!):"
+		targetKeyLabel.text = "\(sommelier[SommelierKeys.unlockTime]!):"
+		cirksKeyLabel.text = "\(sommelier[SommelierKeys.cirks]!):"
+		timeKeyLabel.text = "\(sommelier[SommelierKeys.total]!):"
+		personalBestKeyLabel.text = "\(sommelier[SommelierKeys.personalBest]!):"
 	}
 	
 	
@@ -308,24 +308,24 @@ class GameCustomer: DTCustomer {
 	}
 	
 	private func getCancelAction() -> UIAlertAction {
-		return UIAlertAction(title: sommelier[Sommelier.cancel], style: .cancel) { [weak self] _ in
+		return UIAlertAction(title: sommelier[SommelierKeys.cancel], style: .cancel) { [weak self] _ in
 			self?.maitreD.usherOutCurrentCustomer()
 		}
 	}
 	
 	private func getChooseLevelAction() -> UIAlertAction {
-		return UIAlertAction(title: sommelier[Sommelier.changeLevel], style: .default) { [weak self] _ in
+		return UIAlertAction(title: sommelier[SommelierKeys.changeLevel], style: .default) { [weak self] _ in
 			self?.maitreD.present(popoverMenu: Views.levelsMenu)
 		}
 	}
 	
 	private func getNextLevelAction() -> UIAlertAction {
-		return UIAlertAction(title: sommelier[Sommelier.playNextLevel], style: .default) { [weak self] _ in
+		return UIAlertAction(title: sommelier[SommelierKeys.playNextLevel], style: .default) { [weak self] _ in
 			guard
 				let strongSelf = self,
 				let levelIndex: Int = strongSelf.waiter.carte?.des("json.index")
 				else { return }
-			strongSelf.waiter.give(DTOrder(Tickets.setLevel, levelIndex + 1))
+			strongSelf.waiter.give(Order(Tickets.setLevel, levelIndex + 1))
 		}
 	}
 	
@@ -372,7 +372,7 @@ class GameCustomer: DTCustomer {
 		
 		drawCircles()
 		animate(
-			[("3", Effects.beep), ("2", Effects.beep), ("1", Effects.beep), (sommelier[Sommelier.go]!, Effects.start)],
+			[("3", Effects.beep), ("2", Effects.beep), ("1", Effects.beep), (sommelier[SommelierKeys.go]!, Effects.start)],
 			color: getColor(by: Colors.crimson))
 	}
 
@@ -393,14 +393,12 @@ class GameCustomer: DTCustomer {
 	private func startBallRolling() {
 		guard
 			let carte = waiter.carte,
-			let level: Level = carte.entrees()
-			else { return }
-		let circles = level.json.circles
-		guard
+			let level: Level = carte.entrees(),
 			let unlockTime: Float = carte.des("json.unlockTime"),
 			let levelIndex: Int = carte.des("json.index"),
 			let nextAlreadyLevelUnlocked: Bool = carte.des("nextLevelUnlocked")
 			else { return }
+		let circles = level.json.circles
 		var
 		circleData = circles[circleIndex],
 		countCircles = circles.count,
@@ -494,6 +492,7 @@ class GameCustomer: DTCustomer {
 						textColor: CircleColors,
 						title: String
 						var actions: [UIAlertAction]
+						
 						if newPersonalBest {
 							personalBest = roundedGameTime
 						}
@@ -501,28 +500,28 @@ class GameCustomer: DTCustomer {
 						if nextAlreadyLevelUnlocked {
 							textColor = newPersonalBest ? Colors.teal : Colors.black
 							actions = [
-								strongSelf.getReplayAction(with: Sommelier.improvePersonalBest),
+								strongSelf.getReplayAction(with: SommelierKeys.improvePersonalBest),
 								strongSelf.getChooseLevelAction(),
 								strongSelf.getNextLevelAction()]
 							switch true {
-							case newPersonalBest:																				title = strongSelf.sommelier[Sommelier.newPB]!
-							case hasPersonalBest && roundedGameTime == personalBest:		title = strongSelf.sommelier[Sommelier.matchedPB]!
-							case almostUnlocked:																				title = strongSelf.sommelier[Sommelier.almost]!
-							default:																										title = strongSelf.sommelier[Sommelier.playAgain]!
+							case newPersonalBest:																				title = strongSelf.sommelier[SommelierKeys.newPB]!
+							case hasPersonalBest && roundedGameTime == personalBest:		title = strongSelf.sommelier[SommelierKeys.matchedPB]!
+							case almostUnlocked:																				title = strongSelf.sommelier[SommelierKeys.almost]!
+							default:																										title = strongSelf.sommelier[SommelierKeys.playAgain]!
 							}
 						} else {
 							if unlocked {
 								textColor = Colors.teal
 								actions = [
 									strongSelf.getNextLevelAction(),
-									strongSelf.getReplayAction(with: Sommelier.improvePersonalBest)]
-								title = strongSelf.sommelier[Sommelier.levelUnlocked]!
-								strongSelf.waiter.give(DTOrder(Tickets.unlock, levelIndex + 1))
+									strongSelf.getReplayAction(with: SommelierKeys.improvePersonalBest)]
+								title = strongSelf.sommelier[SommelierKeys.levelUnlocked]!
+								strongSelf.waiter.give(Order(Tickets.unlock, levelIndex + 1))
 							} else {
 								textColor = Colors.black
-								let titleKey = almostUnlocked ? Sommelier.almost : Sommelier.playAgain
+								let titleKey = almostUnlocked ? SommelierKeys.almost : SommelierKeys.playAgain
 								actions = [strongSelf.getReplayAction(with: titleKey)]
-								title = strongSelf.sommelier[Sommelier.levelNotUnlocked]!
+								title = strongSelf.sommelier[SommelierKeys.levelNotUnlocked]!
 							}
 							if !isFirstLevel { actions.append(strongSelf.getChooseLevelAction()) }
 						}
@@ -536,7 +535,7 @@ class GameCustomer: DTCustomer {
 							color: strongSelf.getColor(by: textColor))
 						strongSelf.personalBestValueLabel.text = "\(strongSelf.roundFloat(personalBest))"
 						if newPersonalBest {
-							strongSelf.waiter.give(DTOrder(
+							strongSelf.waiter.give(Order(
 								Tickets.personalBest,
 								PBMetrics(value: personalBest, levelIndex: levelIndex)))
 						}
@@ -557,7 +556,7 @@ class GameCustomer: DTCustomer {
 			
 			if isOffScreen {
 				if strongSelf.arrow == nil {
-					strongSelf.arrow = UIImageView(image: UIImage(named: Images.arrow))
+					strongSelf.arrow = UIImageView(image: UIImage(named: ImageNames.arrow))
 					let
 					arrowWidth = strongSelf.screenBounds.height / 4,
 					arrowHeight = arrowWidth / 3.764705882352941

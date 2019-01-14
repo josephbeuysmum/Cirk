@@ -13,13 +13,13 @@ class LevelsMenu: MenuCustomer {
 //	private var carte: LevelsCarte? { return waiter.carte as? LevelsCarte }
 	
 	private var
-	maitreD: DTMaitreD!, 
-	sommelier: DTSommelier!,
-	waiter: DTWaiterForCustomer!
+	maitreD: MaitreD!, 
+	sommelier: Sommelier!,
+	waiter: WaiterForCustomer!
 	
 //	deinit { lo("au revoir levels menu") }
 	
-	override func assign(_ waiter: DTWaiterForCustomer, maitreD: DTMaitreD, and sommelier: DTSommelier) {
+	override func assign(_ waiter: WaiterForCustomer, maitreD: MaitreD, and sommelier: Sommelier) {
 		self.waiter = waiter
 		self.maitreD = maitreD
 		self.sommelier = sommelier
@@ -32,7 +32,7 @@ class LevelsMenu: MenuCustomer {
 	override func placeOrder() {
 		super.placeOrder()
 		tableView.register(UINib(nibName: Views.levelsCell, bundle: nil), forCellReuseIdentifier: Views.levelsCell)
-		dismissButton.setTitle(sommelier[Sommelier.close]!, for: .normal)
+		dismissButton.setTitle(sommelier[SommelierKeys.close]!, for: .normal)
 		dismissButton.addTarget(self, action: #selector(dismissButtonTarget), for: .touchUpInside)
 	}
 	
@@ -66,9 +66,9 @@ extension LevelsMenu: UITableViewDataSource {
 			let tableHeader = tableView.dequeueReusableCell(withIdentifier: Views.levelsCell) as? LevelsMenuItem
 			else { return nil }
 		tableHeader.serve(with: LevelsTableHeader(
-			level: sommelier[Sommelier.level]!,
-			target: sommelier[Sommelier.target]!,
-			personalBest: sommelier[Sommelier.personalBest]!))
+			level: sommelier[SommelierKeys.level]!,
+			target: sommelier[SommelierKeys.target]!,
+			personalBest: sommelier[SommelierKeys.personalBest]!))
 		return tableHeader
 	}
 }
@@ -76,7 +76,7 @@ extension LevelsMenu: UITableViewDataSource {
 extension LevelsMenu {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let row = indexPath.row
-		waiter.give(DTOrder(Tickets.setLevel, row))
+		waiter.give(Order(Tickets.setLevel, row))
 		maitreD.removeMenu("\(row)")
 	}
 }

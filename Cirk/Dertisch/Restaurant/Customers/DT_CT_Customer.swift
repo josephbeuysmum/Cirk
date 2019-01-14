@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol DTCustomerForWaiter: class {
+public protocol CustomerForWaiter: class {
 	func approach()
 //	func firstDishServed()
 //	func placeOrder()
@@ -17,17 +17,17 @@ public protocol DTCustomerForWaiter: class {
 //	func returnMenuToWaiter(_ chosenDishId: String?)
 }
 
-public protocol DTCustomerForSommelier {
+public protocol CustomerForSommelier {
 	func regionChosen()
 }
 
-public protocol DTCustomerProtocol: DTCustomerForWaiter, DTCustomerForSommelier {
-	func assign(_ waiter: DTWaiterForCustomer, maitreD: DTMaitreD, and sommelier: DTSommelier)
+public protocol CustomerProtocol: CustomerForWaiter, CustomerForSommelier {
+	func assign(_ waiter: WaiterForCustomer, maitreD: MaitreD, and sommelier: Sommelier)
 }
 
-open class DTCustomer: UIViewController {
+open class Customer: UIViewController {
 	// these can only be overridden if they are here as opposed to the extension below
-	open func assign(_ waiter: DTWaiterForCustomer, maitreD: DTMaitreD, and sommelier: DTSommelier) {}
+	open func assign(_ waiter: WaiterForCustomer, maitreD: MaitreD, and sommelier: Sommelier) {}
 	open func finishMeal() {}
 	open func firstDishServed() {}
 	open func returnMenuToWaiter(_ chosenDishId: String?) {}
@@ -43,7 +43,7 @@ open class DTCustomer: UIViewController {
 	
 	override final public func viewDidLoad() {
 		super.viewDidLoad()
-		if let labels = DTReflector().getAll(UILabel.self, from: Mirror(reflecting: self)) {
+		if let labels = Reflector().getAll(UILabel.self, from: Mirror(reflecting: self)) {
 			for label in labels {
 				label.text = nil
 			}
@@ -54,7 +54,7 @@ open class DTCustomer: UIViewController {
 	private final func checkReadinessToOrder() {
 		guard
 			isViewLoaded,
-			let waiter = DTReflector().getFirst(DTWaiterForCustomer.self, from: Mirror(reflecting: self)),
+			let waiter = Reflector().getFirst(WaiterForCustomer.self, from: Mirror(reflecting: self)),
 			waiter.onShift
 			else { return }
 		placeOrder()
@@ -62,7 +62,7 @@ open class DTCustomer: UIViewController {
 	}
 }
 
-extension DTCustomer: DTCustomerProtocol {
+extension Customer: CustomerProtocol {
 	public final func approach() {
 		checkReadinessToOrder()
 	}

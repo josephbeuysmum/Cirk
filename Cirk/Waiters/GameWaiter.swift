@@ -10,13 +10,13 @@ import AVFoundation
 //import Dertisch
 
 // todo all this is basically GeneralWaiter with a bespoke [Game]Carte added, so if we make the carte generic too [with a subscript? [and casting accessors a la JsonThingy?]] then we can do away with this class/code
-class GameWaiter: DTWaiter {
+class GameWaiter: Waiter {
 	fileprivate var
-	customer: DTCustomerForWaiter!,
-	headChef: DTHeadChefForWaiter!,
-	carte_: DTCarteForCustomer?
+	customer: CustomerForWaiter!,
+	headChef: HeadChefForWaiter!,
+	carte_: CarteForCustomer?
 
-	required init(customer: DTCustomerForWaiter, headChef: DTHeadChefForWaiter?) {
+	required init(customer: CustomerForWaiter, headChef: HeadChefForWaiter?) {
 //		lo("bonjour game waiter")
 		self.customer = customer
 		self.headChef = headChef
@@ -25,22 +25,22 @@ class GameWaiter: DTWaiter {
 //	deinit { lo("au revoir game waiter") }
 }
 
-extension GameWaiter: DTEndShiftProtocol {
+extension GameWaiter: EndShiftProtocol {
 	func endShift() {
 		customer = nil
 		headChef = nil
 	}
 }
 
-extension GameWaiter: DTWaiterForCustomer {
-	var carte: DTCarteForCustomer? {
+extension GameWaiter: WaiterForCustomer {
+	var carte: CarteForCustomer? {
 		return carte_
 	}
 }
 
-extension GameWaiter: DTWaiterForWaiter {
-	func fillCarte(with entrees: DTOrderFromKitchen) {
+extension GameWaiter: WaiterForWaiter {
+	func fillCarte(with entrees: FulfilledOrder) {
 		guard let dishes = entrees.dishes else { return }
-		carte_ = DTCarte(dishes)
+		carte_ = Carte(dishes)
 	}
 }

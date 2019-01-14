@@ -8,7 +8,7 @@
 
 // kudos to everyone involved in this stack overflow thread:
 // stackoverflow.com/questions/27989094/how-to-unwrap-an-optional-value-from-any-type
-struct DTReflector {
+struct Reflector {
 	func getAll<T>(_ type: T.Type, from mirror: Mirror) -> [T]? {
 		return instances(of: type, from: mirror, getAll: true)
 	}

@@ -9,15 +9,15 @@
 //import Dertisch
 import Foundation
 
-class LevelsWaiter: DTWaiter {
+class LevelsWaiter: Waiter {
 	fileprivate weak var
-	customer: DTCustomerForWaiter!
+	customer: CustomerForWaiter!
 	
 	fileprivate var
-	headChef: DTHeadChefForWaiter!,
-	carte_: DTCarteForCustomer?
+	headChef: HeadChefForWaiter!,
+	carte_: CarteForCustomer?
 
-	required init(customer: DTCustomerForWaiter, headChef: DTHeadChefForWaiter?) {
+	required init(customer: CustomerForWaiter, headChef: HeadChefForWaiter?) {
 //		lo("bonjour levels waiter")
 		self.customer = customer
 		self.headChef = headChef
@@ -26,22 +26,22 @@ class LevelsWaiter: DTWaiter {
 //	deinit { lo("au revoir levels waiter") }
 }
 
-// todo we've managed to make DTCustomer nillify itself via a weak ref., let's do the same for the head chef etc.
-extension LevelsWaiter: DTEndShiftProtocol {
+// todo we've managed to make Customer nillify itself via a weak ref., let's do the same for the head chef etc.
+extension LevelsWaiter: EndShiftProtocol {
 	func endShift() {
 		headChef = nil
 	}
 }
 
-extension LevelsWaiter: DTWaiterForCustomer {
-	var carte: DTCarteForCustomer? {
+extension LevelsWaiter: WaiterForCustomer {
+	var carte: CarteForCustomer? {
 		return carte_
 	}
 }
 
-extension LevelsWaiter: DTWaiterForWaiter {
-	func fillCarte(with entrees: DTOrderFromKitchen) {
+extension LevelsWaiter: WaiterForWaiter {
+	func fillCarte(with entrees: FulfilledOrder) {
 		guard let dishes = entrees.dishes else { return }
-		carte_ = DTCarte(dishes)
+		carte_ = Carte(dishes)
 	}
 }

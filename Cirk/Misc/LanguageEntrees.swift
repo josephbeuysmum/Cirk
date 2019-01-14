@@ -10,10 +10,10 @@ struct LanguageEntre {
 	let name: String, flag: String?
 }
 
-struct LanguageCellEntrees: DTDishionarizer {
+struct LanguageCellEntrees: Dishionarizer {
 	let names: [LanguageCellEntre]
 }
 
-struct LanguageCellEntre: DTDishionarizer {
+struct LanguageCellEntre: Dishionarizer {
 	let name: String
 }

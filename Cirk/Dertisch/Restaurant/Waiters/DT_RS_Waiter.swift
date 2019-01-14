@@ -8,31 +8,31 @@
 
 import Foundation
 
-public protocol DTDish {}
-public protocol DTSimpleDish: DTDish {}
-public protocol DTComplexDish: DTDish {}
+public protocol Dish {}
+public protocol SimpleDish: Dish {}
+public protocol ComplexDish: Dish {}
 
-extension Array: DTSimpleDish {}
-extension Bool: DTSimpleDish {}
-extension Double: DTSimpleDish {}
-extension Float: DTSimpleDish {}
-extension Int: DTSimpleDish {}
-extension String: DTSimpleDish {}
+extension Array: SimpleDish {}
+extension Bool: SimpleDish {}
+extension Double: SimpleDish {}
+extension Float: SimpleDish {}
+extension Int: SimpleDish {}
+extension String: SimpleDish {}
 
-public typealias DTDishionary = [String: DTSimpleDish]
+public typealias Dishionary = [String: SimpleDish]
 
-public struct DTDishes: DTComplexDish {
+public struct Dishes: ComplexDish {
 	
-	private var dishes = DTDishionary()
+	private var dishes = Dishionary()
 	
-	init(_ dishes: DTDishionary) {
+	init(_ dishes: Dishionary) {
 		self.dishes = dishes
 	}
 }
 
-extension DTDishes: Collection {
-	public typealias Index = DTDishionary.Index
-	public typealias Element = DTDishionary.Element
+extension Dishes: Collection {
+	public typealias Index = Dishionary.Index
+	public typealias Element = Dishionary.Element
 	
 	public var startIndex: Index { return dishes.startIndex }
 	public var endIndex: Index { return dishes.endIndex }
@@ -41,7 +41,7 @@ extension DTDishes: Collection {
 		get { return dishes[index] }
 	}
 	
-	public subscript(key: String) -> DTSimpleDish? {
+	public subscript(key: String) -> SimpleDish? {
 		get { return dishes[key] }
 	}
 	
@@ -50,17 +50,17 @@ extension DTDishes: Collection {
 	}
 }
 
-public protocol DTDishionarizer {
-	var dishionary: DTDishionary? { get }
+public protocol Dishionarizer {
+	var dishionary: Dishionary? { get }
 }
 
-fileprivate func dishionize(_ value: Any) -> DTDishionary? {
-	var dishionary = DTDishionary()
+fileprivate func dishionize(_ value: Any) -> Dishionary? {
+	var dishionary = Dishionary()
 	dishionize_(value, in: &dishionary)
 	return dishionary.count > 0 ? dishionary : nil
 }
 
-fileprivate func dishionize_(_ value: Any, in dishionary: inout DTDishionary, with prefix: String? = nil) {
+fileprivate func dishionize_(_ value: Any, in dishionary: inout Dishionary, with prefix: String? = nil) {
 	let mirror = Mirror(reflecting: value)
 	var arrayCount = 0
 	_ = mirror.children.compactMap {
@@ -74,18 +74,18 @@ fileprivate func dishionize_(_ value: Any, in dishionary: inout DTDishionary, wi
 				dishionary["\(compositeLabel).count"] = array.count
 			}
 			dishionize_($0.value, in: &dishionary, with: compositeLabel)
-		} else if let value = $0.value as? DTSimpleDish {
+		} else if let value = $0.value as? SimpleDish {
 			dishionary[compositeLabel] = value
 		}
 		arrayCount += 1
 	}
 }
 
-extension DTDishionarizer {
+extension Dishionarizer {
 	// todo make dishionary once and once only
-	var dishionary: DTDishionary? {
+	var dishionary: Dishionary? {
 //		lo("dish..............", self)
-//		if let dishion = DTReflector().getFirst(DTDishionary.self, from: Mirror(reflecting: self)) {
+//		if let dishion = Reflector().getFirst(Dishionary.self, from: Mirror(reflecting: self)) {
 //			lo("dishion exists")
 //			return dishion
 //		} else {
@@ -99,26 +99,26 @@ extension DTDishionarizer {
 
 
 
-public protocol DTCarteForCustomer {}
+public protocol CarteForCustomer {}
 
 // todo reinstate carte.stock()? And see if we can somehow make it generic?
-public protocol DTCarteForWaiter {
-//	func stock(with order: DTOrderFromKitchen)
+public protocol CarteForWaiter {
+//	func stock(with order: FulfilledOrder)
 	func empty()
 }
 
-public protocol DTCarteProtocol: DTCarteForCustomer, DTCarteForWaiter {
-//	init(_ entrees: DTDishes?)
+public protocol CarteProtocol: CarteForCustomer, CarteForWaiter {
+//	init(_ entrees: Dishes?)
 }
 
-public extension DTCarteForWaiter {
-//	func stock(with order: DTOrderFromKitchen) { lo() }
+public extension CarteForWaiter {
+//	func stock(with order: FulfilledOrder) { lo() }
 	func empty() {}
 }
 
-public extension DTCarteForCustomer {
+public extension CarteForCustomer {
 	func des<T>(_ id: String) -> T? {
-		guard let dishes = (self as? DTCarte)?.dishes_ else { return nil }
+		guard let dishes = (self as? Carte)?.dishes_ else { return nil }
 		let tempValue: Any?
 		if let mandatoryValue = dishes[id] {
 			tempValue = mandatoryValue
@@ -158,18 +158,18 @@ public extension DTCarteForCustomer {
 	
 	// todo we are currently using these to get array, when really they should be accessible through des<T>()
 	func entrees<T>() -> T? {
-		return (self as? DTCarte)?.entrees_ as? T
+		return (self as? Carte)?.entrees_ as? T
 	}
 }
 
-public struct DTCarte: DTCarteProtocol {
-	fileprivate let entrees_: DTDishionarizer
-	fileprivate var dishes_: DTDishes?
+public struct Carte: CarteProtocol {
+	fileprivate let entrees_: Dishionarizer
+	fileprivate var dishes_: Dishes?
 	
-	public init(_ entrees: DTDishionarizer) {
+	public init(_ entrees: Dishionarizer) {
 		self.entrees_ = entrees
 		guard let dishionary = entrees.dishionary else { return }
-		self.dishes_ = DTDishes(dishionary)
+		self.dishes_ = Dishes(dishionary)
 //		lo(dishionary)
 	}
 }
@@ -181,61 +181,61 @@ public struct DTCarte: DTCarteProtocol {
 
 
 
-public protocol DTWaiterForCustomer: DTGiveOrderProtocol {
-	var carte: DTCarteForCustomer? { get }
+public protocol WaiterForCustomer: GiveOrderProtocol {
+	var carte: CarteForCustomer? { get }
 	var onShift: Bool { get }
 }
 
-//public protocol DTWaiterForTableCustomer {
+//public protocol WaiterForTableCustomer {
 //	func getCellDataFor<T>(_ indexPath: IndexPath) -> T?
 //}
 
-public protocol DTWaiterForHeadChef {//: DTServeCustomerProtocol {
-	mutating func serve(entrees: DTOrderFromKitchen)
-	mutating func hand(main: DTOrderFromKitchen)
+public protocol WaiterForHeadChef {
+	mutating func serve(entrees: FulfilledOrder)
+	mutating func hand(main: FulfilledOrder)
 }
 
-public protocol DTWaiterForWaiter {
-	mutating func fillCarte(with entrees: DTOrderFromKitchen)
-	mutating func serve(dishes: DTOrderFromKitchen)
+public protocol WaiterForWaiter {
+	mutating func fillCarte(with entrees: FulfilledOrder)
+	mutating func serve(dishes: FulfilledOrder)
 }
 
-public protocol DTWaiter: DTWaiterForCustomer, DTWaiterForHeadChef, DTWaiterForWaiter, DTStartShiftProtocol, DTEndShiftProtocol, DTCigaretteBreakProtocol {
-	init(customer: DTCustomerForWaiter, headChef: DTHeadChefForWaiter?)
+public protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForWaiter, StartShiftProtocol, EndShiftProtocol, CigaretteBreakProtocol {
+	init(customer: CustomerForWaiter, headChef: HeadChefForWaiter?)
 }
 
 
 
-public extension DTWaiter {
+public extension Waiter {
 	public func endBreak() {}
 	public func endShift() {}
 	public func startBreak() {}
 	public func startShift() {}
 }
 
-public extension DTWaiterForCustomer {
+public extension WaiterForCustomer {
 	public var onShift: Bool {
 		return type(of: self) == GeneralWaiter.self || carte != nil
-		// && DTReflector().getFirst(DTHeadChefForWaiter.self, from: Mirror(reflecting: self)) != nil
+		// && Reflector().getFirst(HeadChefForWaiter.self, from: Mirror(reflecting: self)) != nil
 	}
 	
-	public func give(_ order: DTOrder) {
+	public func give(_ order: Order) {
 //		lo()
 		// todo replace the "get firsts" with some sort of generic ID
-		guard var headChef = DTReflector().getFirst(DTHeadChefForWaiter.self, from: Mirror(reflecting: self)) else { return }
+		guard var headChef = Reflector().getFirst(HeadChefForWaiter.self, from: Mirror(reflecting: self)) else { return }
 		headChef.give(order)
 	}
 }
 
-public extension DTWaiterForWaiter {
-	func fillCarte(with entrees: DTOrderFromKitchen) {}
-	func serve(dishes: DTOrderFromKitchen) {
+public extension WaiterForWaiter {
+	func fillCarte(with entrees: FulfilledOrder) {}
+	func serve(dishes: FulfilledOrder) {
 		let mirror = Mirror(reflecting: self)
-//		guard let carte = DTReflector().getFirst(DTCarte.self, from: mirror) else { return }
+//		guard let carte = Reflector().getFirst(Carte.self, from: mirror) else { return }
 //		carte.stock(with: dishes)
-//		guard var waiter = self as? DTWaiterForWaiter else { return  }
+//		guard var waiter = self as? WaiterForWaiter else { return  }
 		fillCarte(with: dishes)
-		guard let customer = DTReflector().getFirst(DTCustomerForWaiter.self, from: mirror) else { return }
+		guard let customer = Reflector().getFirst(CustomerForWaiter.self, from: mirror) else { return }
 		// if we don't use dispatch queue we will cause a simultaneous-mutating-access error in the carte
 		DispatchQueue.main.async {
 			customer.present(dish: dishes.ticket)
@@ -243,18 +243,18 @@ public extension DTWaiterForWaiter {
 	}
 }
 
-public extension DTWaiterForHeadChef {
-	public func hand(main: DTOrderFromKitchen) {
-		guard var waiter = self as? DTWaiterForWaiter else { return }
+public extension WaiterForHeadChef {
+	public func hand(main: FulfilledOrder) {
+		guard var waiter = self as? WaiterForWaiter else { return }
 		waiter.serve(dishes: main)
 	}
 	
-	public func serve(entrees: DTOrderFromKitchen) {
+	public func serve(entrees: FulfilledOrder) {
 		guard
-			let customer = DTReflector().getFirst(DTCustomerForWaiter.self, from: Mirror(reflecting: self)),
-			var waiter = self as? DTWaiterForWaiter
+			let customer = Reflector().getFirst(CustomerForWaiter.self, from: Mirror(reflecting: self)),
+			var waiter = self as? WaiterForWaiter
 			else { return }
-//		if let carte = DTReflector().getFirst(DTCarteForWaiter.self, from: Mirror(reflecting: self)) {
+//		if let carte = Reflector().getFirst(CarteForWaiter.self, from: Mirror(reflecting: self)) {
 //			carte.stock(with: entrees)
 //		} else {
 			waiter.fillCarte(with: entrees)

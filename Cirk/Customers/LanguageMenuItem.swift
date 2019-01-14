@@ -9,7 +9,7 @@
 //import Dertisch
 import UIKit
 
-class LanguageMenuItem: DTTableViewCell {
+class LanguageMenuItem: RestaurantTableViewCell {
 	@IBOutlet weak var languageLabel: UILabel!
 	@IBOutlet weak var flagImage: UIImageView!
 	
@@ -25,7 +25,7 @@ class LanguageMenuItem: DTTableViewCell {
 		if let flag = language.flag {
 			flagImage.image = UIImage(named: flag)
 		} else {
-			let img = UIImageView(image: UIImage(named: Images.wood))
+			let img = UIImageView(image: UIImage(named: ImageNames.wood))
 			img.contentMode = .scaleAspectFill
 			backgroundView = img
 		}

@@ -43,7 +43,7 @@
 		{
 			"key": "GO",
 			"en": "GO!",
-			"fr": "ALLER!",
+			"fr": "ALLEZ!",
 		},
 		{
 			"key": "IMPROVE_PERSONAL_BEST",
@@ -59,6 +59,16 @@
 			"key": "LEVEL",
 			"en": "level",
 			"fr": "étage",
+		},
+		{
+			"key": "LAST_LEVEL_HEADER",
+			"en": "Cirk Completed!",
+			"fr": "Cirk Complet!",
+		},
+		{
+			"key": "LAST_LEVEL_COPY",
+			"en": "Congratulations for completing Cirk! If you have any feedback you would like to share please contact the developer.\n\nCirk was developed to test the viability of on iOS framework on Github called Dertisch. The fact that the app has made it to the App Store is proof of its viability. Thank you for contributing to this test by playing, we hope you have enjoyed the game.",
+			"fr": "Congratulations for completing Cirk! If you have any feedback you would like to share please contact the developer.\n\nCirk was developed to test the viability of on iOS framework on Github called Dertisch. The fact that the app has made it to the App Store is proof of its viability. Thank you for contributing to this test by playing, we hope you have enjoyed the game.",
 		},
 		{
 			"key": "LEVEL_UNLOCKED",

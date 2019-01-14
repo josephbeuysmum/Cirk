@@ -6,7 +6,7 @@
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
 
-public struct DTCCommonPhrases {
+public struct CommonPhrases {
 	public static let
 	Activated = "Activated",
 	Added = "Added",

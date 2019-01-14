@@ -8,32 +8,32 @@
 
 import UIKit
 
-public protocol DTUrlSessionProtocol: DTKitchenMember {
+public protocol UrlSessionProtocol: KitchenMember {
 	func call (
 		url: String,
-		method: DTUrlSession.methods,
+		method: UrlSession.methods,
 		parameters: Dictionary< String, String >?,
 		callback: ( ( String, Any? ) -> Void )? )
 }
 
-public class DTUrlSession {
-	public var headChef: DTHeadChefForKitchenMember?
+public class UrlSession {
+	public var headChef: HeadChefForKitchenMember?
 	
 	fileprivate var ongoing_calls: [ String ]
 	
-	required public init(_ kitchenStaff: [String: DTKitchenMember]? = nil) {
+	required public init(_ kitchenStaff: [String: KitchenMember]? = nil) {
 		ongoing_calls = []
 	}
 	
 	deinit {}
 }
 
-extension DTUrlSession: DTUrlSessionProtocol {
+extension UrlSession: UrlSessionProtocol {
 	public enum methods: String { case GET, POST, DELETE }
 	
 	public func call (
 		url: String,
-		method: DTUrlSession.methods,
+		method: UrlSession.methods,
 		parameters: Dictionary< String, String >? = nil,
 		callback: ( ( String, Any? ) -> Void )? = nil ) {
 		guard
@@ -79,7 +79,7 @@ extension DTUrlSession: DTUrlSessionProtocol {
 	
 	
 	
-	// unadulterated transmission because DTImages deals with post-processing
+	// unadulterated transmission because Images deals with post-processing
 	fileprivate func cast ( image data: Data, with url: String ) throws {
 //		transmit( success: true, with: url, and: data )
 	}
@@ -103,6 +103,6 @@ extension DTUrlSession: DTUrlSessionProtocol {
 	
 	
 //	fileprivate func transmit ( success: Bool, with url: String, and data: Any? = nil ) {
-//		dishes_.make(order: url, with: DTRawIngredient(success: success, url: url, data: data))
+//		dishes_.make(order: url, with: RawIngredient(success: success, url: url, data: data))
 //	}
 }

@@ -13,7 +13,7 @@ import UIKit
 //	var level: Level? { return level_ }
 //}
 
-class LevelsMenuItem: DTTableViewCell, CircleRendererProtocol {
+class LevelsMenuItem: RestaurantTableViewCell, CircleRendererProtocol {
 	@IBOutlet weak var levelLabel: UILabel!
 	@IBOutlet weak var targetLabel: UILabel!
 	@IBOutlet weak var personalBestLabel: UILabel!
@@ -33,7 +33,7 @@ class LevelsMenuItem: DTTableViewCell, CircleRendererProtocol {
 		levelLabel.text = header.level
 		targetLabel.text = header.target
 		personalBestLabel.text = header.personalBest
-		let img = UIImageView(image: UIImage(named: Images.wood))
+		let img = UIImageView(image: UIImage(named: ImageNames.wood))
 		img.contentMode = .scaleAspectFill
 		backgroundView = img
 	}
@@ -47,7 +47,7 @@ class LevelsMenuItem: DTTableViewCell, CircleRendererProtocol {
 		circleColor = isUnlocked ? Colors.teal : Colors.crimson,
 		alpha: CGFloat = isUnlocked ? 1 : 0.8,
 		textColor = UIColor(red: black.red, green: black.green, blue: black.blue, alpha: alpha),
-		imageName = isUnlocked ? Images.unlocked : Images.locked,
+		imageName = isUnlocked ? ImageNames.unlocked : ImageNames.locked,
 		countCircles = level.json.circles.count,
 		countCirclesDouble = Double(countCircles)
 		levelLabel.textColor = textColor

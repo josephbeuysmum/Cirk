@@ -18,24 +18,24 @@ public func lobject(_ object: [String: Any], file: String = #file, function: Str
 	}
 }
 
-// differing levels of log (see DTConsts logLevel and logModes)
+// differing levels of log (see Consts logLevel and logModes)
 public func loInfo(_ args: Any... , file: String = #file, function: String = #function, line: Int = #line) {
-	guard DTCLogs.logModes.index(of: DTCLogs.logLevel.info) != nil else { return }
+	guard Logs.logModes.index(of: Logs.logLevel.info) != nil else { return }
 	_lo(args, file: file, function: function, line: line)
 }
 
 public func loFeedback(_ args: Any... , file: String = #file, function: String = #function, line: Int = #line) {
-	guard DTCLogs.logModes.index(of: DTCLogs.logLevel.feedback) != nil else { return }
+	guard Logs.logModes.index(of: Logs.logLevel.feedback) != nil else { return }
 	_lo(args, file: file, function: function, line: line)
 }
 
 public func loWarning(_ args: Any... , file: String = #file, function: String = #function, line: Int = #line) {
-	guard DTCLogs.logModes.index(of: DTCLogs.logLevel.warning) != nil else { return }
+	guard Logs.logModes.index(of: Logs.logLevel.warning) != nil else { return }
 	_lo(args, file: file, function: function, line: line)
 }
 
 public func loError(_ args: Any... , file: String = #file, function: String = #function, line: Int = #line) {
-	guard DTCLogs.logModes.index(of: DTCLogs.logLevel.error) != nil else { return }
+	guard Logs.logModes.index(of: Logs.logLevel.error) != nil else { return }
 	_lo(args, file: file, function: function, line: line)
 }
 
@@ -48,10 +48,10 @@ public func loError(_ args: Any... , file: String = #file, function: String = #f
 
 
 fileprivate func getShortFileName(from file: String) -> String {
-	guard  let lastSlash = DTString.getLastIndexOf(subString: "/", inString: file) as Int?,
-		let lastDot = DTString.getLastIndexOf(subString: ".", inString: file) as Int?,
-		let fileName = DTString.getSubStringOf(string: file, between: lastSlash + 1, and: lastDot),
-		let shortFileName = DTString.set(length: 16, ofText: fileName)
+	guard  let lastSlash = StringUtils.getLastIndexOf(subString: "/", inString: file) as Int?,
+		let lastDot = StringUtils.getLastIndexOf(subString: ".", inString: file) as Int?,
+		let fileName = StringUtils.getSubStringOf(string: file, between: lastSlash + 1, and: lastDot),
+		let shortFileName = StringUtils.set(length: 16, ofText: fileName)
 		else { return "unknown file" }
 	return shortFileName
 }
@@ -62,10 +62,10 @@ fileprivate func _lo(_ args: [Any?], file: String, function: String, line: Int) 
 	let
 	printableArgs = args.count > 0 ? args : ["\(function) ()"],
 	fileName = getShortFileName(from: file)
-	if  let shortenedLine = DTString.set(length: 4, ofText: String(line)),
-		let shortenedInterval = DTString.set(
+	if  let shortenedLine = StringUtils.set(length: 4, ofText: String(line)),
+		let shortenedInterval = StringUtils.set(
 			length: 5,
-			ofText: String(DTTime.getInterval(format: DTTime.intervalFormats.withoutHoursAndMinutes))) {
+			ofText: String(Time.getInterval(format: Time.intervalFormats.withoutHoursAndMinutes))) {
 		_log(printableArgs, location: "\(fileName) \(shortenedLine) \(shortenedInterval)")
 	} else {
 		_log(printableArgs)
@@ -78,9 +78,9 @@ fileprivate func _log(_ args: [Any?], location: String? = nil) {
 	if  args.count == 1, let args = args[0] as? [Any] { mutableArgs = args }
 	// turn args into single message string
 	guard mutableArgs.count > 0 else { return }
-	var message = DTCChars.emptyString
+	var message = Chars.emptyString
 	_ = mutableArgs.map { element in
-		if let messageSuffix = DTString.serialise(value: _serialise(arg: element)) {
+		if let messageSuffix = StringUtils.serialise(value: _serialise(arg: element)) {
 			message = "\(message)  \(messageSuffix)"
 		}
 	}

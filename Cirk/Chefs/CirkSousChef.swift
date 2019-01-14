@@ -9,27 +9,10 @@
 import CoreData
 //import Dertisch
 
-// todo? this proxy contains differing data types, and if the app gets any bigger it needs splitting up into separate proxies
-//protocol CirkSousChefProtocol: DTKitchenMember {
-////	var allLevels: [String: Level]? { get }
-//////	var lastLevelGot: Level? { get }
-////	var highestUnlockedLevel: Level? { get }
-////	var mode: Modes { get set }
-////	var selectedLevel: Level? { get }
-////	func getLevel(by index: Int) -> Level?
-////	func selectLevel(by index: Int)
-////	func set(personalBest: PBMetrics?)
-////	func unlockLevel(by index: Int?)
-//}
-
-extension CirkSousChef: DTKitchenMember {}
-
 class CirkSousChef {
 	var
 	mode: Modes,
-	headChef: DTHeadChefForKitchenMember?
-	
-	private var hc: DTHeadChefForKitchenMember?
+	headChef: HeadChefForKitchenMember?
 	
 	// todo uppercase these
 	private let
@@ -37,17 +20,17 @@ class CirkSousChef {
 	indexKey: String,
 	modeKey: String,
 	personalBestKey: String,
-	coreData: DTCoreData?,
-	bundledJson: DTBundledJson?
+	coreData: Freezer?,
+	bundledJson: BundledJson?
 	
 	private var
 	levels: [Level],
 	levelsJson: LevelsJson?,
 	selectedLevelIndex: Int?
 	
-	required init(_ kitchenStaff: [String: DTKitchenMember]?) {
-		coreData = kitchenStaff?[DTCoreData.staticId] as? DTCoreData
-		bundledJson = kitchenStaff?[DTBundledJson.staticId] as? DTBundledJson
+	required init(_ kitchenStaff: [String: KitchenMember]?) {
+		coreData = kitchenStaff?[Freezer.staticId] as? Freezer
+		bundledJson = kitchenStaff?[BundledJson.staticId] as? BundledJson
 		levelKey = "DTCDLevel"
 		indexKey = "index"
 		personalBestKey = "personalBest"
@@ -77,8 +60,8 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 					index: i,
 					mode: Modes.tabletop.rawValue,
 					json: json,
-					personalBest: nil,
-					nextLevelUnlocked: i < levelsUnlockedUpTo)
+					nextLevelUnlocked: i < levelsUnlockedUpTo,
+					personalBest: nil)
 			} else {
 				level = self.levels[i]
 			}
@@ -131,7 +114,7 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 		guard let pb = personalBest else { return }
 		coreData?.update(
 			levelKey,
-			to: DTCDAttribute(personalBestKey, pb.value),
+			to: FreezerAttribute(personalBestKey, pb.value),
 			by: "index == \(pb.levelIndex)") { [weak self] managedObjects in
 				guard
 					let strongSelf = self,
@@ -142,7 +125,7 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 				guard let level = strongSelf.getLevel(by: pb.levelIndex) else { return }
 //				lo(level.index, level.personalBest, level.nextLevelUnlocked)
 //				lo(strongSelf.headChef)
-				strongSelf.headChef?.give(dishes: DTOrderFromKitchen(Tickets.personalBest, level))
+				strongSelf.headChef?.give(dishes: FulfilledOrder(Tickets.personalBest, level))
 		}
 	}
 	
@@ -210,8 +193,8 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 					index: index,
 					mode: Int(safeLevel.mode),
 					json: levelJson,
-					personalBest: Float(safeLevel.personalBest),
-					nextLevelUnlocked: nextLevelUnlocked)
+					nextLevelUnlocked: nextLevelUnlocked,
+					personalBest: Float(safeLevel.personalBest))
 //				lo("UPDATE", index, getLevelArrayIndex(by: index), safeLevel.personalBest, level.nextLevelUnlocked)
 				if let levelIndex = getLevelArrayIndex(by: index) {
 					self.levels.replaceSubrange(levelIndex...levelIndex, with: [level])
@@ -231,12 +214,12 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 	
 	// todo: mode does nothing for now, but is foreseen as a way to make an upside-down version of the game later on
 	private func store(level index: Int) {
-		var levelEntity = DTCDEntity(
+		var levelEntity = FreezerEntity(
 			levelKey,
 			keys: [
-				DTCDKey(indexKey, DTCDTypes.int),
-				DTCDKey(modeKey, DTCDTypes.int),
-				DTCDKey(personalBestKey, DTCDTypes.double)
+				FreezerKey(indexKey, FreezerTypes.int),
+				FreezerKey(modeKey, FreezerTypes.int),
+				FreezerKey(personalBestKey, FreezerTypes.double)
 			])
 		guard
 			levelEntity.add(index, by: indexKey),
@@ -249,3 +232,5 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 		}
 	}
 }
+
+extension CirkSousChef: KitchenMember {}

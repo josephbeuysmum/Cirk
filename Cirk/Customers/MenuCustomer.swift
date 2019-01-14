@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuCustomer: DTCustomer {
+class MenuCustomer: Customer {
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var dismissButton: UIButton!
 	

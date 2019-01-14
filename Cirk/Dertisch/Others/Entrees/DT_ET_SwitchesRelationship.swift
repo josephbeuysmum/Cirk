@@ -1,16 +1,16 @@
 //
-//  DT_ET_switchBundle.swift
+//  DT_ET_SwitchesRelationship.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 27/07/2018.
 //
 
-internal struct DTSwitchesRelationship: DTEndShiftProtocol {
+internal struct SwitchesRelationship: EndShiftProtocol {
 	var
 	customerID: String,
-	customer: DTCustomer?,
-	waiter: DTWaiter?,
-	headChef: DTHeadChef?,
+	customer: Customer?,
+	waiter: Waiter?,
+	headChef: HeadChef?,
 	animated: Bool
 
 	mutating func endShift() {

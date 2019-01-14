@@ -6,7 +6,7 @@
 //  Copyright © 2016 Rich Text Format Ltd. All rights reserved.
 //
 
-public struct DTCLogs {
+public struct Logs {
 	public struct logLevel {
 		static let
 		output = 0,

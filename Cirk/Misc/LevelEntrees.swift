@@ -10,16 +10,16 @@
 //	var index: Int { get }
 //}
 
-struct Level: DTDishionarizer { //, Indexical {
+struct Level: Dishionarizer { //, Indexical {
 	let
 	index: Int,
 	mode: Int,
 	json: LevelJson,
-	personalBest: Float?,
-	nextLevelUnlocked: Bool
+	nextLevelUnlocked: Bool,
+	personalBest: Float?
 }
 
-struct LevelCollection: DTDishionarizer { //, Indexical {
+struct LevelCollection: Dishionarizer { //, Indexical {
 	let levels: [Level]
 }
 

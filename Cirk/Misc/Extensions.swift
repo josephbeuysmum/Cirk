@@ -8,18 +8,18 @@
 
 //import Dertisch
 
-//extension DTCarteForCustomer {
+//extension CarteForCustomer {
 //	var circles: [CircleJson]? {
 //		let value: [CircleJson]? = self.des("circles")
 //		return value
 //	}
 //}
 
-extension DTMaitreD: DTMaitreDExtension {
+extension MaitreD: MaitreDExtension {
 	public func registerStaff(with key: String) {
-		register(DTCoreData.self, with: key)
-		register(DTBundledJson.self, with: key)
-		register(CirkSousChef.self, with: key, injecting: [DTCoreData.self, DTBundledJson.self])
+		register(Freezer.self, with: key)
+		register(BundledJson.self, with: key)
+		register(CirkSousChef.self, with: key, injecting: [Freezer.self, BundledJson.self])
 		introduce(
 			Views.introCustomer,
 			 as: IntroCustomer.self,

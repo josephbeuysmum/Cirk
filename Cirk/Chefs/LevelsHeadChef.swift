@@ -8,12 +8,12 @@
 
 //import Dertisch
 
-class LevelsHeadChef: DTHeadChef {
-	var waiter: DTWaiterForHeadChef?
+class LevelsHeadChef: HeadChef {
+	var waiter: WaiterForHeadChef?
 	
 	fileprivate var sousChef: CirkSousChef?
 	
-	required init(_ sousChefs: [String: DTKitchenMember]?) {
+	required init(_ sousChefs: [String: KitchenMember]?) {
 //		lo("bonjour levels head chef")
 		sousChef = sousChefs?[CirkSousChef.staticId] as? CirkSousChef
 	}
@@ -21,7 +21,7 @@ class LevelsHeadChef: DTHeadChef {
 //	deinit { lo("au revoir levels head chef") }
 }
 
-extension LevelsHeadChef: DTEndShiftProtocol {
+extension LevelsHeadChef: EndShiftProtocol {
 	func endShift() {
 		// todo can we genericise sousChef?.headChef = nil somehow? maybe nillify all sousChef headChefs at screen change time?
 		sousChef?.headChef = nil
@@ -29,8 +29,8 @@ extension LevelsHeadChef: DTEndShiftProtocol {
 	}
 }
 
-extension LevelsHeadChef: DTHeadChefForWaiter {
-	func give(_ order: DTOrder) {
+extension LevelsHeadChef: HeadChefForWaiter {
+	func give(_ order: Order) {
 		guard
 			order.ticket == Tickets.setLevel,
 			let index = order.content as? Int
@@ -39,9 +39,9 @@ extension LevelsHeadChef: DTHeadChefForWaiter {
 	}
 }
 
-extension LevelsHeadChef: DTStartShiftProtocol {
+extension LevelsHeadChef: StartShiftProtocol {
 	func startShift() {
 		guard let allLevels = sousChef?.allLevels else { return }
-		waiter?.serve(entrees: DTOrderFromKitchen(Tickets.allLevels, allLevels))
+		waiter?.serve(entrees: FulfilledOrder(Tickets.allLevels, allLevels))
 	}
 }

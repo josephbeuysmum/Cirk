@@ -8,28 +8,28 @@
 
 import Foundation
 
-public protocol DTHeadChefForKitchenMember {
-	mutating func give(dishes: DTOrderFromKitchen)
+public protocol HeadChefForKitchenMember {
+	mutating func give(dishes: FulfilledOrder)
 }
 
-public protocol DTHeadChefForWaiter: DTGiveOrderProtocol {}
+public protocol HeadChefForWaiter: GiveOrderProtocol {}
 
-public protocol DTHeadChef: DTHeadChefForWaiter, DTHeadChefForKitchenMember, DTStartShiftProtocol, DTEndShiftProtocol, DTCigaretteBreakProtocol {
-	init(_ sousChefs: [String: DTKitchenMember]?)
-	var waiter: DTWaiterForHeadChef? { get set }
+public protocol HeadChef: HeadChefForWaiter, HeadChefForKitchenMember, StartShiftProtocol, EndShiftProtocol, CigaretteBreakProtocol {
+	init(_ sousChefs: [String: KitchenMember]?)
+	var waiter: WaiterForHeadChef? { get set }
 }
 
-public extension DTHeadChef {
+public extension HeadChef {
 	public func endBreak() {}
 	public func endShift() {}
-	public mutating func give(_ order: DTOrder) {}
+	public mutating func give(_ order: Order) {}
 	public func startBreak() {}
 	public func startShift() {}
 }
 
-public extension DTHeadChefForKitchenMember {
-	public func give(dishes: DTOrderFromKitchen) {
-		guard var waiter = DTReflector().getFirst(DTWaiterForHeadChef.self, from: Mirror(reflecting: self)) else { return }
+public extension HeadChefForKitchenMember {
+	public func give(dishes: FulfilledOrder) {
+		guard var waiter = Reflector().getFirst(WaiterForHeadChef.self, from: Mirror(reflecting: self)) else { return }
 		waiter.hand(main: dishes)
 	}
 }

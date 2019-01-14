@@ -9,7 +9,7 @@
 import AVFoundation
 //import Foundation
 //
-//class GameCarte: NSObject, DTCarte {
+//class GameCarte: NSObject, Carte {
 //	fileprivate var
 //	level: Level?
 //
@@ -113,13 +113,13 @@ extension BallbearingPlayer: AVAudioPlayerDelegate {
 	}
 }
 
-//extension GameCarte: DTCarteForWaiter {
+//extension GameCarte: CarteForWaiter {
 //	func empty() {
 //		stopSoundEffect()
 //		stopBallbearingSound()
 //	}
 //
-//	func stock(with order: DTOrderFromKitchen) {
+//	func stock(with order: FulfilledOrder) {
 //		guard let updatedLevel = order.dishes as? Level else { return }
 //		level = updatedLevel
 //	}

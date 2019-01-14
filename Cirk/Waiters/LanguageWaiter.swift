@@ -9,14 +9,14 @@
 //import Dertisch
 import Foundation
 
-class LanguageWaiter: DTWaiter {
+class LanguageWaiter: Waiter {
 	fileprivate weak var
-	customer: DTCustomerForWaiter!
+	customer: CustomerForWaiter!
 	
 	fileprivate var
-	carte_: DTCarteForCustomer?
+	carte_: CarteForCustomer?
 	
-	required init(customer: DTCustomerForWaiter, headChef: DTHeadChefForWaiter?) {
+	required init(customer: CustomerForWaiter, headChef: HeadChefForWaiter?) {
 		lo("bonjour language waiter")
 		self.customer = customer
 		
@@ -24,12 +24,12 @@ class LanguageWaiter: DTWaiter {
 		Languages.allCases.forEach {
 			languageNames.append(LanguageCellEntre(name: $0.rawValue))
 		}
-		carte_ = DTCarte(LanguageCellEntrees(names: languageNames))
+		carte_ = Carte(LanguageCellEntrees(names: languageNames))
 	}
 	
 	deinit { lo("au revoir language waiter") }
 }
 
-extension LanguageWaiter: DTWaiterForCustomer {
-	var carte: DTCarteForCustomer? { return carte_ }
+extension LanguageWaiter: WaiterForCustomer {
+	var carte: CarteForCustomer? { return carte_ }
 }

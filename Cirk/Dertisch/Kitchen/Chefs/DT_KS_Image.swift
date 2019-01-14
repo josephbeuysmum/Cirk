@@ -8,13 +8,13 @@
 
 import UIKit
 
-public protocol DTImagesProtocol: DTKitchenMember {
+public protocol ImagesProtocol: KitchenMember {
 	func getImage(by url: String, callback: ((String, Any?) -> Void)?) -> UIImage?
 	func loadImage(by url: String)
 }
 
-public class DTImages {
-	public var headChef: DTHeadChefForKitchenMember?
+public class Images {
+	public var headChef: HeadChefForKitchenMember?
 	
 	// todo forced unwraps for url_session and key is unacceptable, revisit this
 	fileprivate let key: String
@@ -22,11 +22,11 @@ public class DTImages {
 	fileprivate var
 	urlsResolving: [String],
 	raw_images: Dictionary<String, Data>,
-	url_session: DTUrlSession!
+	url_session: UrlSession!
 	
-	required public init(_ kitchenStaff: [String: DTKitchenMember]? = nil) {
+	required public init(_ kitchenStaff: [String: KitchenMember]? = nil) {
 		key = NSUUID().uuidString
-		url_session = kitchenStaff?[DTUrlSession.staticId] as? DTUrlSession
+		url_session = kitchenStaff?[UrlSession.staticId] as? UrlSession
 		urlsResolving = []
 		raw_images = [:]
 	}
@@ -34,7 +34,7 @@ public class DTImages {
 	deinit {}
 }
 
-extension DTImages: DTImagesProtocol {
+extension Images: ImagesProtocol {
 	public func getImage(by url: String, callback:((String, Any?) -> Void )? = nil) -> UIImage? {
 		let image = getLocalImage( by: url )
 		guard image == nil else { return image }
@@ -53,18 +53,18 @@ extension DTImages: DTImagesProtocol {
 //			guard let strongSelf = self else { return }
 //			if let urlIndex = strongSelf.urlsResolving.index(of: url) { strongSelf.urlsResolving.remove( at: urlIndex ) }
 //			guard strongSelf.assess(result: data) else { return }
-//			let result = data as! DTRawIngredient
+//			let result = data as! RawIngredient
 //			strongSelf.raw_images[url] = result.data as? Data
 //			strongSelf.dishes_.make(order: strongSelf.getUrlKey(by: url), with: url)
 //		}
-		url_session.call(url: url, method: DTUrlSession.methods.GET)
+		url_session.call(url: url, method: UrlSession.methods.GET)
 	}
 	
 	
 	
 	fileprivate func assess(result: Any?) -> Bool {
 		guard
-			let result = result as? DTRawIngredient,
+			let result = result as? RawIngredient,
 			let success = result.success,
 			success,
 			result.data is Data

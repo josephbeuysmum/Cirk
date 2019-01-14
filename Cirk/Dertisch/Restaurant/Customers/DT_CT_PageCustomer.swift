@@ -8,8 +8,8 @@
 
 //import UIKit
 //
-//extension DTPageCustomer {//}: DTDishesEntitySetterProtocol {
-//	public func set(dishes: DTDishes) {
+//extension PageCustomer {//}: DishesEntitySetterProtocol {
+//	public func set(dishes: Dishes) {
 //		guard dishes_ == nil else { return }
 //		dishes_ = dishes
 //	}
@@ -17,6 +17,6 @@
 //	public func endShift() {}
 //}
 //
-//open class DTPageCustomer: UIPageViewController {
-//	fileprivate var dishes_: DTDishes?
+//open class PageCustomer: UIPageViewController {
+//	fileprivate var dishes_: Dishes?
 //}

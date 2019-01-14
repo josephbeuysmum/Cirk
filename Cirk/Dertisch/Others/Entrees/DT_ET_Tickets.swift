@@ -6,37 +6,34 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-// todo better generic word for dishes and dishes than "passable"
-//public typealias DTOrderFromKitchen = DTPassable
-public typealias DTOrder = DTPassable
-public typealias DTTicket = String
+public typealias Ticket = String
 
-public protocol DTPassableProtocol {
-	var ticket: DTTicket { get }
-	var content: Any? { get }
-}
-
-//public protocol DTOrderFromKitchenProtocol {}
-
-public struct DTPassable: DTPassableProtocol {
+public struct Order {
 	public let
-	ticket: DTTicket,
+	ticket: Ticket,
 	content: Any?
-	
-	public init(_ ticket: DTTicket, _ content: Any?) {
+
+	public init(_ ticket: Ticket, _ content: Any?) {
 		self.ticket = ticket
 		self.content = content
 	}
 }
 
-public struct DTOrderFromKitchen {//}: DTOrderFromKitchenProtocol {
-	var ticket: DTTicket { return passable.ticket }
-	var dishes: DTDishionarizer? { return passable.content as? DTDishionarizer }
-	
-	private let passable: DTPassable
-	
-	public init(_ id: DTTicket, _ content: DTDishionarizer?) {
-		passable = DTPassable(id, content)
+public struct FulfilledOrder {
+	public let
+	ticket: Ticket,
+	dishes: Dishionarizer?,
+	multipleDishes: [String: Dishionarizer]?
+
+	public init(_ ticket: Ticket, _ dishes: Dishionarizer?) {
+		self.ticket = ticket
+		self.dishes = dishes
+		self.multipleDishes = nil
+	}
+
+	public init(_ ticket: Ticket, _ multipleDishes: [String: Dishionarizer]?) {
+		self.ticket = ticket
+		self.multipleDishes = multipleDishes
+		self.dishes = nil
 	}
 }
-

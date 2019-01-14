@@ -7,9 +7,7 @@
 
 import UIKit
 
-public protocol DTTableViewCellProtocol: class {}//, DTServeCustomerProtocol {}
-
-open class DTTableViewCell: UITableViewCell, DTTableViewCellProtocol {
+open class RestaurantTableViewCell: UITableViewCell {
 	// todo make this a serve(entrees)
 	open func serve<T>(with data: T?) {}
 }

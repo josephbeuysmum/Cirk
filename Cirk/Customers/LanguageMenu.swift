@@ -11,13 +11,13 @@ import UIKit
 
 class LanguageMenu: MenuCustomer {
 	private var
-	maitreD: DTMaitreD!,
-	sommelier: DTSommelier!,
-	waiter: DTWaiterForCustomer!
+	maitreD: MaitreD!,
+	sommelier: Sommelier!,
+	waiter: WaiterForCustomer!
 	
 	//	deinit { lo("au revoir language menu") }
 	
-	override func assign(_ waiter: DTWaiterForCustomer, maitreD: DTMaitreD, and sommelier: DTSommelier) {
+	override func assign(_ waiter: WaiterForCustomer, maitreD: MaitreD, and sommelier: Sommelier) {
 		self.waiter = waiter
 		self.maitreD = maitreD
 		self.sommelier = sommelier
@@ -30,7 +30,7 @@ class LanguageMenu: MenuCustomer {
 	override func placeOrder() {
 		super.placeOrder()
 		tableView.register(UINib(nibName: Views.languageCell, bundle: nil), forCellReuseIdentifier: Views.languageCell)
-		dismissButton.setTitle(sommelier[Sommelier.close]!, for: .normal)
+		dismissButton.setTitle(sommelier[SommelierKeys.close]!, for: .normal)
 		dismissButton.addTarget(self, action: #selector(dismissButtonTarget), for: .touchUpInside)
 	}
 	
@@ -65,7 +65,7 @@ extension LanguageMenu: UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		guard
-			let language = sommelier?[Sommelier.language],
+			let language = sommelier?[SommelierKeys.language],
 			let tableHeader = tableView.dequeueReusableCell(withIdentifier: Views.languageCell) as? LanguageMenuItem
 			else { return nil }
 		tableHeader.serve(with: LanguageEntre(name: language, flag: nil))

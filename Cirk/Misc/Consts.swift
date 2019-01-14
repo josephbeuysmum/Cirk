@@ -36,7 +36,7 @@ enum Effects: String {
 	wind = "electronicRunning"
 }
 
-struct Images {
+struct ImageNames {
 	static let
 	arrow = "arrow",
 	ball = "ball",
@@ -73,7 +73,7 @@ enum Modes: Int {
 	glassFromBelow = 1
 }
 
-struct Sommelier {
+struct SommelierKeys {
 	static let
 	almost = "ALMOST",
 	cancel = "CANCEL",
@@ -104,7 +104,7 @@ struct Sommelier {
 
 struct Storage {
 	static let
-	selectedLevel = "\(DTCCommonPhrases.Selected)\(level)"
+	selectedLevel = "\(CommonPhrases.Selected)\(level)"
 }
 
 struct Tickets {
@@ -123,12 +123,12 @@ struct Views {
 	levels_ = "Levels"
 	
 	static let
-	gameCustomer = "Game\(DTCCommonPhrases.Customer)",
-	introCustomer = "Intro\(DTCCommonPhrases.Customer)",
-	languageCell = "\(language_)\(DTCCommonPhrases.Cell)",
-	languageMenu = "\(language_)\(DTCCommonPhrases.Menu)",
-	levelsCell = "\(levels_)\(DTCCommonPhrases.Cell)",
-	levelsMenu = "\(levels_)\(DTCCommonPhrases.Menu)"
+	gameCustomer = "Game\(CommonPhrases.Customer)",
+	introCustomer = "Intro\(CommonPhrases.Customer)",
+	languageCell = "\(language_)\(CommonPhrases.Cell)",
+	languageMenu = "\(language_)\(CommonPhrases.Menu)",
+	levelsCell = "\(levels_)\(CommonPhrases.Cell)",
+	levelsMenu = "\(levels_)\(CommonPhrases.Menu)"
 }
 
 
@@ -138,13 +138,13 @@ struct Views {
 //	levels_ = "Levels"
 
 //	static let
-//	levelSelected = "\(level_)\(DTCCommonPhrases.Selected)",
+//	levelSelected = "\(level_)\(CommonPhrases.Selected)",
 //	levelChosen = "\(level_)Chosen",
-//	levelsAdded = "\(levels_)\(DTCCommonPhrases.Added)",
-//	levelUpdated = "\(levels_)\(DTCCommonPhrases.Updated)",
+//	levelsAdded = "\(levels_)\(CommonPhrases.Added)",
+//	levelUpdated = "\(levels_)\(CommonPhrases.Updated)",
 //	ballTimerTicked = "BallTimerTicked",
 //	newPersonalBest = "NewPersonalBest",
-//	selectedLevel = "\(DTCCommonPhrases.Selected)\(level_)"
+//	selectedLevel = "\(CommonPhrases.Selected)\(level_)"
 
 //	frameTime = Float(0.02),
 //	alpha = CGFloat(0.8)

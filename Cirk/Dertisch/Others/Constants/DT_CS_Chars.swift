@@ -8,7 +8,7 @@
 
 // set of popular chars, created so as to ensure that an ampersand (say)
 // in one class is the same as an ampersand in another
-public struct DTCChars {
+public struct Chars {
 	public static let
 	ampersand =					"&",
 	asterisk =					"*",

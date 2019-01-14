@@ -1,5 +1,5 @@
 //
-//  DT_PX_CoreData.swift
+//  DT_IG_Freezer.swift
 //  Dertisch
 //
 //  Created by Richard Willis on 21/03/2018.
@@ -8,23 +8,21 @@
 
 import CoreData
 
-public enum DTCDOperationTypes { case delete, retrieve, store, update }
-
-public protocol DTCoreDataProtocol: DTKitchenMember {
+public protocol FreezerProtocol: KitchenMember {
 	var dataModelName: String? { get set }
-	func delete(_ entityName: String, _ callback: @escaping DTCDDeletionClosure)
-	func delete(_ entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping DTCDDeletionClosure)
-	func retrieve(_ entityName: String, by predicate: String?, _ callback: @escaping DTCDClosure)
-	func store(_ entity: DTCDEntity, _ callback: @escaping DTCDClosure)
-	func update(_ entityName: String, to attribute: DTCDAttribute, by predicate: String?, _ callback: @escaping DTCDClosure)
+	func delete(_ entityName: String, _ callback: @escaping FreezerDeletionClosure)
+	func delete(_ entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping FreezerDeletionClosure)
+	func retrieve(_ entityName: String, by predicate: String?, _ callback: @escaping FreezerClosure)
+	func store(_ entity: FreezerEntity, _ callback: @escaping FreezerClosure)
+	func update(_ entityName: String, to attribute: FreezerAttribute, by predicate: String?, _ callback: @escaping FreezerClosure)
 }
 
-public class DTCoreData {
-	public var headChef: DTHeadChefForKitchenMember?
+public class Freezer {
+	public var headChef: HeadChefForKitchenMember?
 	
 	lazy var persistentContainer: NSPersistentContainer? = {
 		guard let dmn = dataModelName else {
-			loWarning("DTCoreData dataModelName is nil")
+			loWarning("Freezer dataModelName is nil")
 			return nil
 		}
 		let container = NSPersistentContainer(name: dmn)
@@ -36,21 +34,21 @@ public class DTCoreData {
 	
 	fileprivate var data_model_name: String?
 	
-	required public init(_ kitchenStaff: [String: DTKitchenMember]? = nil) {}
+	required public init(_ kitchenStaff: [String: KitchenMember]? = nil) {}
 	
 	deinit {}
 }
 
-extension DTCoreData: DTCoreDataProtocol {
+extension Freezer: FreezerProtocol {
 	public var dataModelName: String? {
 		get { return data_model_name }
 		set {
-			guard data_model_name == nil else { fatalError("Currently DTCoreData dataModelName can only be set once") }
+			guard data_model_name == nil else { fatalError("Currently Freezer dataModelName can only be set once") }
 			data_model_name = newValue
 		}
 	}
 	
-	public func delete(_ entityName: String, _ callback: @escaping DTCDDeletionClosure) {
+	public func delete(_ entityName: String, _ callback: @escaping FreezerDeletionClosure) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
 		let
 		request = NSFetchRequest< NSFetchRequestResult >(entityName: entityName),
@@ -63,7 +61,7 @@ extension DTCoreData: DTCoreDataProtocol {
 		}
 	}
 	
-	public func delete(_ entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping DTCDDeletionClosure) {
+	public func delete(_ entityName: String, by condition: @escaping (NSManagedObject) -> Bool, _ callback: @escaping FreezerDeletionClosure) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
 		let
 		request = NSFetchRequest< NSFetchRequestResult >(entityName: entityName),
@@ -88,7 +86,7 @@ extension DTCoreData: DTCoreDataProtocol {
 		}
 	}
 	
-	public func retrieve(_ entityName: String, by predicate: String? = nil, _ callback: @escaping DTCDClosure) {
+	public func retrieve(_ entityName: String, by predicate: String? = nil, _ callback: @escaping FreezerClosure) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
 		let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
 		if let predicate = predicate {
@@ -112,7 +110,7 @@ extension DTCoreData: DTCoreDataProtocol {
 		}
 	}
 	
-	public func store(_ entity: DTCDEntity, _ callback: @escaping DTCDClosure) {
+	public func store(_ entity: FreezerEntity, _ callback: @escaping FreezerClosure) {
 		persistentContainer?.performBackgroundTask { privateContext in
 			let managedEntity = NSEntityDescription.insertNewObject(forEntityName: entity.name, into: privateContext)
 			// todo this string interpolations causes runtime errors (when storing string values is known, there may be others). I will have to replace it with that byzantine predicate syntax stuff. ugh
@@ -139,7 +137,7 @@ extension DTCoreData: DTCoreDataProtocol {
 		}
 	}
 	
-	public func update(_ entityName: String, to attribute: DTCDAttribute, by predicate: String? = nil, _ callback: @escaping DTCDClosure) {
+	public func update(_ entityName: String, to attribute: FreezerAttribute, by predicate: String? = nil, _ callback: @escaping FreezerClosure) {
 		guard let privateContext = persistentContainer?.newBackgroundContext() else { return }
 		privateContext.perform {
 			let updateRequest = NSBatchUpdateRequest(entityName: entityName)

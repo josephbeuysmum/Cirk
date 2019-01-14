@@ -10,7 +10,7 @@
 //import Dertisch
 import UIKit
 
-class IntroCustomer: DTCustomer {
+class IntroCustomer: Customer {
 	@IBOutlet weak var backgroundImage: UIImageView!
 	@IBOutlet weak var playButton: UIButton!
 	@IBOutlet weak var titleLabel: UILabel!
@@ -20,9 +20,9 @@ class IntroCustomer: DTCustomer {
 	
 	private var
 	ball: UIImageView?,
-	maitreD: DTMaitreD?,
-	sommelier: DTSommelier?,
-	waiter: DTWaiterForCustomer?,
+	maitreD: MaitreD?,
+	sommelier: Sommelier?,
+	waiter: WaiterForCustomer?,
 	shape_layer: CAShapeLayer?
 	
 //	private var timer: Timer?
@@ -34,7 +34,7 @@ class IntroCustomer: DTCustomer {
 	
 //	deinit { lo("au revoir intro customer") }
 	
-	override func assign(_ waiter: DTWaiterForCustomer, maitreD: DTMaitreD, and sommelier: DTSommelier) {
+	override func assign(_ waiter: WaiterForCustomer, maitreD: MaitreD, and sommelier: Sommelier) {
 		self.waiter = waiter
 		self.maitreD = maitreD
 		self.sommelier = sommelier
@@ -61,16 +61,16 @@ class IntroCustomer: DTCustomer {
 		ballSize = CGFloat(round(Double((Int(screenHeight) + Metrics.screenMedian) / 2) / Metrics.ballHeightDivider)),
 		halfBallSize = ballSize / 2,
 		teal = Colors.teal
-		backgroundImage.image = UIImage(named: Images.wood)
+		backgroundImage.image = UIImage(named: ImageNames.wood)
 		titleLabel.text = "Cirk"
 		descriptionLabel.makeWrappable()
-//		descriptionLabel.text = sommelier?[Sommelier.gameDescription]
+//		descriptionLabel.text = sommelier?[SommelierKeys.gameDescription]
 		
 		ball = UIImageView(frame: CGRect(x: circX - halfBallSize,y: circY - halfBallSize, width: ballSize, height: ballSize))
-		ball!.image = UIImage(named: Images.ball)
+		ball!.image = UIImage(named: ImageNames.ball)
 		view.addSubview(ball!)
 		
-//		playButton.setTitle(sommelier?[Sommelier.play], for: .normal)
+//		playButton.setTitle(sommelier?[SommelierKeys.play], for: .normal)
 		playButton.addTarget(self, action: #selector(playButtonTarget), for: .touchUpInside)
 //		cancelButton.addTarget(self, action: #selector(cancelButtonTarget), for: .touchUpInside)
 		
@@ -110,8 +110,8 @@ class IntroCustomer: DTCustomer {
 	}
 	
 	override func regionChosen() {
-		descriptionLabel.text = sommelier?[Sommelier.gameDescription]
-		playButton.setTitle(sommelier?[Sommelier.play], for: .normal)
+		descriptionLabel.text = sommelier?[SommelierKeys.gameDescription]
+		playButton.setTitle(sommelier?[SommelierKeys.play], for: .normal)
 	}
 	
 	override func returnMenuToWaiter(_ chosenDishId: String?) {

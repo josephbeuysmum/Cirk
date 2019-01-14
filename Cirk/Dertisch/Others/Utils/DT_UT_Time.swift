@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class DTTime {
+public class Time {
 	public enum intervalFormats {
 		case full, withoutHours, withoutMilliseconds, withoutHoursAndMilliseconds, withoutHoursAndMinutes
 	}

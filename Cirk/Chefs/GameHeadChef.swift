@@ -8,12 +8,12 @@
 
 //import Dertisch
 
-class GameHeadChef: DTHeadChef {
-	var waiter: DTWaiterForHeadChef?
+class GameHeadChef: HeadChef {
+	var waiter: WaiterForHeadChef?
 	
 	fileprivate var sousChef: CirkSousChef?
 	
-	required init(_ sousChefs: [String: DTKitchenMember]?) {
+	required init(_ sousChefs: [String: KitchenMember]?) {
 //		lo("bonjour game head chef")
 		sousChef = sousChefs?[CirkSousChef.staticId] as? CirkSousChef
 		sousChef?.headChef = self
@@ -29,11 +29,11 @@ class GameHeadChef: DTHeadChef {
 			level = highestUnlockedLevel
 		}
 		guard let unwrappedLevel = level else { return }
-		waiter?.serve(entrees: DTOrderFromKitchen(Tickets.openingLevel, unwrappedLevel))
+		waiter?.serve(entrees: FulfilledOrder(Tickets.openingLevel, unwrappedLevel))
 	}
 }
 
-extension GameHeadChef: DTCigaretteBreakProtocol {
+extension GameHeadChef: CigaretteBreakProtocol {
 	func endBreak() {
 		sousChef?.headChef = self
 		setLevel()
@@ -44,21 +44,21 @@ extension GameHeadChef: DTCigaretteBreakProtocol {
 	}
 }
 
-extension GameHeadChef: DTEndShiftProtocol {
+extension GameHeadChef: EndShiftProtocol {
 	func endShift() {
 		sousChef?.headChef = nil
 		waiter = nil
 	}
 }
 
-extension GameHeadChef: DTStartShiftProtocol {
+extension GameHeadChef: StartShiftProtocol {
 	func startShift() {
 		setLevel()
 	}
 }
 
-extension GameHeadChef: DTHeadChefForWaiter {
-	func give(_ order: DTOrder) {
+extension GameHeadChef: HeadChefForWaiter {
+	func give(_ order: Order) {
 		switch order.ticket {
 		case Tickets.personalBest:
 			sousChef?.set(personalBest: order.content as? PBMetrics)
@@ -67,7 +67,7 @@ extension GameHeadChef: DTHeadChefForWaiter {
 				let index = order.content as? Int,
 				let level = sousChef?.getLevel(by: index)
 				else { return }
-			waiter?.hand(main: DTOrderFromKitchen(order.ticket, level))
+			waiter?.hand(main: FulfilledOrder(order.ticket, level))
 		case Tickets.unlock:
 			sousChef?.unlockLevel(by: order.content as? Int)
 		default: ()
