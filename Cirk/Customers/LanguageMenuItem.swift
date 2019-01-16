@@ -25,7 +25,7 @@ class LanguageMenuItem: RestaurantTableViewCell {
 		if let flag = language.flag {
 			flagImage.image = UIImage(named: flag)
 		} else {
-			let img = UIImageView(image: UIImage(named: ImageNames.wood))
+			let img = UIImageView(image: UIImage(named: ImageNames.surface))
 			img.contentMode = .scaleAspectFill
 			backgroundView = img
 		}

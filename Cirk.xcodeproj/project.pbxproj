@@ -58,7 +58,6 @@
 		A98795C6219C1CC20041CA40 /* DT_ET_SwitchesRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98795C0219C1CC20041CA40 /* DT_ET_SwitchesRelationship.swift */; };
 		A98795C7219C1CC20041CA40 /* DT_ET_RawIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98795C1219C1CC20041CA40 /* DT_ET_RawIngredient.swift */; };
 		A98795C8219C1CC20041CA40 /* DT_ET_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98795C2219C1CC20041CA40 /* DT_ET_CoreData.swift */; };
-		A98795CB219C3F6C0041CA40 /* BallbearingPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98795CA219C3F6C0041CA40 /* BallbearingPlayer.swift */; };
 		A98795CF219CC2920041CA40 /* tickTock.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A98795CE219CC2920041CA40 /* tickTock.mp3 */; };
 		A993ED2B21728785005351EF /* DT_UT_Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993ED2A21728785005351EF /* DT_UT_Protocols.swift */; };
 		A9B011F721A467BA008212C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9B011F621A467BA008212C7 /* Assets.xcassets */; };
@@ -78,6 +77,7 @@
 		A9D5AEC021A70542006EF751 /* LevelsHeadChef.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5AEBD21A70542006EF751 /* LevelsHeadChef.swift */; };
 		A9D5AEC121A70542006EF751 /* GameHeadChef.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5AEBE21A70542006EF751 /* GameHeadChef.swift */; };
 		A9D5AEC221A70542006EF751 /* CirkSousChef.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5AEBF21A70542006EF751 /* CirkSousChef.swift */; };
+		A9FBBF8721EF9BD0005BA6D4 /* BallbearingPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FBBF8621EF9BD0005BA6D4 /* BallbearingPlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,7 +147,6 @@
 		A98795C0219C1CC20041CA40 /* DT_ET_SwitchesRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_SwitchesRelationship.swift; sourceTree = "<group>"; };
 		A98795C1219C1CC20041CA40 /* DT_ET_RawIngredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_RawIngredient.swift; sourceTree = "<group>"; };
 		A98795C2219C1CC20041CA40 /* DT_ET_CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_CoreData.swift; sourceTree = "<group>"; };
-		A98795CA219C3F6C0041CA40 /* BallbearingPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallbearingPlayer.swift; sourceTree = "<group>"; };
 		A98795CE219CC2920041CA40 /* tickTock.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tickTock.mp3; sourceTree = "<group>"; };
 		A993ED2A21728785005351EF /* DT_UT_Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Protocols.swift; sourceTree = "<group>"; };
 		A9B011F621A467BA008212C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -167,6 +166,7 @@
 		A9D5AEBD21A70542006EF751 /* LevelsHeadChef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsHeadChef.swift; sourceTree = "<group>"; };
 		A9D5AEBE21A70542006EF751 /* GameHeadChef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameHeadChef.swift; sourceTree = "<group>"; };
 		A9D5AEBF21A70542006EF751 /* CirkSousChef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CirkSousChef.swift; sourceTree = "<group>"; };
+		A9FBBF8621EF9BD0005BA6D4 /* BallbearingPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BallbearingPlayer.swift; sourceTree = "<group>"; };
 		C5168873EAB688564CC07E51 /* Pods-Cirk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cirk.release.xcconfig"; path = "Target Support Files/Pods-Cirk/Pods-Cirk.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -380,6 +380,7 @@
 		A9776D7B2153962A00693C99 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				A9FBBF8621EF9BD0005BA6D4 /* BallbearingPlayer.swift */,
 				A9776D802153962A00693C99 /* CircleRenderer.swift */,
 				A9776D7C2153962A00693C99 /* Consts.swift */,
 				A9776D7F2153962A00693C99 /* Extensions.swift */,
@@ -393,7 +394,6 @@
 		A9776DC62153B63C00693C99 /* Waiters */ = {
 			isa = PBXGroup;
 			children = (
-				A98795CA219C3F6C0041CA40 /* BallbearingPlayer.swift */,
 				A9776DC82153B63C00693C99 /* GameWaiter.swift */,
 				A9B0120221A59019008212C7 /* LanguageWaiter.swift */,
 				A9776DC92153B63C00693C99 /* LevelsWaiter.swift */,
@@ -636,10 +636,10 @@
 				A9338315216B915200A2FCE3 /* DT_UT_Extensions.swift in Sources */,
 				A94577A321E78977006C1934 /* DT_UT_Reflector.swift in Sources */,
 				A9776DE02153E3F700693C99 /* GameCustomer.swift in Sources */,
-				A98795CB219C3F6C0041CA40 /* BallbearingPlayer.swift in Sources */,
 				A9B011FB21A58BB1008212C7 /* LanguageEntrees.swift in Sources */,
 				A9338301216B915200A2FCE3 /* DT_CT_Customer.swift in Sources */,
 				A9D5AEC121A70542006EF751 /* GameHeadChef.swift in Sources */,
+				A9FBBF8721EF9BD0005BA6D4 /* BallbearingPlayer.swift in Sources */,
 				A933830B216B915200A2FCE3 /* DT_CS_Logs.swift in Sources */,
 				A971CDD2215393EF00F4BB29 /* AppDelegate.swift in Sources */,
 				A993ED2B21728785005351EF /* DT_UT_Protocols.swift in Sources */,

@@ -29,7 +29,7 @@ class GameHeadChef: HeadChef {
 			level = highestUnlockedLevel
 		}
 		guard let unwrappedLevel = level else { return }
-		waiter?.serve(entrees: FulfilledOrder(Tickets.openingLevel, unwrappedLevel))
+		waiter?.serve(entrees: FulfilledOrder(Tickets.openingLevel, dishes: unwrappedLevel))
 	}
 }
 
@@ -67,7 +67,7 @@ extension GameHeadChef: HeadChefForWaiter {
 				let index = order.content as? Int,
 				let level = sousChef?.getLevel(by: index)
 				else { return }
-			waiter?.hand(main: FulfilledOrder(order.ticket, level))
+			waiter?.serve(main: FulfilledOrder(order.ticket, dishes: level))
 		case Tickets.unlock:
 			sousChef?.unlockLevel(by: order.content as? Int)
 		default: ()

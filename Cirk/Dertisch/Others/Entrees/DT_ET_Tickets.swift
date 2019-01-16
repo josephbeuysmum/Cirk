@@ -6,14 +6,14 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
-public typealias Ticket = String
+//public typealias Ticket = String
 
 public struct Order {
 	public let
-	ticket: Ticket,
+	ticket: String,
 	content: Any?
 
-	public init(_ ticket: Ticket, _ content: Any?) {
+	public init(_ ticket: String, _ content: Any?) {
 		self.ticket = ticket
 		self.content = content
 	}
@@ -21,19 +21,11 @@ public struct Order {
 
 public struct FulfilledOrder {
 	public let
-	ticket: Ticket,
-	dishes: Dishionarizer?,
-	multipleDishes: [String: Dishionarizer]?
-
-	public init(_ ticket: Ticket, _ dishes: Dishionarizer?) {
+	ticket: String,
+	dishes: Dishionarizer?
+	
+	public init(_ ticket: String, dishes: Dishionarizer? = nil) {
 		self.ticket = ticket
 		self.dishes = dishes
-		self.multipleDishes = nil
-	}
-
-	public init(_ ticket: Ticket, _ multipleDishes: [String: Dishionarizer]?) {
-		self.ticket = ticket
-		self.multipleDishes = multipleDishes
-		self.dishes = nil
 	}
 }

@@ -10,6 +10,8 @@
 import Foundation
 
 class LanguageWaiter: Waiter {
+	func fillCarte(with entrees: FulfilledOrder) {}
+	
 	fileprivate weak var
 	customer: CustomerForWaiter!
 	
@@ -17,17 +19,17 @@ class LanguageWaiter: Waiter {
 	carte_: CarteForCustomer?
 	
 	required init(customer: CustomerForWaiter, headChef: HeadChefForWaiter?) {
-		lo("bonjour language waiter")
+//		lo("bonjour language waiter")
 		self.customer = customer
 		
 		var languageNames: [LanguageCellEntre] = []
 		Languages.allCases.forEach {
 			languageNames.append(LanguageCellEntre(name: $0.rawValue))
 		}
-		carte_ = Carte(LanguageCellEntrees(names: languageNames))
+//		carte_ = Carte(LanguageCellEntrees(names: ["languageNames": languageNames]))
 	}
 	
-	deinit { lo("au revoir language waiter") }
+//	deinit { lo("au revoir language waiter") }
 }
 
 extension LanguageWaiter: WaiterForCustomer {

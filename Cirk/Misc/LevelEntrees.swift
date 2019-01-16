@@ -16,6 +16,7 @@ struct Level: Dishionarizer { //, Indexical {
 	mode: Int,
 	json: LevelJson,
 	nextLevelUnlocked: Bool,
+	countLevels: Int,
 	personalBest: Float?
 }
 
@@ -23,15 +24,24 @@ struct LevelCollection: Dishionarizer { //, Indexical {
 	let levels: [Level]
 }
 
+struct LevelCount: Dishionarizer {
+	let countLevels: Int
+}
+
 struct LevelsJson: Decodable {
 	let levels: [LevelJson]
 }
 
-struct LevelJson: Decodable { //, Indexical {
+struct LevelJson: Decodable, Hashable {
+	var hashValue: Int { return index }
 	let
 	index: Int,
 	circles: [CircleJson],
 	unlockTime: Int
+	
+	static func == (lhs: LevelJson, rhs: LevelJson) -> Bool {
+		return lhs.index == rhs.index
+	}
 }
 
 struct CircleJson: Decodable {

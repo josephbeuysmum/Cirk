@@ -61,7 +61,8 @@ class IntroCustomer: Customer {
 		ballSize = CGFloat(round(Double((Int(screenHeight) + Metrics.screenMedian) / 2) / Metrics.ballHeightDivider)),
 		halfBallSize = ballSize / 2,
 		teal = Colors.teal
-		backgroundImage.image = UIImage(named: ImageNames.wood)
+		backgroundImage.contentMode = .scaleAspectFill
+		backgroundImage.image = UIImage(named: ImageNames.surface)
 		titleLabel.text = "Cirk"
 		descriptionLabel.makeWrappable()
 //		descriptionLabel.text = sommelier?[SommelierKeys.gameDescription]

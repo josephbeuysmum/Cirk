@@ -192,7 +192,7 @@ public protocol WaiterForCustomer: GiveOrderProtocol {
 
 public protocol WaiterForHeadChef {
 	mutating func serve(entrees: FulfilledOrder)
-	mutating func hand(main: FulfilledOrder)
+	mutating func serve(main: FulfilledOrder)
 }
 
 public protocol WaiterForWaiter {
@@ -228,8 +228,8 @@ public extension WaiterForCustomer {
 }
 
 public extension WaiterForWaiter {
-	func fillCarte(with entrees: FulfilledOrder) {}
-	func serve(dishes: FulfilledOrder) {
+//	func fillCarte(with entrees: FulfilledOrder) { lo() }
+	mutating func serve(dishes: FulfilledOrder) {
 		let mirror = Mirror(reflecting: self)
 //		guard let carte = Reflector().getFirst(Carte.self, from: mirror) else { return }
 //		carte.stock(with: dishes)
@@ -244,7 +244,7 @@ public extension WaiterForWaiter {
 }
 
 public extension WaiterForHeadChef {
-	public func hand(main: FulfilledOrder) {
+	public func serve(main: FulfilledOrder) {
 		guard var waiter = self as? WaiterForWaiter else { return }
 		waiter.serve(dishes: main)
 	}
@@ -254,6 +254,7 @@ public extension WaiterForHeadChef {
 			let customer = Reflector().getFirst(CustomerForWaiter.self, from: Mirror(reflecting: self)),
 			var waiter = self as? WaiterForWaiter
 			else { return }
+		// todo reinstate stock?
 //		if let carte = Reflector().getFirst(CarteForWaiter.self, from: Mirror(reflecting: self)) {
 //			carte.stock(with: entrees)
 //		} else {

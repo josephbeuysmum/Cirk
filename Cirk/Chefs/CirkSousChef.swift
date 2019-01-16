@@ -33,7 +33,7 @@ class CirkSousChef {
 		bundledJson = kitchenStaff?[BundledJson.staticId] as? BundledJson
 		levelKey = "DTCDLevel"
 		indexKey = "index"
-		personalBestKey = "personalBest"
+		personalBestKey = CarteKeys.personalBest
 		modeKey = "mode"
 		levels = []
 		mode = Modes.tabletop
@@ -60,7 +60,7 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 					index: i,
 					mode: Modes.tabletop.rawValue,
 					json: json,
-					nextLevelUnlocked: i < levelsUnlockedUpTo,
+					nextLevelUnlocked: i < levelsUnlockedUpTo, countLevels: 0,
 					personalBest: nil)
 			} else {
 				level = self.levels[i]
@@ -69,6 +69,10 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 			levels.append(level)
 		}
 		return levels.count > 0 ? LevelCollection(levels: levels) : nil
+	}
+	
+	var countLevel: LevelCount {
+		return LevelCount(countLevels: levels.count)
 	}
 	
 	var highestUnlockedLevel: Level? {
@@ -107,7 +111,6 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 	func selectLevel(by index: Int) {
 		let countJson = levelsJson?.levels.count
 		selectedLevelIndex = countJson != nil && index > -1 && index < countJson! ? index : nil
-//		lo("selected index:", selectedLevelIndex)
 	}
 	
 	func set(personalBest: PBMetrics?) {
@@ -118,14 +121,14 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 			by: "index == \(pb.levelIndex)") { [weak self] managedObjects in
 				guard
 					let strongSelf = self,
-					let safeManagedObjects = managedObjects
+					let strongManagedObjects = managedObjects
 					else { return }
 //				lo( strongSelf.getLevel(by: pb.levelIndex)?.index, strongSelf.getLevel(by: pb.levelIndex)?.personalBest, strongSelf.getLevel(by: pb.levelIndex)?.nextLevelUnlocked )
-				strongSelf.set(levels: safeManagedObjects)
+				strongSelf.set(levels: strongManagedObjects)
 				guard let level = strongSelf.getLevel(by: pb.levelIndex) else { return }
 //				lo(level.index, level.personalBest, level.nextLevelUnlocked)
 //				lo(strongSelf.headChef)
-				strongSelf.headChef?.give(dishes: FulfilledOrder(Tickets.personalBest, level))
+				strongSelf.headChef?.give(dishes: FulfilledOrder(Tickets.personalBest, dishes: level))
 		}
 	}
 	
@@ -139,8 +142,8 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 //		endShift(); return;
 		coreData?.retrieve(levelKey) { [weak self] managedObjects in
 			guard let strongSelf = self else { return }
-			if let safeManagedObjects = managedObjects {
-				strongSelf.set(levels: safeManagedObjects)
+			if let strongManagedObjects = managedObjects {
+				strongSelf.set(levels: strongManagedObjects)
 			} else {
 				if let lowestLevel = strongSelf.levelsJson?.levels.reduce(LevelJson(index: 100, circles: [], unlockTime: 0), { $0.index < $1.index ? $0 : $1 }) {
 					strongSelf.store(level: lowestLevel.index)
@@ -181,22 +184,23 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 	}
 
 	private func set(levels: [NSManagedObject]?) {
-		guard let safeLevels = levels as? [DTCDLevel] else {
-			return }
-		for safeLevel in safeLevels {
-			let index = Int(safeLevel.index)
-//			lo(index)
-			if let levelJson = getLevelJson(by: index) {
+		guard
+			let strongLevels = levels as? [DTCDLevel],
+			let countLevels = levelsJson?.levels.count
+			else { return }
+		for level in strongLevels {
+			let levelIndex = Int(level.index)
+			if let levelJson = getLevelJson(by: levelIndex) {
 				let
-				nextLevelUnlocked = safeLevel.personalBest > 0 && safeLevel.personalBest <= Double(levelJson.unlockTime),
+				nextLevelUnlocked = level.personalBest > 0 && level.personalBest <= Double(levelJson.unlockTime),
 				level = Level(
-					index: index,
-					mode: Int(safeLevel.mode),
+					index: levelIndex ,
+					mode: Int(level.mode),
 					json: levelJson,
 					nextLevelUnlocked: nextLevelUnlocked,
-					personalBest: Float(safeLevel.personalBest))
-//				lo("UPDATE", index, getLevelArrayIndex(by: index), safeLevel.personalBest, level.nextLevelUnlocked)
-				if let levelIndex = getLevelArrayIndex(by: index) {
+					countLevels: countLevels,
+					personalBest: Float(level.personalBest))
+				if let levelIndex = getLevelArrayIndex(by: level.index) {
 					self.levels.replaceSubrange(levelIndex...levelIndex, with: [level])
 				} else {
 					self.levels.append(level)

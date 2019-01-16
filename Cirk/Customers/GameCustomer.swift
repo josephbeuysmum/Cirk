@@ -131,7 +131,8 @@ class GameCustomer: Customer {
 		let label = UILabel()
 		label.font = UIFont.systemFont(ofSize: 168)
 		countdownLabel = label
-		backgroundImage.image = UIImage(named: ImageNames.wood)
+		backgroundImage.contentMode = .scaleAspectFill
+		backgroundImage.image = UIImage(named: ImageNames.surface)
 		
 		restartButton.addTarget(self, action: #selector(restartButtonTarget), for: .touchUpInside)
 		levelsButton.addTarget(self, action: #selector(levelsButtonTarget), for: .touchUpInside)
@@ -204,14 +205,13 @@ class GameCustomer: Customer {
 	
 	/*
 	tood jobboes:
-	continue bugtesting
-	change wooden background
+	melanie for bugtesting
 	improve copy texts
-	strings as consts (see opening guard statement in func initilizeLevel)
 	last level options
 	french translations
 	test UI with melanie
 	level design
+	allow left hand portrait too? 
 	*/
 	private func drawCircles() {
 		guard let level: Level = waiter.carte?.entrees() else { return }
@@ -323,7 +323,7 @@ class GameCustomer: Customer {
 		return UIAlertAction(title: sommelier[SommelierKeys.playNextLevel], style: .default) { [weak self] _ in
 			guard
 				let strongSelf = self,
-				let levelIndex: Int = strongSelf.waiter.carte?.des("json.index")
+				let levelIndex: Int = strongSelf.waiter.carte?.des(CarteKeys.jsonIndex)
 				else { return }
 			strongSelf.waiter.give(Order(Tickets.setLevel, levelIndex + 1))
 		}
@@ -338,12 +338,13 @@ class GameCustomer: Customer {
 	private func initilizeLevel() {
 		guard
 			let carte = waiter.carte,
-			let unlockTime: Float = carte.des("json.unlockTime"),
-			let personalBest: Float = carte.des("personalBest"),
-			let levelIndex: Int = carte.des("json.index"),
-			let countCircles: String = carte.des("json.circles.count"),
-			let circlesTime: String = carte.des("json.circles.0.time")
+			let unlockTime: Float = carte.des(CarteKeys.jsonUnlock),
+			let personalBest: Float = carte.des(CarteKeys.personalBest),
+			let levelIndex: Int = carte.des(CarteKeys.jsonIndex),
+			let countCircles: String = carte.des(CarteKeys.countCircles),
+			let firstCircleTime: String = carte.des(CarteKeys.circleTime)
 			else { return }
+//		lo(levelIndex)
 		currentCircle.removeFromSuperlayer()
 		nextCircle?.removeFromSuperlayer()
 		arrow?.removeFromSuperview()
@@ -354,14 +355,18 @@ class GameCustomer: Customer {
 		timeInsideCircle = 0
 		circleIndex = 0
 		
+		let
+		levelNumber = "\(levelIndex + 1)",
+		countLevels: Int? = carte.des(CarteKeys.countLevels)
+		
 		ballbearingPlayer.set(audioOn: true)
 		personalBestValueLabel.text = personalBest < 0 ? "..." : "\(roundFloat(personalBest))"
 		timeValueLabel.text = "0.0"
 		cirksValueLabel.text = countCircles
-		levelValueLabel.text = "\(levelIndex + 1)"
+		levelValueLabel.text = countLevels != nil ? "\(levelNumber)/\(countLevels!)" : levelNumber
 		targetValueLabel.text = "\(unlockTime)"
 		timeLabel.textColor = getColor(by: Colors.black)
-		timeLabel.text = circlesTime
+		timeLabel.text = firstCircleTime
 		
 		let ballSizeGame = CGFloat(ballSize)
 		ball.frame = CGRect(
@@ -394,15 +399,15 @@ class GameCustomer: Customer {
 		guard
 			let carte = waiter.carte,
 			let level: Level = carte.entrees(),
-			let unlockTime: Float = carte.des("json.unlockTime"),
-			let levelIndex: Int = carte.des("json.index"),
-			let nextAlreadyLevelUnlocked: Bool = carte.des("nextLevelUnlocked")
+			let unlockTime: Float = carte.des(CarteKeys.jsonUnlock),
+			let levelIndex: Int = carte.des(CarteKeys.jsonIndex),
+			let nextAlreadyLevelUnlocked: Bool = carte.des(CarteKeys.nextLevelUnlocked)
 			else { return }
 		let circles = level.json.circles
 		var
 		circleData = circles[circleIndex],
 		countCircles = circles.count,
-		personalBest: Float = carte.des("personalBest") ?? 0,
+		personalBest: Float = carte.des(CarteKeys.personalBest) ?? 0,
 		cirkCenterPoint = getCenterPoint(by: circleData, and: screenBounds),
 		screenCenterPoint = CGPoint(x: screenBounds.width / 2, y: screenBounds.height / 2),
 		hasPersonalBest = personalBest > 0,

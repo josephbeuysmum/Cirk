@@ -12,6 +12,18 @@ import UIKit
 // todo remove UIKit dependency and CGFloats
 fileprivate let level = "Level"
 
+struct CarteKeys {
+	private static let ns = "json."
+	static let
+	circleTime = "\(ns)circles.0.time",
+	countCircles = "\(ns)circles.count",
+	countLevels = "countLevels",
+	jsonIndex = "\(ns)index",
+	jsonUnlock = "\(ns)unlockTime",
+	nextLevelUnlocked = "nextLevelUnlocked",
+	personalBest = "personalBest"
+}
+
 struct Colors {
 	static let
 	crimson = CircleColors(red: 0.8, green: 0, blue: 0),
@@ -41,8 +53,8 @@ struct ImageNames {
 	arrow = "arrow",
 	ball = "ball",
 	locked = "locked",
-	unlocked = "unlocked",
-	wood = "wood"
+	surface = "wood",
+	unlocked = "unlocked"
 }
 
 enum Languages: String, CaseIterable {

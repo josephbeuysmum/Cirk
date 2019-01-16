@@ -30,6 +30,6 @@ public extension HeadChef {
 public extension HeadChefForKitchenMember {
 	public func give(dishes: FulfilledOrder) {
 		guard var waiter = Reflector().getFirst(WaiterForHeadChef.self, from: Mirror(reflecting: self)) else { return }
-		waiter.hand(main: dishes)
+		waiter.serve(main: dishes)
 	}
 }

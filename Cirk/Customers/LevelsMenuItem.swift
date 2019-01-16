@@ -33,7 +33,7 @@ class LevelsMenuItem: RestaurantTableViewCell, CircleRendererProtocol {
 		levelLabel.text = header.level
 		targetLabel.text = header.target
 		personalBestLabel.text = header.personalBest
-		let img = UIImageView(image: UIImage(named: ImageNames.wood))
+		let img = UIImageView(image: UIImage(named: ImageNames.surface))
 		img.contentMode = .scaleAspectFill
 		backgroundView = img
 	}

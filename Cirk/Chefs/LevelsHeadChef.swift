@@ -42,6 +42,6 @@ extension LevelsHeadChef: HeadChefForWaiter {
 extension LevelsHeadChef: StartShiftProtocol {
 	func startShift() {
 		guard let allLevels = sousChef?.allLevels else { return }
-		waiter?.serve(entrees: FulfilledOrder(Tickets.allLevels, allLevels))
+		waiter?.serve(entrees: FulfilledOrder(Tickets.allLevels, dishes: allLevels))
 	}
 }
