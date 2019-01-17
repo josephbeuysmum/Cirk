@@ -26,7 +26,7 @@ class LanguageWaiter: Waiter {
 		Languages.allCases.forEach {
 			languageNames.append(LanguageCellEntre(name: $0.rawValue))
 		}
-//		carte_ = Carte(LanguageCellEntrees(names: ["languageNames": languageNames]))
+		carte_ = Carte(LanguageCellEntrees(names: languageNames))
 	}
 	
 //	deinit { lo("au revoir language waiter") }

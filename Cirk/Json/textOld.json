@@ -8,12 +8,12 @@
 		{
 			"key": "CANCEL",
 			"en": "Cancel",
-			"fr": "Annuler",
+			"fr": "___",
 		},
 		{
 			"key": "CHANGE_LEVEL",
 			"en": "Change level?",
-			"fr": "Changer de niveau?",
+			"fr": "Joue autre niveau?",
 		},
 		{
 			"key": "CIRKS",
@@ -23,7 +23,7 @@
 		{
 			"key": "CLOSE",
 			"en": "Close",
-			"fr": "Fermer",
+			"fr": "Fait",
 		},
 		{
 			"key": "ENGLISH",
@@ -36,19 +36,19 @@
 			"fr": "Français",
 		},
 		{
-			"key": "GAME_DESCRIPTION",
+			"key": "GAME_DESC",
 			"en": "Balance a ballbearing.\nAgainst the clock.\nInside cirkles.",
-			"fr": "Balancer une bille.\nContre la montre.\nDans les cirkles.",
+			"fr": "chenille processionaire",
 		},
 		{
 			"key": "GO",
 			"en": "GO!",
-			"fr": "PARTEZ!",
+			"fr": "ALLEZ!",
 		},
 		{
 			"key": "IMPROVE_PERSONAL_BEST",
 			"en": "Improve personal best?",
-			"fr": "Améliorer record personnel?",
+			"fr": "___ record personnel",
 		},
 		{
 			"key": "LANGUAGE",
@@ -58,21 +58,21 @@
 		{
 			"key": "LEVEL",
 			"en": "level",
-			"fr": "niveau",
+			"fr": "étage",
 		},
 		{
 			"key": "LAST_LEVEL_HEADER",
 			"en": "Cirk Completed!",
-			"fr": "Cirk Completé!",
+			"fr": "Cirk Complet!",
 		},
 		{
 			"key": "LAST_LEVEL_COPY",
-			"en": "Congratulations on completing Cirk! To give feedback or anything else please visit josephbeuysmum.co.uk",
-			"fr": "Félicitations d'avoir complété Cirk! Si vous avez des remarques à partager, veuillez contacter le développeur.",
+			"en": "Congratulations for completing Cirk! If you have any feedback you would like to share please contact the developer.\n\nCirk was developed to test the viability of on iOS framework on Github called Dertisch. The fact that the app has made it to the App Store is proof of its viability. Thank you for contributing to this test by playing, we hope you have enjoyed the game.",
+			"fr": "Congratulations for completing Cirk! If you have any feedback you would like to share please contact the developer.\n\nCirk was developed to test the viability of on iOS framework on Github called Dertisch. The fact that the app has made it to the App Store is proof of its viability. Thank you for contributing to this test by playing, we hope you have enjoyed the game.",
 		},
 		{
 			"key": "LAST_LEVEL_UNLOCKED",
-			"en": "Last Level Completed!",
+			"en": "Last Level Completed",
 			"fr": "Dernier Niveau Complet!",
 		},
 		{
@@ -88,7 +88,7 @@
 		{
 			"key": "MATCHED_PB",
 			"en": "Matched Personal Best!",
-			"fr": "Record Personnel Égalé",
+			"fr": "Égalé Record Personnel",
 		},
 		{
 			"key": "NEW_PB",
@@ -103,7 +103,7 @@
 		{
 			"key": "PLAY",
 			"en": "Play",
-			"fr": "Jouer",
+			"fr": "Joue",
 		},
 		{
 			"key": "PLAY_AGAIN",
@@ -113,7 +113,7 @@
 		{
 			"key": "PLAY_NEXT_LEVEL",
 			"en": "Play next level?",
-			"fr": "Jouer niveau suivant?",
+			"fr": "Joue niveau suivant?",
 		},
 		{
 			"key": "TARGET",

@@ -8,8 +8,8 @@
 import Foundation
 
 public protocol BundledJsonProtocol: KitchenMember {
-	var settings: JsonSettings? { get }
-	func decode<T>(json fileName: String, into type: T.Type) -> T? where T : Decodable
+//	var settings: JsonSettings? { get }
+//	func decode<T>(json fileName: String, into type: T.Type) -> T? where T : Decodable
 }
 
 public class BundledJson {
@@ -61,7 +61,7 @@ extension BundledJson: BundledJsonProtocol {
 	}
 	
 	fileprivate func handle(decodingError context: DecodingError.Context) {
-		lo(context.debugDescription)
+		print("^", context.debugDescription)
 	}
 	
 	fileprivate func parseSettings() {

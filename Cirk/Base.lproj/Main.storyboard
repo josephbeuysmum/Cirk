@@ -425,7 +425,7 @@
                                 </variation>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;description&gt;" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fn5-4B-ZYF">
-                                <rect key="frame" x="264" y="120" width="280" height="128"/>
+                                <rect key="frame" x="264" y="128" width="280" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="RDz-MO-cR7">
                                         <variation key="heightClass=regular-widthClass=regular" constant="640"/>
@@ -434,11 +434,11 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="256"/>
                                     </constraint>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="EraserDust" family="EraserDust" pointSize="21"/>
+                                <fontDescription key="fontDescription" name="EraserDust" family="EraserDust" pointSize="24"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" name="EraserDust" family="EraserDust" pointSize="42"/>
+                                    <fontDescription key="fontDescription" name="EraserDust" family="EraserDust" pointSize="48"/>
                                 </variation>
                             </label>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SeO-NE-UZ1">
@@ -496,7 +496,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="38l-Ao-usE" firstAttribute="top" secondItem="fn5-4B-ZYF" secondAttribute="bottom" constant="16" id="1PI-YA-FQw"/>
+                            <constraint firstItem="38l-Ao-usE" firstAttribute="top" secondItem="fn5-4B-ZYF" secondAttribute="bottom" constant="8" id="1PI-YA-FQw">
+                                <variation key="heightClass=regular-widthClass=regular" constant="16"/>
+                            </constraint>
                             <constraint firstItem="NRS-yE-tAc" firstAttribute="trailing" secondItem="4dd-ad-8fm" secondAttribute="trailing" constant="16" id="4Re-4F-k5a">
                                 <variation key="heightClass=compact-widthClass=compact" constant="16"/>
                                 <variation key="heightClass=regular-widthClass=regular" constant="48"/>
