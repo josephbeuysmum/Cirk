@@ -222,11 +222,8 @@ class GameCustomer: Customer {
 	tood
 	
 	JOBBOES
-	dis/en able restart button
-	melanie for bugtesting and other feedbacks
-	test layouts on other devices
 	level design
-	app icon
+	melanie for bugtesting and other feedbacks
 	
 	NICE TO HAVES
 	left hand portrait mode
@@ -301,7 +298,7 @@ class GameCustomer: Customer {
 				onto: view.layer,
 				within: screenBounds,
 				colored: getColor(by: Colors.teal, and: 0.4).cgColor,
-				withStrokeOf: 4,
+				withStrokeOf: strokeWidth,
 				andRadius: getRadius(by: nextCircleData.radius, and: ballSizeInt))
 			view.layer.addSublayer(nextCircle!)
 		}
@@ -411,6 +408,9 @@ class GameCustomer: Customer {
 		animate(
 			[("3", Effects.beep), ("2", Effects.beep), ("1", Effects.beep), (sommelier[SommelierKeys.go]!, Effects.start)],
 			color: getColor(by: Colors.crimson))
+		
+		restartButton.isEnabled = true
+		levelsButton.isEnabled = true
 	}
 	
 	private func invalidateTimer() {
@@ -525,6 +525,10 @@ class GameCustomer: Customer {
 				if viewTime <= 0 {
 					let incrementedCircleIndex = strongSelf.circleIndex + 1
 					if incrementedCircleIndex == countCircles {
+						
+						strongSelf.restartButton.isEnabled = false
+						strongSelf.levelsButton.isEnabled = false
+						
 						strongSelf.timeLabel.textColor = crimson
 						strongSelf.timeLabel.text = "0.0"
 						strongSelf.timeValueLabel.text = "\(roundedGameTime)"

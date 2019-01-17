@@ -75,7 +75,6 @@ struct Metrics {
 	screenLargest = 1024,
 	screenMedian = (screenSmallest + screenLargest) / 2,
 	shadowDivider = 80,
-//	timeTextMarginDivider = 44,
 	timeViewSize = 32
 }
 
