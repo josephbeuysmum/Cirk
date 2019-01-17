@@ -13,8 +13,6 @@ import UIKit
 fileprivate typealias AlertDetails = (header: String, actions: [UIAlertAction], message: String?)
 fileprivate typealias AnimDetails = (text: String, effect: Effects)
 
-//fileprivate enum PostAnimStates { case levelStarting, levelEnding, gameComplete }
-
 class GameCustomer: Customer {
 	@IBOutlet weak var backgroundImage: UIImageView!
 	@IBOutlet weak var levelKeyLabel: UILabel!
@@ -33,13 +31,6 @@ class GameCustomer: Customer {
 	private var ballSize: Double {
 		return round(Double((Int(screenBounds.height) + Metrics.screenMedian) / 2) / Metrics.ballHeightDivider)
 	}
-	
-//	private var standardUnlockActions: [UIAlertAction] {
-//		return [
-//			strongSelf.getReplayAction(with: SommelierKeys.improvePersonalBest),
-//			strongSelf.getChooseLevelAction(),
-//			strongSelf.getNextLevelAction()]
-//	}
 	
 	private let ballbearingPlayer: BallbearingPlayer
 	
@@ -62,7 +53,6 @@ class GameCustomer: Customer {
 	countdownLabel: UILabel!,
 	timeLabel: UILabel!,
 	animationDetails: [AnimDetails]?,
-//	postAnimState: PostAnimStates?,
 	nextCircle: CAShapeLayer?,
 	alertDetails: AlertDetails?,
 	timer: Timer?,
@@ -117,7 +107,7 @@ class GameCustomer: Customer {
 		teal = getColor(by: Colors.teal),
 		timeTextSize = screenBounds.height < 415 ? 28 : 52
 		
-		supportedInterfaceOrientations = .landscapeRight
+		supportedInterfaceOrientations = [.landscapeRight, .landscapeLeft]
 		timeLabel = UILabel()
 		timeLabel.font = UIFont(name: "EraserDust", size: CGFloat(timeTextSize))
 		timeLabel.textAlignment = .center
@@ -174,18 +164,13 @@ class GameCustomer: Customer {
 	
 	private func textAnimationComplete() {
 		animationDetails = nil
-//		guard let state = postAnimState else { return }
-//		switch state {
-//		case .levelStarting:
 		if alertDetails == nil {
 			startBallRolling()
-//		case .levelEnding, .gameComplete:
 		} else {
 			ballbearingPlayer.set(audioOn: false)
 			maitreD.alert(actions: alertDetails!.actions, title: alertDetails!.header, message: alertDetails!.message)
 			alertDetails = nil
 		}
-//		postAnimState = nil
 	}
 	
 	private func textAnimationSectionComplete() {
@@ -226,7 +211,6 @@ class GameCustomer: Customer {
 	melanie for bugtesting and other feedbacks
 	
 	NICE TO HAVES
-	left hand portrait mode
 	variable surfaces
 	glass up and under with video
 	*/
@@ -261,9 +245,9 @@ class GameCustomer: Customer {
 		potentialLeftX = Int(cirkCenterPoint.x) - (timeLabelWidth / 2),
 		potentialRightX = Int(screenBounds.width) - timeLabelWidth
 		switch true {
-		case potentialLeftX < 0: 								timeLabelX = 0
+		case potentialLeftX < 0: 				timeLabelX = 0
 		case potentialLeftX > potentialRightX:	timeLabelX = potentialRightX
-		default: 																timeLabelX = potentialLeftX
+		default: 								timeLabelX = potentialLeftX
 		}
 		if cirkCenterPoint.y + radius + timeLabelHeightFloat < timeKeyLabel.frame.origin.y {
 			// room for text label beneath cirk
@@ -276,11 +260,11 @@ class GameCustomer: Customer {
 			timeLabelY = Int(cirkCenterPoint.y) - (timeLabelHeight / 2)
 			if cirkCenterPoint.x > (screenBounds.width / 2) {
 				// left
-				timeLabelX = Int(cirkCenterPoint.x - radius) - timeLabelWidth
+				timeLabelX = Int(cirkCenterPoint.x - radius) - timeLabelWidth - Metrics.timeLabelMargin
 				timeLabel.textAlignment = .right
 			} else {
 				// right
-				timeLabelX = Int(cirkCenterPoint.x + radius)
+				timeLabelX = Int(cirkCenterPoint.x + radius) + Metrics.timeLabelMargin
 				timeLabel.textAlignment = .left
 			}
 		}
@@ -404,7 +388,6 @@ class GameCustomer: Customer {
 			height: ballSizeGame)
 		
 		drawCircles()
-//		postAnimState = .levelStarting
 		animate(
 			[("3", Effects.beep), ("2", Effects.beep), ("1", Effects.beep), (sommelier[SommelierKeys.go]!, Effects.start)],
 			color: getColor(by: Colors.crimson))
@@ -550,8 +533,6 @@ class GameCustomer: Customer {
 						if newPersonalBest {
 							personalBest = roundedGameTime
 						}
-						
-//						strongSelf.postAnimState = lastLevelComplete ? .gameComplete : .levelEnding
 
 						switch true {
 						case lastLevelComplete:

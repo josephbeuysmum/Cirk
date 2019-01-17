@@ -55,7 +55,7 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 		level: Level
 		for i in 0..<countJson {
 			if  i >= countLevels,
-				let json = getLevelJson(by: i) {
+				let json = levelsJson?.levels[i] {
 				level = Level(
 					index: i,
 					mode: Modes.tabletop.rawValue,
@@ -133,11 +133,18 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 	}
 	
 	func startShift() {
-		guard let levelsJson = bundledJson?.decode(json: "levels", into: LevelsJson.self) else {
+		guard let rawLevelsJson = bundledJson?.decode(json: "levels", into: LevelsJson.self) else {
 			// todo replace this
 			fatalError("NO LEVELS JSON")
 		}
-		self.levelsJson = levelsJson
+		var preparedLevels: [LevelJson] = []
+		let levelsCount = rawLevelsJson.levels.count
+		for i in 0..<levelsCount {
+			var level = rawLevelsJson.levels[i]
+			level.index = i
+			preparedLevels.append(level)
+		}
+		self.levelsJson = LevelsJson(levels: preparedLevels)
 		coreData?.dataModelName = "CirkData"
 //		endShift(); return;
 		coreData?.retrieve(levelKey) { [weak self] managedObjects in
@@ -145,9 +152,7 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 			if let strongManagedObjects = managedObjects {
 				strongSelf.set(levels: strongManagedObjects)
 			} else {
-				if let lowestLevel = strongSelf.levelsJson?.levels.reduce(LevelJson(index: 100, circles: [], unlockTime: 0), { $0.index < $1.index ? $0 : $1 }) {
-					strongSelf.store(level: lowestLevel.index)
-				}
+				strongSelf.store(level: 0)
 			}
 		}
 	}
@@ -178,11 +183,6 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 		return nil
 	}
 	
-	private func getLevelJson(by index: Int) -> LevelJson? {
-		guard let levelsJson = (levelsJson?.levels.filter { $0.index == index }) else { return nil }
-		return levelsJson.count == 1 ? levelsJson[0] : nil
-	}
-
 	private func set(levels: [NSManagedObject]?) {
 		guard
 			let strongLevels = levels as? [DTCDLevel],
@@ -190,11 +190,11 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 			else { return }
 		for level in strongLevels {
 			let levelIndex = Int(level.index)
-			if let levelJson = getLevelJson(by: levelIndex) {
+			if let levelJson = levelsJson?.levels[levelIndex] {
 				let
 				nextLevelUnlocked = level.personalBest > 0 && level.personalBest <= Double(levelJson.unlockTime),
 				level = Level(
-					index: levelIndex ,
+					index: levelIndex,
 					mode: Int(level.mode),
 					json: levelJson,
 					nextLevelUnlocked: nextLevelUnlocked,

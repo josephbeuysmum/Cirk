@@ -15,7 +15,7 @@ class LevelsMenu: MenuCustomer {
 	private var
 	maitreD: MaitreD!, 
 	sommelier: Sommelier!,
-	waiter: WaiterForCustomer!
+	waiter: WaiterForCustomer?
 	
 //	deinit { lo("au revoir levels menu") }
 	
@@ -47,7 +47,7 @@ class LevelsMenu: MenuCustomer {
 
 extension LevelsMenu: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		guard let entrees: LevelCollection = waiter.carte?.entrees() else { return 0 }
+		guard let entrees: LevelCollection = waiter?.carte?.entrees() else { return 0 }
 		return entrees.levels.count
 	}
 	
@@ -55,7 +55,7 @@ extension LevelsMenu: UITableViewDataSource {
 		guard
 //			let carte = carte,
 			let cell = tableView.dequeueReusableCell(withIdentifier: Views.levelsCell) as? LevelsMenuItem,
-			let levels: LevelCollection = waiter.carte?.entrees()
+			let levels: LevelCollection = waiter?.carte?.entrees()
 			else { return UITableViewCell() }
 		cell.serve(with: levels.levels[indexPath.row])
 		return cell
@@ -76,7 +76,7 @@ extension LevelsMenu: UITableViewDataSource {
 extension LevelsMenu {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let row = indexPath.row
-		waiter.give(Order(Tickets.setLevel, row))
+		waiter?.give(Order(Tickets.setLevel, row))
 		maitreD.removeMenu("\(row)")
 	}
 }
