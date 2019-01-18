@@ -15,18 +15,19 @@ fileprivate typealias AnimDetails = (text: String, effect: Effects)
 
 class GameCustomer: Customer {
 	@IBOutlet weak var backgroundImage: UIImageView!
-	@IBOutlet weak var levelKeyLabel: UILabel!
-	@IBOutlet weak var levelValueLabel: UILabel!
-	@IBOutlet weak var targetKeyLabel: UILabel!
-	@IBOutlet weak var targetValueLabel: UILabel!
 	@IBOutlet weak var cirksKeyLabel: UILabel!
 	@IBOutlet weak var cirksValueLabel: UILabel!
-	@IBOutlet weak var timeKeyLabel: UILabel!
-	@IBOutlet weak var timeValueLabel: UILabel!
+	@IBOutlet weak var levelsButton: UIButton!
+	@IBOutlet weak var levelKeyLabel: UILabel!
+	@IBOutlet weak var levelValueLabel: UILabel!
 	@IBOutlet weak var personalBestKeyLabel: UILabel!
 	@IBOutlet weak var personalBestValueLabel: UILabel!
-	@IBOutlet weak var levelsButton: UIButton!
 	@IBOutlet weak var restartButton: UIButton!
+	@IBOutlet weak var targetKeyLabel: UILabel!
+	@IBOutlet weak var targetValueLabel: UILabel!
+	@IBOutlet weak var timeKeyLabel: UILabel!
+	@IBOutlet weak var timeValueLabel: UILabel!
+	@IBOutlet weak var titleLabel: UILabel!
 
 	private var ballSize: Double {
 		return round(Double((Int(screenBounds.height) + Metrics.screenMedian) / 2) / Metrics.ballHeightDivider)
@@ -122,7 +123,9 @@ class GameCustomer: Customer {
 		targetValueLabel.textColor = black
 		timeValueLabel.textColor = black
 		personalBestValueLabel.textColor = teal
-		
+		titleLabel.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 1.9)
+		titleLabel.textColor = getColor(by: Colors.brown, and: 0.4)
+
 		ball = UIImageView(image: UIImage(named: ImageNames.ball))
 		
 		let label = UILabel()
@@ -157,6 +160,8 @@ class GameCustomer: Customer {
 	private func animate(_ texts: [AnimDetails], color textColor: UIColor) {
 		guard animationDetails == nil, texts.count > 0 else { return }
 		animationDetails = texts
+		arrow?.removeFromSuperview()
+		arrow = nil
 		countdownLabel.layer.removeAllAnimations()
 		countdownLabel.textColor = textColor
 		animateNextText()
@@ -207,9 +212,7 @@ class GameCustomer: Customer {
 	tood
 	
 	JOBBOES
-	second circle paler
-	remove arrow when animating level end message
-	level design
+	level design cont
 	melanie for bugtesting and other feedbacks
 	
 	NICE TO HAVES
@@ -283,7 +286,7 @@ class GameCustomer: Customer {
 				from: nextCircleData,
 				onto: view.layer,
 				within: screenBounds,
-				colored: getColor(by: Colors.teal, and: 0.4).cgColor,
+				colored: getColor(by: Colors.teal, and: 0.25).cgColor,
 				withStrokeOf: strokeWidth,
 				andRadius: getRadius(by: nextCircleData.radius, and: ballSizeInt))
 			view.layer.addSublayer(nextCircle!)
@@ -365,8 +368,8 @@ class GameCustomer: Customer {
 //		lo(levelIndex)
 		currentCircle.removeFromSuperlayer()
 		nextCircle?.removeFromSuperlayer()
-		arrow?.removeFromSuperview()
-		arrow = nil
+//		arrow?.removeFromSuperview()
+//		arrow = nil
 		
 		ballX = 0
 		ballY = 0
@@ -381,6 +384,9 @@ class GameCustomer: Customer {
 		targetValueLabel.text = "\(unlockTime)"
 		timeLabel.textColor = getColor(by: Colors.black)
 		timeLabel.text = firstCircleTime
+		
+		let title: String? = carte.des(CarteKeys.jsonTitle)
+		titleLabel.text = title
 		
 		let
 		ballStartX: Float = carte.des(CarteKeys.ballX) ?? 0.5,

@@ -36,6 +36,7 @@ struct LevelJson: Decodable, Hashable {
 	var hashValue: Int { return 0 }
 	let
 	circles: [CircleJson],
+	title: String,
 	unlockTime: Float,
 	ballX: Float?,
 	ballY: Float?
@@ -56,6 +57,7 @@ struct CircleJson: Decodable {
 
 struct LevelsTableHeader {
 	let
+	title: String,
 	level: String,
 	target: String,
 	personalBest: String

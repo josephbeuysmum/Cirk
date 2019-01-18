@@ -66,6 +66,7 @@ extension LevelsMenu: UITableViewDataSource {
 			let tableHeader = tableView.dequeueReusableCell(withIdentifier: Views.levelsCell) as? LevelsMenuItem
 			else { return nil }
 		tableHeader.serve(with: LevelsTableHeader(
+			title: sommelier[SommelierKeys.title]!,
 			level: sommelier[SommelierKeys.level]!,
 			target: sommelier[SommelierKeys.target]!,
 			personalBest: sommelier[SommelierKeys.personalBest]!))

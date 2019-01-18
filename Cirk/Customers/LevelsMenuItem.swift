@@ -14,6 +14,7 @@ import UIKit
 //}
 
 class LevelsMenuItem: RestaurantTableViewCell, CircleRendererProtocol {
+	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var levelLabel: UILabel!
 	@IBOutlet weak var targetLabel: UILabel!
 	@IBOutlet weak var personalBestLabel: UILabel!
@@ -30,6 +31,7 @@ class LevelsMenuItem: RestaurantTableViewCell, CircleRendererProtocol {
 	}
 	
 	private func populate(with header: LevelsTableHeader) {
+		titleLabel.text = nil
 		levelLabel.text = header.level
 		targetLabel.text = header.target
 		personalBestLabel.text = header.personalBest
@@ -55,6 +57,7 @@ class LevelsMenuItem: RestaurantTableViewCell, CircleRendererProtocol {
 		personalBestLabel.textColor = isUnlocked ?
 			textColor :
 			UIColor(red: crimson.red, green: crimson.green, blue: crimson.blue, alpha: alpha)
+		titleLabel.text = "\(level.json.title)"
 		levelLabel.text = "\(level.index + 1)"
 		targetLabel.text = "\(level.json.unlockTime)"
 		if isUnlocked {

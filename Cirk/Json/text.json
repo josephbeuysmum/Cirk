@@ -97,8 +97,8 @@
 		},
 		{
 			"key": "PERSONAL_BEST",
-			"en": "personal best",
-			"fr": "record personnel",
+			"en": "best",
+			"fr": "record",
 		},
 		{
 			"key": "PLAY",
@@ -119,6 +119,11 @@
 			"key": "TARGET",
 			"en": "target",
 			"fr": "cible",
+		},
+		{
+			"key": "TITLE",
+			"en": "title",
+			"fr": "titre",
 		},
 		{
 			"key": "TOTAL",

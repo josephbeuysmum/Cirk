@@ -17,7 +17,6 @@ extension CircleRendererProtocol {
 		colored color: CGColor,
 		withStrokeOf lineWidth: CGFloat,
 		andRadius radius: CGFloat) {
-		lo(getCenterPoint(by: circleData, and: bounds))
 		circle.path = UIBezierPath(
 			arcCenter: getCenterPoint(by: circleData, and: bounds),
 			radius: radius,

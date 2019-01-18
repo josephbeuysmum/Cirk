@@ -21,6 +21,7 @@ struct CarteKeys {
 	countCircles = "\(ns)circles.count",
 	countLevels = "countLevels",
 	jsonIndex = "\(ns)index",
+	jsonTitle = "\(ns)title",
 	jsonUnlock = "\(ns)unlockTime",
 	nextLevelUnlocked = "nextLevelUnlocked",
 	personalBest = "personalBest"
@@ -31,7 +32,7 @@ struct Colors {
 	crimson = CircleColors(red: 0.8, green: 0, blue: 0),
 	black = CircleColors(red: 0, green: 0, blue: 0),
 	lightGray = CircleColors(red: 0.8, green: 0.8, blue: 0.8),
-	umber = CircleColors(red: 0.95, green: 0.4, blue: 0),
+	brown = CircleColors(red: 0.6, green: 0.4, blue: 0.1),
 	teal = CircleColors(red: 0.2, green: 1, blue: 0.8),
 	alpha = CGFloat(0.6)
 }
@@ -112,6 +113,7 @@ struct SommelierKeys {
 	playAgain = "PLAY_AGAIN",
 	playNextLevel = "PLAY_NEXT_LEVEL",
 	target = "TARGET",
+	title = "TITLE",
 	total = "TOTAL",
 	unlockTime = "UNLOCK_TIME"
 //		levelMastered = "LEVEL_MASTERED",

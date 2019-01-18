@@ -1,16 +1,240 @@
 {
 	"levels": [
 		{
+			"title": "Der Learnz",
+			"index": 0,
 			"circles" : [
 				{"x": 0.3, "y": 0.5, "radius": 3, "time": 3},
 			],
-			"unlockTime": 30,
+			"unlockTime": 30
 		},
 		{
+			"title": "Der Practisz",
+			"index": 1,
 			"circles" : [
-				{"x": 0.7, "y": 0.50, "radius": 3, "time": 3},
+				{"x": 0.7, "y": 0.5, "radius": 3, "time": 3},
 			],
 			"unlockTime": 10
+		},
+		{
+			"title": "Der Stillz",
+			"circles": [
+				{"x": 0.5, "y": 0.5, "radius": 3, "time": 3},
+			],
+			"unlockTime": 10
+		},
+		{
+			"title": "Der Stillzier",
+			"circles": [
+				{"x": 0.5, "y": 0.5, "radius": 2.5, "time": 3},
+			],
+			"unlockTime": 3
+		},
+		{
+			"title": "Ooh Two!",
+			"circles": [
+				{"x": 0.5, "y": 0.5, "radius": 3, "time": 3},
+				{"x": 0.375, "y": 0.5, "radius": 3, "time": 3},
+			],
+			"unlockTime": 10
+		},
+		{
+			"title": "Zero Waste",
+			"circles": [
+				{"x": 0.5625, "y": 0.5, "radius": 3, "time": 3},
+				{"x": 0.4375, "y": 0.5, "radius": 3, "time": 3},
+			],
+			"unlockTime": 6,
+			"ballX": 0.5625
+		},
+		{
+			"title": "Freeze!",
+			"circles": [
+				{"x": 0.8, "y": 0.5, "radius": 2, "time": 3},
+			],
+			"unlockTime": 3,
+			"ballX": 0.8
+		},
+		{
+			"title": "Back And Forth",
+			"circles": [
+				{"x": 0.75, "y": 0.5, "radius": 2.75, "time": 1.5},
+				{"x": 0.25, "y": 0.5, "radius": 2.5, "time": 1.5}
+			],
+			"unlockTime": 10
+		},
+		{
+			"title": "Three's Company",
+			"circles": [
+				{"x": 0.4, "y": 0.5, "radius": 2.75, "time": 1},
+				{"x": 0.6, "y": 0.5, "radius": 2.75, "time": 1},
+				{"x": 0.5, "y": 0.5, "radius": 2.75, "time": 1},
+			],
+			"unlockTime": 10,
+			"ballX": 0.4
+		},
+		{
+			"title": "Agile Sprint",
+			"circles": [
+				{"x": 0.225, "y": 0.5, "radius": 2.5, "time": 1},
+				{"x": 0.775, "y": 0.5, "radius": 2.25, "time": 1}
+			],
+			"unlockTime": 4,
+			"ballX": 0.225
+		},
+		{
+			"title": "Clean Diag",
+			"circles": [
+				{"x": 0.75, "y": 0.35, "radius": 2.5, "time": 2},
+				{"x": 0.5, "y": 0.5, "radius": 2.5, "time": 2},
+				{"x": 0.25, "y": 0.65, "radius": 2.5, "time": 2},
+			],
+			"unlockTime": 10,
+			"ballX": 0.75,
+			"ballY": 0.35
+		},
+		{
+			"title": "Boxed In",
+			"circles": [
+				{"x": 0.75, "y": 0.7, "radius": 2.25, "time": 2},
+				{"x": 0.25, "y": 0.7, "radius": 2.25, "time": 2},
+				{"x": 0.25, "y": 0.3, "radius": 2.25, "time": 2},
+				{"x": 0.75, "y": 0.3, "radius": 2.25, "time": 2},
+			],
+			"unlockTime": 20
+		},
+		{
+			"title": "Guess Where?",
+			"circles": [
+				{"x": 1.175, "y": 0.5, "radius": 4, "time": 2},
+			],
+			"unlockTime": 12
+		},
+		{
+			"title": "Straight Down",
+			"circles": [
+				{"x": 0.5, "y": 0.7, "radius": 2, "time": 1},
+				{"x": 0.5, "y": 0.5, "radius": 2, "time": 2},
+				{"x": 0.5, "y": 0.3, "radius": 2, "time": 3},
+			],
+			"unlockTime": 12
+		},
+		{
+			"title": "Ready, Steady, Stay",
+			"circles": [
+				{"x": 0.5, "y": 0.5, "radius": 1.75, "time": 4},
+			],
+			"unlockTime": 4
+		},
+		{
+			"title": "Corner To Corner",
+			"circles": [
+				{"x": 0.9, "y": 0.6, "radius": 2.75, "time": 1},
+				{"x": 0.7, "y": 0.5, "radius": 2.5, "time": 1},
+				{"x": 0.5, "y": 0.4, "radius": 2.25, "time": 1},
+				{"x": 0.3, "y": 0.5, "radius": 2, "time": 1},
+				{"x": 0.1, "y": 0.6, "radius": 1.75, "time": 1},
+			],
+			"unlockTime": 20
+		},
+		{
+			"title": "Quick A To B",
+			"circles": [
+				{"x": 0.2, "y": 0.5, "radius": 3, "time": 3},
+				{"x": 0.8, "y": 0.5, "radius": 3, "time": 3},
+			],
+			"unlockTime": 10
+		},
+		{
+			"title": "Square Man",
+			"circles": [
+				{"x": 0.7, "y": 0.6, "radius": 2, "time": 1},
+				{"x": 0.7, "y": 0.4, "radius": 2, "time": 1},
+				{"x": 0.3, "y": 0.4, "radius": 2, "time": 1},
+				{"x": 0.3, "y": 0.6, "radius": 2, "time": 1},
+			],
+			"unlockTime": 12
+		},
+		{
+			"title": "Steady Right?",
+			"circles": [
+				{"x": 0.5, "y": 0.5, "radius": 3, "time": 0.5},
+				{"x": 0.575, "y": 0.5, "radius": 3, "time": 0.5},
+				{"x": 0.65, "y": 0.5, "radius": 3, "time": 0.5},
+				{"x": 0.725, "y": 0.5, "radius": 3, "time": 0.5},
+				{"x": 0.8, "y": 0.5, "radius": 3, "time": 0.5},
+			],
+			"unlockTime": 2.5
+		},
+		{
+			"title": "Down The Plug",
+			"circles": [
+				{"x": 0.5, "y": 0.5, "radius": 2.5, "time": 5},
+				{"x": 0.5, "y": 0.5, "radius": 2.1, "time": 4},
+				{"x": 0.5, "y": 0.5, "radius": 1.8, "time": 3},
+				{"x": 0.5, "y": 0.5, "radius": 1.5, "time": 2},
+				{"x": 0.5, "y": 0.5, "radius": 1.3, "time": 1},
+			],
+			"unlockTime": 15
+		},
+		{
+			"title": "Left Out",
+			"circles": [
+				{"x": -0.125, "y": 0.3, "radius": 3, "time": 4},
+			],
+			"unlockTime": 10
+		},
+		{
+			"title": "Short And Saccharine",
+			"circles": [
+				{"x": 0.5, "y": 0.5, "radius": 2, "time": 1},
+				{"x": 0.8, "y": 0.6, "radius": 2, "time": 1},
+			],
+			"unlockTime": 4
+		},
+		{
+			"title": "Run!",
+			"circles": [
+				{"x": 0.8, "y": 0.7, "radius": 2.25, "time": 0.2},
+			],
+			"unlockTime": 1
+		},
+		{
+			"title": "Cirkling",
+			"circles": [
+				{"x": 0.6, "y": 0.5, "radius": 2, "time": 1},
+				{"x": 0.57, "y": 0.57, "radius": 2, "time": 1},
+				{"x": 0.5, "y": 0.6, "radius": 2, "time": 1},
+				{"x": 0.43, "y": 0.57, "radius": 2, "time": 1},
+				{"x": 0.4, "y": 0.5, "radius": 2, "time": 1},
+				{"x": 0.43, "y": 0.43, "radius": 2, "time": 1},
+				{"x": 0.5, "y": 0.4, "radius": 2, "time": 1},
+				{"x": 0.57, "y": 0.43, "radius": 2, "time": 1},
+				{"x": 0.6, "y": 0.5, "radius": 2, "time": 1},
+			],
+			"unlockTime": 18,
+			"ballX": 0.6,
+			"ballY": 0.5
+		},
+		{
+			"title": "The Pentagon",
+			"circles": [
+				{"x": 0.6, "y": 0.5, "radius": 2.5, "time": 2},
+				{"x": 0.42, "y": 0.62, "radius": 2.5, "time": 2},
+				{"x": 0.53, "y": 0.69, "radius": 2.5, "time": 2},
+				{"x": 0.53, "y": 0.31, "radius": 2.5, "time": 2},
+				{"x": 0.42, "y": 0.38, "radius": 2.5, "time": 2},
+			],
+			"unlockTime": 18,
+			"ballX": 0.6,
+			"ballY": 0.5
+		},
+		{
+			"title": "Run Faster!",
+			"circles": [
+				{"x": 0.2, "y": 0.5, "radius": 1.75, "time": 0.1},
+			],
+			"unlockTime": 1
 		},
 	]
 }
