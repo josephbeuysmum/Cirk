@@ -35,28 +35,28 @@ class GameCustomer: Customer {
 	private let ballbearingPlayer: BallbearingPlayer
 	
 	private var
-	currentCircle: CAShapeLayer,
-	orientations: UIInterfaceOrientationMask,
-	countBallbearing: Int,
+	alertDetails: AlertDetails?,
+	animationDetails: [AnimDetails]?,
+	arrow: UIImageView?,
+	ball: UIImageView!,
 	ballX: CGFloat!,
 	ballY: CGFloat!,
 	circleIndex: Int!,
-	screenBounds: CGRect!,
-	timeInsideCircle: Float!,
+	cirk: UIImageView!,
+	countBallbearing: Int,
+	countdownLabel: UILabel!,
+	currentCircle: CAShapeLayer,
 	gameTime: Float!,
 	maitreD: MaitreD!,
-	waiter: WaiterForCustomer!,
-	sommelier: Sommelier!,
 	motionManager: CMMotionManager!,
-	ball: UIImageView!,
-	cirk: UIImageView!,
-	countdownLabel: UILabel!,
-	timeLabel: UILabel!,
-	animationDetails: [AnimDetails]?,
 	nextCircle: CAShapeLayer?,
-	alertDetails: AlertDetails?,
+	orientations: UIInterfaceOrientationMask,
+	screenBounds: CGRect!,
+	sommelier: Sommelier!,
+	timeInsideCircle: Float!,
+	timeLabel: UILabel!,
 	timer: Timer?,
-	arrow: UIImageView?
+	waiter: WaiterForCustomer!
 
 	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
 		get { return orientations }
@@ -207,6 +207,8 @@ class GameCustomer: Customer {
 	tood
 	
 	JOBBOES
+	second circle paler
+	remove arrow when animating level end message
 	level design
 	melanie for bugtesting and other feedbacks
 	
@@ -380,10 +382,16 @@ class GameCustomer: Customer {
 		timeLabel.textColor = getColor(by: Colors.black)
 		timeLabel.text = firstCircleTime
 		
-		let ballSizeGame = CGFloat(ballSize)
+		let
+		ballStartX: Float = carte.des(CarteKeys.ballX) ?? 0.5,
+		ballStartY: Float = carte.des(CarteKeys.ballY) ?? 0.5,
+		ballSizeGame = CGFloat(ballSize)
+		
+		lo( screenBounds.width * CGFloat(ballStartX), screenBounds.height * CGFloat(ballStartY) )
+		
 		ball.frame = CGRect(
-			x: (screenBounds.width - ballSizeGame) / 2,
-			y: (screenBounds.height - ballSizeGame) / 2,
+			x: (screenBounds.width - 0) * CGFloat(ballStartX) - (ballSizeGame / 2),
+			y: (screenBounds.height - 0) * CGFloat(ballStartY) - (ballSizeGame / 2),
 			width: ballSizeGame,
 			height: ballSizeGame)
 		

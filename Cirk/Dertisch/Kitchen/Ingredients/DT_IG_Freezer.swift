@@ -104,6 +104,7 @@ extension Freezer: FreezerProtocol {
 				callback(safeManagedObjects.count > 0 ? safeManagedObjects : nil)
 			}
 		}
+		// this is where a fail sometimes happens
 		do { try privateContext.execute(asyncFetchRequest)
 		} catch let error {
 			loWarning("NSAsynchronousFetchRequest error: \(error)")

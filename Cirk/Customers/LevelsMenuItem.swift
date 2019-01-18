@@ -56,7 +56,7 @@ class LevelsMenuItem: RestaurantTableViewCell, CircleRendererProtocol {
 			textColor :
 			UIColor(red: crimson.red, green: crimson.green, blue: crimson.blue, alpha: alpha)
 		levelLabel.text = "\(level.index + 1)"
-		targetLabel.text = "\(level.json.unlockTime).0"
+		targetLabel.text = "\(level.json.unlockTime)"
 		if isUnlocked {
 			personalBestLabel.text = isUnlocked && level.personalBest! > 0 ? "\(level.personalBest!)" : "..."
 		} else {

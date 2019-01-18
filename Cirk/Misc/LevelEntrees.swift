@@ -36,7 +36,9 @@ struct LevelJson: Decodable, Hashable {
 	var hashValue: Int { return 0 }
 	let
 	circles: [CircleJson],
-	unlockTime: Int
+	unlockTime: Float,
+	ballX: Float?,
+	ballY: Float?
 	var index: Int?
 
 	static func == (lhs: LevelJson, rhs: LevelJson) -> Bool {

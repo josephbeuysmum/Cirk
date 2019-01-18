@@ -15,6 +15,8 @@ fileprivate let level = "Level"
 struct CarteKeys {
 	private static let ns = "json."
 	static let
+	ballX = "\(ns)ballX",
+	ballY = "\(ns)ballY",
 	circleTime = "\(ns)circles.0.time",
 	countCircles = "\(ns)circles.count",
 	countLevels = "countLevels",

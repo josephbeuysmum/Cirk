@@ -132,6 +132,7 @@ public extension CarteForCustomer {
 		if let result = value as? T {
 			return result
 		} else {
+			// todo add CGFloat etc. here
 			let tType = type(of: T.self)
 			switch true {
 			case tType == String.Type.self:
