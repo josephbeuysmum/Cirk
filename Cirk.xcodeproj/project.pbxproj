@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4BBDCE16D61CFD1E712A0138 /* Pods_Cirk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B89D490481831D4899B93B0 /* Pods_Cirk.framework */; };
 		A90335CA21F07B56002B1450 /* text.json in Resources */ = {isa = PBXBuildFile; fileRef = A90335C921F07B56002B1450 /* text.json */; };
+		A91FB84C21F2F7E50029EF6C /* levelsArchive.json in Resources */ = {isa = PBXBuildFile; fileRef = A91FB84B21F2F7E50029EF6C /* levelsArchive.json */; };
 		A932AEDF2195D2E000D4D3DC /* ballbearingLoop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A932AEDC2195D2DF00D4D3DC /* ballbearingLoop.mp3 */; };
 		A932AEE62195F2ED00D4D3DC /* punch.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A932AEE22195F2ED00D4D3DC /* punch.mp3 */; };
 		A932AEE72195F2ED00D4D3DC /* shwoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A932AEE32195F2ED00D4D3DC /* shwoosh.mp3 */; };
@@ -94,6 +95,7 @@
 		0D59B7CB221A59AF1A61E92E /* Pods-Cirk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cirk.debug.xcconfig"; path = "Target Support Files/Pods-Cirk/Pods-Cirk.debug.xcconfig"; sourceTree = "<group>"; };
 		7B89D490481831D4899B93B0 /* Pods_Cirk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cirk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A90335C921F07B56002B1450 /* text.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = text.json; sourceTree = "<group>"; };
+		A91FB84B21F2F7E50029EF6C /* levelsArchive.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = levelsArchive.json; sourceTree = "<group>"; };
 		A932AEDC2195D2DF00D4D3DC /* ballbearingLoop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ballbearingLoop.mp3; sourceTree = "<group>"; };
 		A932AEE22195F2ED00D4D3DC /* punch.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = punch.mp3; sourceTree = "<group>"; };
 		A932AEE32195F2ED00D4D3DC /* shwoosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shwoosh.mp3; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				A9D5AEB621A6B994006EF751 /* levels.json */,
+				A91FB84B21F2F7E50029EF6C /* levelsArchive.json */,
 				A9D5AEB421A6B994006EF751 /* settings.json */,
 				A90335C921F07B56002B1450 /* text.json */,
 			);
@@ -545,6 +548,7 @@
 				A9D5AEB921A6B994006EF751 /* settings.json in Resources */,
 				A9D5AEB821A6B994006EF751 /* LanguageCell.xib in Resources */,
 				A9D5AEAF21A6B97F006EF751 /* Main.storyboard in Resources */,
+				A91FB84C21F2F7E50029EF6C /* levelsArchive.json in Resources */,
 				A9D5AEBB21A6B994006EF751 /* levels.json in Resources */,
 				A932AEE62195F2ED00D4D3DC /* punch.mp3 in Resources */,
 				A932AEE82195F2ED00D4D3DC /* bambooWhoosh.mp3 in Resources */,

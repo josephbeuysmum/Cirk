@@ -157,6 +157,96 @@ class GameCustomer: Customer {
 	
 	
 	
+	private func analyseResult() {
+		guard
+			let carte = waiter.carte,
+			let unlockTime: Float = carte.des(CarteKeys.jsonUnlock),
+			let levelIndex: Int = carte.des(CarteKeys.jsonIndex),
+			let nextLevelAlreadyUnlocked: Bool = carte.des(CarteKeys.nextLevelUnlocked),
+			let countLevels: Int = carte.des(CarteKeys.countLevels)
+			else { return }
+		var
+		personalBest: Float = carte.des(CarteKeys.personalBest) ?? 0,
+		hasPersonalBest = personalBest > 0,
+		actions: [UIAlertAction],
+		message: String?
+		let
+		roundedGameTime = roundFloat(gameTime),
+		unlocked = !nextLevelAlreadyUnlocked && roundedGameTime <= unlockTime,
+		newPersonalBest = !hasPersonalBest || roundedGameTime < personalBest,
+		lastLevelComplete = (levelIndex + 1 == countLevels) && unlocked,
+		levelWasAlreadyUnlocked = personalBest <= unlockTime,
+		almostUnlocked = roundedGameTime < unlockTime + Metrics.closeMarginOfError,
+		textColor: CircleColors,
+		title: String
+		
+		restartButton.isEnabled = false
+		levelsButton.isEnabled = false
+		timeLabel.textColor = getColor(by: Colors.crimson)
+		timeLabel.text = "0.0"
+		timeValueLabel.text = "\(roundedGameTime)"
+		invalidateTimer()
+		
+		if newPersonalBest {
+			personalBest = roundedGameTime
+		}
+		
+		switch true {
+		case lastLevelComplete:
+			textColor = levelWasAlreadyUnlocked && personalBest >= roundedGameTime ? Colors.black : Colors.teal
+			actions = [
+				getReplayAction(with: SommelierKeys.improvePersonalBest),
+				getChooseLevelAction()]
+			if levelWasAlreadyUnlocked {
+				title = getUnlockedLevelAlertTitle(hasPersonalBest, almostUnlocked, newPersonalBest, roundedGameTime, personalBest)
+				message = levelWasAlreadyUnlocked ? nil : sommelier[SommelierKeys.lastLevelCopy]
+			} else {
+				title = sommelier[SommelierKeys.lastLevelUnlocked]!
+				message = levelWasAlreadyUnlocked ? nil : sommelier[SommelierKeys.lastLevelCopy]
+			}
+			
+		case nextLevelAlreadyUnlocked:
+			textColor = newPersonalBest ? Colors.teal : Colors.black
+			actions = [
+				getReplayAction(with: SommelierKeys.improvePersonalBest),
+				getChooseLevelAction(),
+				getNextLevelAction()]
+			title = getUnlockedLevelAlertTitle(hasPersonalBest, almostUnlocked, newPersonalBest, roundedGameTime, personalBest)
+			
+		default:
+			if unlocked {
+				textColor = Colors.teal
+				actions = [
+					getNextLevelAction(),
+					getReplayAction(with: SommelierKeys.improvePersonalBest)]
+				title = sommelier[SommelierKeys.levelUnlocked]!
+				waiter.give(Order(Tickets.unlock, levelIndex + 1))
+			} else {
+				textColor = Colors.black
+				let titleKey = almostUnlocked ? SommelierKeys.almost : SommelierKeys.playAgain
+				actions = [getReplayAction(with: titleKey)]
+				title = sommelier[SommelierKeys.levelNotUnlocked]!
+			}
+			if levelIndex > 0 {
+				actions.append(getChooseLevelAction())
+			}
+		}
+		actions.append(getCancelAction())
+		alertDetails = AlertDetails(header: title, actions: actions, message: message)
+		animate(
+			getAnimDetails(
+				title,
+				success: unlocked || (nextLevelAlreadyUnlocked && newPersonalBest)),
+			color: getColor(by: textColor))
+		personalBestValueLabel.text = "\(roundFloat(personalBest))"
+		if newPersonalBest {
+			waiter.give(Order(
+				Tickets.personalBest,
+				PBMetrics(value: personalBest, levelIndex: levelIndex)))
+		}
+		ballbearingPlayer.stopBallbearingSound()
+	}
+	
 	private func animate(_ texts: [AnimDetails], color textColor: UIColor) {
 		guard animationDetails == nil, texts.count > 0 else { return }
 		animationDetails = texts
@@ -217,6 +307,8 @@ class GameCustomer: Customer {
 	
 	NICE TO HAVES
 	variable surfaces
+	
+	CIRK 2.0
 	glass up and under with video
 	*/
 	private func drawCircles() {
@@ -365,11 +457,8 @@ class GameCustomer: Customer {
 			let firstCircleTime: String = carte.des(CarteKeys.circleTime),
 			let countLevels: Int = carte.des(CarteKeys.countLevels)
 			else { return }
-//		lo(levelIndex)
 		currentCircle.removeFromSuperlayer()
 		nextCircle?.removeFromSuperlayer()
-//		arrow?.removeFromSuperview()
-//		arrow = nil
 		
 		ballX = 0
 		ballY = 0
@@ -392,8 +481,6 @@ class GameCustomer: Customer {
 		ballStartX: Float = carte.des(CarteKeys.ballX) ?? 0.5,
 		ballStartY: Float = carte.des(CarteKeys.ballY) ?? 0.5,
 		ballSizeGame = CGFloat(ballSize)
-		
-		lo( screenBounds.width * CGFloat(ballStartX), screenBounds.height * CGFloat(ballStartY) )
 		
 		ball.frame = CGRect(
 			x: (screenBounds.width - 0) * CGFloat(ballStartX) - (ballSizeGame / 2),
@@ -428,27 +515,18 @@ class GameCustomer: Customer {
 	private func roundFloat(_ value: Float) -> Float {
 		return (round(value * 10) / 10)
 	}
-
+	
 	private func startBallRolling() {
-		guard
-			let carte = waiter.carte,
-			let level: Level = carte.entrees(),
-			let unlockTime: Float = carte.des(CarteKeys.jsonUnlock),
-			let levelIndex: Int = carte.des(CarteKeys.jsonIndex),
-			let nextLevelAlreadyUnlocked: Bool = carte.des(CarteKeys.nextLevelUnlocked),
-			let countLevels: Int = carte.des(CarteKeys.countLevels)
-			else { return }
+		guard let level: Level = waiter.carte?.entrees() else { return }
 		let circles = level.json.circles
 		var
 		circleData = circles[circleIndex],
 		countCircles = circles.count,
-		personalBest: Float = carte.des(CarteKeys.personalBest) ?? 0,
 		cirkCenterPoint = getCenterPoint(by: circleData, and: screenBounds),
 		screenCenterPoint = CGPoint(x: screenBounds.width / 2, y: screenBounds.height / 2),
-		hasPersonalBest = personalBest > 0,
-		wasInsideCirk = false
+		wasInsideCirk = false,
+		levelOver = false
 		let
-//		isFirstLevel = levelIndex < 1,
 		momentumDivider = CGFloat(2),
 		ballSizeInt = Int(ballSize),
 		ballSizeCGFloat = CGFloat(ballSize),
@@ -456,12 +534,10 @@ class GameCustomer: Customer {
 		frameTime = Metrics.frameTime,
 		strokeWidth = screenBounds.height / CGFloat(Metrics.circleStrokeDivider),
 		shadowWidth = screenBounds.height / CGFloat(Metrics.shadowDivider),
-		insideCirkPythag = getRadius(by: circleData.radius, and: ballSizeInt) - ((ballSizeCGFloat + strokeWidth) / 2) + shadowWidth,
 		onScreenPythag = sqrt((screenCenterPoint.x * screenCenterPoint.x) + (screenCenterPoint.y * screenCenterPoint.y)),
-		ballbearingVolumeDivider = Metrics.ballbearingVolumeDivider,
-		black = getColor(by: Colors.black),
-		crimson = getColor(by: Colors.crimson)
-		
+		ballbearingVolumeDivider = Metrics.ballbearingVolumeDivider
+		var insideCirkPythag = getRadius(by: circleData.radius, and: ballSizeInt) - ((ballSizeCGFloat + strokeWidth) / 2) + shadowWidth
+
 		gameTime = 0
 		ballbearingPlayer.startBallbearingSound()
 		motionManager.startAccelerometerUpdates()
@@ -500,7 +576,7 @@ class GameCustomer: Customer {
 			if hasLeftCircle {
 				strongSelf.ballbearingPlayer.stopSoundEffect()
 				strongSelf.timeInsideCircle = 0
-				strongSelf.timeLabel.textColor = black
+				strongSelf.timeLabel.textColor = strongSelf.getColor(by: Colors.black)
 				strongSelf.timeLabel.text = "\(circleData.time)"
 			}
 
@@ -511,7 +587,7 @@ class GameCustomer: Customer {
 			if isInsideCirk {
 				if !wasInsideCirk {
 					strongSelf.ballbearingPlayer.play(sound: Effects.ticking, loops: true)
-					strongSelf.timeLabel.textColor = crimson
+					strongSelf.timeLabel.textColor = strongSelf.getColor(by: Colors.crimson)
 				}
 				strongSelf.timeInsideCircle = strongSelf.timeInsideCircle + frameTime
 				
@@ -521,108 +597,27 @@ class GameCustomer: Customer {
 				
 				if viewTime <= 0 {
 					let incrementedCircleIndex = strongSelf.circleIndex + 1
-					if incrementedCircleIndex == countCircles {
-						
-						strongSelf.restartButton.isEnabled = false
-						strongSelf.levelsButton.isEnabled = false
-						
-						strongSelf.timeLabel.textColor = crimson
-						strongSelf.timeLabel.text = "0.0"
-						strongSelf.timeValueLabel.text = "\(roundedGameTime)"
-						strongSelf.invalidateTimer()
-						
-						let
-						unlocked = !nextLevelAlreadyUnlocked && roundedGameTime <= unlockTime,
-						newPersonalBest = !hasPersonalBest || roundedGameTime < personalBest,
-						lastLevelComplete = (levelIndex + 1 == countLevels) && unlocked,
-						levelWasAlreadyUnlocked = personalBest <= unlockTime,
-						almostUnlocked = roundedGameTime < unlockTime + Metrics.closeMarginOfError,
-						
-						textColor: CircleColors,
-						title: String
-						var
-						actions: [UIAlertAction],
-						message: String?
-
-						if newPersonalBest {
-							personalBest = roundedGameTime
-						}
-
-						switch true {
-						case lastLevelComplete:
-							textColor = levelWasAlreadyUnlocked && personalBest >= roundedGameTime ? Colors.black : Colors.teal
-							actions = [
-								strongSelf.getReplayAction(with: SommelierKeys.improvePersonalBest),
-								strongSelf.getChooseLevelAction()]
-							if levelWasAlreadyUnlocked {
-								title = strongSelf.getUnlockedLevelAlertTitle(hasPersonalBest, almostUnlocked, newPersonalBest, roundedGameTime, personalBest)
-								message = levelWasAlreadyUnlocked ? nil : strongSelf.sommelier[SommelierKeys.lastLevelCopy]
-							} else {
-								title = strongSelf.sommelier[SommelierKeys.lastLevelUnlocked]!
-								message = levelWasAlreadyUnlocked ? nil : strongSelf.sommelier[SommelierKeys.lastLevelCopy]
-							}
-							
-						case nextLevelAlreadyUnlocked:
-							textColor = newPersonalBest ? Colors.teal : Colors.black
-							actions = [
-								strongSelf.getReplayAction(with: SommelierKeys.improvePersonalBest),
-								strongSelf.getChooseLevelAction(),
-								strongSelf.getNextLevelAction()]
-							title = strongSelf.getUnlockedLevelAlertTitle(hasPersonalBest, almostUnlocked, newPersonalBest, roundedGameTime, personalBest)
-							
-						default:
-							if unlocked {
-								textColor = Colors.teal
-//								if lastLevelComplete {
-//									actions = [strongSelf.getReplayAction(with: SommelierKeys.improvePersonalBest)]
-//									title = strongSelf.sommelier[SommelierKeys.lastLevelUnlocked]!
-//									message = strongSelf.sommelier[SommelierKeys.lastLevelCopy]
-//								} else {
-									actions = [
-										strongSelf.getNextLevelAction(),
-										strongSelf.getReplayAction(with: SommelierKeys.improvePersonalBest)]
-									title = strongSelf.sommelier[SommelierKeys.levelUnlocked]!
-									strongSelf.waiter.give(Order(Tickets.unlock, levelIndex + 1))
-//								}
-							} else {
-								textColor = Colors.black
-								let titleKey = almostUnlocked ? SommelierKeys.almost : SommelierKeys.playAgain
-								actions = [strongSelf.getReplayAction(with: titleKey)]
-								title = strongSelf.sommelier[SommelierKeys.levelNotUnlocked]!
-							}
-							if levelIndex > 0 {
-								actions.append(strongSelf.getChooseLevelAction())
-							}
-						}
-						actions.append(strongSelf.getCancelAction())
-						strongSelf.alertDetails = AlertDetails(header: title, actions: actions, message: message)
-						strongSelf.animate(
-							strongSelf.getAnimDetails(
-								title,
-								success: unlocked || (nextLevelAlreadyUnlocked && newPersonalBest)),
-							color: strongSelf.getColor(by: textColor))
-						strongSelf.personalBestValueLabel.text = "\(strongSelf.roundFloat(personalBest))"
-						if newPersonalBest {
-							strongSelf.waiter.give(Order(
-								Tickets.personalBest,
-								PBMetrics(value: personalBest, levelIndex: levelIndex)))
-						}
-						strongSelf.ballbearingPlayer.stopBallbearingSound()
-					} else {
+					if incrementedCircleIndex < countCircles {
 						strongSelf.circleIndex = incrementedCircleIndex
 						strongSelf.timeInsideCircle = 0
 						circleData = circles[strongSelf.circleIndex]
+						insideCirkPythag = strongSelf.getRadius(
+							by: circleData.radius,
+							and: ballSizeInt) - ((ballSizeCGFloat + strokeWidth) / 2) + shadowWidth
 						cirkCenterPoint = strongSelf.getCenterPoint(by: circleData, and: strongSelf.screenBounds)
 						strongSelf.timeLabel.text = "\(circles[strongSelf.circleIndex].time)"
 						strongSelf.cirksValueLabel.text = "\(countCircles - strongSelf.circleIndex)"
 						strongSelf.drawCircles()
+					} else {
+						levelOver = true
+						strongSelf.analyseResult()
 					}
 				} else {
 					strongSelf.timeLabel.text = "\(viewTime)"
 				}
 			}
 			
-			if isOffScreen {
+			if isOffScreen && !levelOver {
 				if strongSelf.arrow == nil {
 					strongSelf.arrow = UIImageView(image: UIImage(named: ImageNames.arrow))
 					let

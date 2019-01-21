@@ -65,7 +65,6 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 			} else {
 				level = self.levels[i]
 			}
-//			lo("ALLEVS", level.index, getLevelArrayIndex(by: level.index), level.personalBest, level.nextLevelUnlocked)
 			levels.append(level)
 		}
 		return levels.count > 0 ? LevelCollection(levels: levels) : nil
@@ -82,7 +81,6 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 			let firstLevel = get(level: 0)
 			else { return nil }
 		let highestLevel = levels.reduce(firstLevel, { $0.index > $1.index ? $0 : $1 })
-//		highestLevel.nextLevelUnlocked = false
 		return highestLevel
 	}
 	
@@ -96,7 +94,7 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 	
 	
 	func endShift() {
-		// todo remove this temporary deletion
+		// todo? remove this temporary deletion
 		coreData?.delete(levelKey) { [weak self] _ in
 			lo("deleted")
 			self?.levels.removeAll()
@@ -123,19 +121,16 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 					let strongSelf = self,
 					let strongManagedObjects = managedObjects
 					else { return }
-//				lo( strongSelf.getLevel(by: pb.levelIndex)?.index, strongSelf.getLevel(by: pb.levelIndex)?.personalBest, strongSelf.getLevel(by: pb.levelIndex)?.nextLevelUnlocked )
 				strongSelf.set(levels: strongManagedObjects)
 				guard let level = strongSelf.getLevel(by: pb.levelIndex) else { return }
-//				lo(level.index, level.personalBest, level.nextLevelUnlocked)
-//				lo(strongSelf.headChef)
 				strongSelf.headChef?.give(dishes: FulfilledOrder(Tickets.personalBest, dishes: level))
 		}
 	}
 	
 	func startShift() {
 		guard let rawLevelsJson = bundledJson?.decode(json: "levels", into: LevelsJson.self) else {
-			// todo replace this
-			fatalError("NO LEVELS JSON")
+			lo("levels json error")
+			return
 		}
 		var preparedLevels: [LevelJson] = []
 		let levelsCount = rawLevelsJson.levels.count
@@ -167,9 +162,6 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 	private func get(level index: Int) -> Level? {
 		let filteredLevels = levels.filter { $0.index == index }
 		guard filteredLevels.count == 1 else { return nil }
-//		let level = filteredLevels[0]
-//		, nextLevel = levels.filter { $0.index == index + 1 }
-//		level.nextLevelUnlocked = nextLevel.count > 0
 		return filteredLevels[0]
 	}
 	
