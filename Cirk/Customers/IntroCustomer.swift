@@ -25,8 +25,6 @@ class IntroCustomer: Customer {
 	waiter: WaiterForCustomer?,
 	shape_layer: CAShapeLayer?
 	
-//	private var timer: Timer?
-	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 //		lo("bonjour intro customer")
@@ -44,12 +42,7 @@ class IntroCustomer: Customer {
 		waiter = nil
 	}
 	
-	override func present(dish dishId: String) {
-		lo(dishId)
-	}
-	
 	override func placeOrder() {
-//		lo()
 		languageButton.addTarget(self, action: #selector(languageButtonTarget), for: .touchUpInside)
 		levelsButton.addTarget(self, action: #selector(levelsButtonTarget), for: .touchUpInside)
 		let
@@ -65,15 +58,12 @@ class IntroCustomer: Customer {
 		backgroundImage.image = UIImage(named: ImageNames.surface)
 		titleLabel.text = "Cirk"
 		descriptionLabel.makeWrappable()
-//		descriptionLabel.text = sommelier?[SommelierKeys.gameDescription]
 		
 		ball = UIImageView(frame: CGRect(x: circX - halfBallSize,y: circY - halfBallSize, width: ballSize, height: ballSize))
 		ball!.image = UIImage(named: ImageNames.ball)
 		view.addSubview(ball!)
 		
-//		playButton.setTitle(sommelier?[SommelierKeys.play], for: .normal)
 		playButton.addTarget(self, action: #selector(playButtonTarget), for: .touchUpInside)
-//		cancelButton.addTarget(self, action: #selector(cancelButtonTarget), for: .touchUpInside)
 		
 		var count = 5
 		_ = Timer.scheduledTimer(withTimeInterval: TimeInterval(0.5), repeats: true) { [weak self] timer in
@@ -89,8 +79,7 @@ class IntroCustomer: Customer {
 			}
 			let
 			screenBounds = UIScreen.main.bounds,
-			circleSize = screenBounds.width > screenBounds.height ? screenBounds.width : screenBounds.height,
-			radius = (circleSize / 200) * CGFloat(((5 - count) % 5) + 20)
+			radius = halfBallSize + CGFloat((4 - (count % 5)) * 3)
 			shapeLayer.path = UIBezierPath(
 				arcCenter: CGPoint(x: circX, y: circY),
 				radius: radius,
@@ -119,10 +108,6 @@ class IntroCustomer: Customer {
 		guard chosenDishId != nil else { return }
 		maitreD?.seatNext(Views.gameCustomer)
 	}
-	
-	
-	
-	
 	
 	@objc private func languageButtonTarget() {
 		maitreD?.present(popoverMenu: Views.languageMenu)

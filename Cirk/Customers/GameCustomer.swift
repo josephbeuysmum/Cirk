@@ -96,6 +96,7 @@ class GameCustomer: Customer {
 	
 	override func placeOrder() {
 		guard screenBounds == nil else { return }
+		
 		let
 		tempScreenBounds = UIScreen.main.bounds,
 		widthIsLargest = tempScreenBounds.width > tempScreenBounds.height
