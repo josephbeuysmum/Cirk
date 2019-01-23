@@ -38,7 +38,7 @@ public protocol MaitreDProtocol: MaitreDRegistrar {
 	func present(popoverMenu menuId: String, inside rect: CGRect?, from storyboard: String?)
 	// todo is there a better solution to getting popover results to the underlying VC than passing chosenDishId?
 	func removeMenu(_ chosenDishId: String?)
-	func seatNext(_ customerId: String, via transitionStyle: UIModalTransitionStyle?, from storyboard: String?)
+	func seat(_ customerId: String, via transitionStyle: UIModalTransitionStyle?, from storyboard: String?)
 	func usherOutCurrentCustomer()
 }
 
@@ -114,7 +114,7 @@ extension MaitreD: MaitreDProtocol {
 		self.window.makeKeyAndVisible()
 		self.window.rootViewController = rootSwitches.customer
 		formerCustomers.append((rootSwitches.customer, customerId))
-		sommelier.set(currentSwitches?.customer)
+		sommelier.set(currentSwitches!.customer)
 	}
 	
 	public func introduce(
@@ -176,7 +176,7 @@ extension MaitreD: MaitreDProtocol {
 		currentSwitches?.customer.returnMenuToWaiter(chosenDishId)
 	}
 	
-	public func seatNext(
+	public func seat(
 		_ customerId: String,
 		via transitionStyle: UIModalTransitionStyle? = nil,
 		from storyboard: String? = nil) {
@@ -232,8 +232,6 @@ extension MaitreD: MaitreDProtocol {
 			GeneralWaiter(maitreD: self, customer: ticket.customer, headChef: headChef)
 		headChef?.waiter = waiter
 		ticket.customer.assign(waiter, maitreD: self, and: sommelier)
-//		waiter.startShift()
-//		headChef?.startShift()
 		return SwitchesRelationship(
 			customerID: ticket.id,
 			customer: ticket.customer,

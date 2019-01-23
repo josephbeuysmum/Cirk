@@ -106,7 +106,7 @@ class IntroCustomer: Customer {
 	
 	override func returnMenuToWaiter(_ chosenDishId: String?) {
 		guard chosenDishId != nil else { return }
-		maitreD?.seatNext(Views.gameCustomer)
+		maitreD?.seat(Views.gameCustomer)
 	}
 	
 	@objc private func languageButtonTarget() {
@@ -118,6 +118,6 @@ class IntroCustomer: Customer {
 	}
 	
 	@objc private func playButtonTarget() {
-		maitreD?.seatNext(Views.gameCustomer)
+		maitreD?.seat(Views.gameCustomer)
 	}
 }

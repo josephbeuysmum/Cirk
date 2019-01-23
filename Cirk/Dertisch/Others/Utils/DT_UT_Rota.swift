@@ -14,17 +14,11 @@ struct Rota {
 	func getColleague<T>(_ type: T.Type, of staffMember: SwitchesRelationshipProtocol) -> T? {
 		let mirror = Mirror(reflecting: staffMember)
 		guard
-			let maitreD = getMaitreD(from: mirror),
+			let maitreD = instances(of: MaitreD.self, from: mirror, getAll: false)?[0],
 			let colleague = instances(of: type, from: mirror, getAll: false)?[0],
 			let switchColleague = colleague as? SwitchesRelationshipProtocol
 			else { return nil }
 		return maitreD.areColleagues(staffMember, switchColleague) ? colleague : nil
-	}
-	
-	
-	
-	private func getMaitreD(from mirror: Mirror) -> MaitreD? {
-		return instances(of: MaitreD.self, from: mirror, getAll: false)?[0]
 	}
 	
 	// kudos to everyone involved in this stack overflow thread:
@@ -34,8 +28,8 @@ struct Rota {
 		for (_, child) in mirror.children.enumerated() {
 			let mirror = Mirror(reflecting: child.value)
 			let value: Any
-			if  mirror.displayStyle == .optional,
-				  let first = mirror.children.first {
+			if 	mirror.displayStyle == .optional,
+				let first = mirror.children.first {
 				value = first.value
 			} else {
 				value = child.value
