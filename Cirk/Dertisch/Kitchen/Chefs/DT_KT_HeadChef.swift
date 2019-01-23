@@ -29,7 +29,7 @@ public extension HeadChef {
 
 public extension HeadChefForKitchenMember {
 	public func give(dishes: FulfilledOrder) {
-		guard var waiter = Reflector().getFirst(WaiterForHeadChef.self, from: Mirror(reflecting: self)) else { return }
+		guard var waiter = Rota().getColleague(WaiterForHeadChef.self, from: Mirror(reflecting: self)) else { return }
 		waiter.serve(main: dishes)
 	}
 }

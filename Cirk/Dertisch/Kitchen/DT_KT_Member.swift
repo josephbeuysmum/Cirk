@@ -6,7 +6,7 @@
 //  Copyright © 2017 Rich Text Format Ltd. All rights reserved.
 //
 
-public protocol KitchenMember: StartShiftProtocol, EndShiftProtocol {
+public protocol KitchenMember: StaffMember {
 	init(_ kitchenStaff: [String: KitchenMember]?)
 	var headChef: HeadChefForKitchenMember? { get set }
 }

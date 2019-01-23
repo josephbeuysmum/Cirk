@@ -111,6 +111,10 @@ extension MaitreD: MaitreDProtocol {
 		return viewArray[0] as? UIView
 	}
 	
+	internal func blah () {
+		lo()
+	}
+	
 //	public func create(_ customerId: String, from storyboard: String? = nil) -> Customer? {
 //		return createBundleFrom(customerId, and: storyboard)?.customer
 //	}

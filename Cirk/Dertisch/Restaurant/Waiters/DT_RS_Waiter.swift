@@ -85,7 +85,7 @@ extension Dishionarizer {
 	// todo make dishionary once and once only
 	var dishionary: Dishionary? {
 //		lo("dish..............", self)
-//		if let dishion = Reflector().getFirst(Dishionary.self, from: Mirror(reflecting: self)) {
+//		if let dishion = Rota().getColleague(Dishionary.self, from: Mirror(reflecting: self)) {
 //			lo("dishion exists")
 //			return dishion
 //		} else {
@@ -201,7 +201,7 @@ public protocol WaiterForWaiter {
 	mutating func serve(dishes: FulfilledOrder)
 }
 
-public protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForWaiter, StartShiftProtocol, EndShiftProtocol, CigaretteBreakProtocol {
+public protocol Waiter: WaiterForCustomer, WaiterForHeadChef, WaiterForWaiter, StaffMember, CigaretteBreakProtocol {
 	init(customer: CustomerForWaiter, headChef: HeadChefForWaiter?)
 }
 
@@ -217,13 +217,13 @@ public extension Waiter {
 public extension WaiterForCustomer {
 	public var onShift: Bool {
 		return type(of: self) == GeneralWaiter.self || carte != nil
-		// && Reflector().getFirst(HeadChefForWaiter.self, from: Mirror(reflecting: self)) != nil
+		// && Rota().getColleague(HeadChefForWaiter.self, from: Mirror(reflecting: self)) != nil
 	}
 	
 	public func give(_ order: Order) {
 //		lo()
 		// todo replace the "get firsts" with some sort of generic ID
-		guard var headChef = Reflector().getFirst(HeadChefForWaiter.self, from: Mirror(reflecting: self)) else { return }
+		guard var headChef = Rota().getColleague(HeadChefForWaiter.self, from: Mirror(reflecting: self)) else { return }
 		headChef.give(order)
 	}
 }
@@ -232,11 +232,11 @@ public extension WaiterForWaiter {
 //	func fillCarte(with entrees: FulfilledOrder) { lo() }
 	mutating func serve(dishes: FulfilledOrder) {
 		let mirror = Mirror(reflecting: self)
-//		guard let carte = Reflector().getFirst(Carte.self, from: mirror) else { return }
+//		guard let carte = Rota().getColleague(Carte.self, from: mirror) else { return }
 //		carte.stock(with: dishes)
 //		guard var waiter = self as? WaiterForWaiter else { return  }
 		fillCarte(with: dishes)
-		guard let customer = Reflector().getFirst(CustomerForWaiter.self, from: mirror) else { return }
+		guard let customer = Rota().getColleague(CustomerForWaiter.self, from: mirror) else { return }
 		// if we don't use dispatch queue we will cause a simultaneous-mutating-access error in the carte
 		DispatchQueue.main.async {
 			customer.present(dish: dishes.ticket)
@@ -252,11 +252,11 @@ public extension WaiterForHeadChef {
 	
 	public func serve(entrees: FulfilledOrder) {
 		guard
-			let customer = Reflector().getFirst(CustomerForWaiter.self, from: Mirror(reflecting: self)),
+			let customer = Rota().getColleague(CustomerForWaiter.self, from: Mirror(reflecting: self)),
 			var waiter = self as? WaiterForWaiter
 			else { return }
 		// todo reinstate stock?
-//		if let carte = Reflector().getFirst(CarteForWaiter.self, from: Mirror(reflecting: self)) {
+//		if let carte = Rota().getColleague(CarteForWaiter.self, from: Mirror(reflecting: self)) {
 //			carte.stock(with: entrees)
 //		} else {
 			waiter.fillCarte(with: entrees)

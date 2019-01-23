@@ -78,7 +78,7 @@ class IntroCustomer: Customer {
 				shapeLayer = CAShapeLayer()
 			}
 			let
-			screenBounds = UIScreen.main.bounds,
+//			screenBounds = UIScreen.main.bounds,
 			radius = halfBallSize + CGFloat((4 - (count % 5)) * 3)
 			shapeLayer.path = UIBezierPath(
 				arcCenter: CGPoint(x: circX, y: circY),
