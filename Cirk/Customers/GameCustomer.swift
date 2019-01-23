@@ -303,19 +303,6 @@ class GameCustomer: Customer {
 		ballbearingPlayer.play(sound: nextAnimDetail.effect, loops: false)
 	}
 	
-	/*
-	tood
-	
-	JOBBOES
-	level design cont
-	melanie for bugtesting and other feedbacks
-	
-	NICE TO HAVES
-	variable surfaces
-	
-	CIRK 2.0
-	glass up and under with video
-	*/
 	private func drawCircles() {
 		guard let level: Level = waiter.carte?.entrees() else { return }
 		ball.removeFromSuperview()
