@@ -21,7 +21,7 @@ public protocol CustomerForSommelier {
 	func regionChosen()
 }
 
-public protocol CustomerProtocol: CustomerForWaiter, CustomerForSommelier {
+public protocol CustomerProtocol: CustomerForWaiter, CustomerForSommelier, SwitchesRelationshipProtocol {
 	func assign(_ waiter: WaiterForCustomer, maitreD: MaitreD, and sommelier: Sommelier)
 }
 
@@ -43,7 +43,7 @@ open class Customer: UIViewController {
 	
 	override final public func viewDidLoad() {
 		super.viewDidLoad()
-		if let labels = Rota().getAll(UILabel.self, from: Mirror(reflecting: self)) {
+		if let labels = Rota().getAllColleagues(UILabel.self, from: Mirror(reflecting: self)) {
 			for label in labels {
 				label.text = nil
 			}
@@ -54,7 +54,7 @@ open class Customer: UIViewController {
 	private final func checkReadinessToOrder() {
 		guard
 			isViewLoaded,
-			let waiter = Rota().getColleague(WaiterForCustomer.self, from: Mirror(reflecting: self)),
+			let waiter = Rota().getColleague(WaiterForCustomer.self, of: self),
 			waiter.onShift
 			else { return }
 		placeOrder()

@@ -11,13 +11,16 @@ import AVFoundation
 
 // todo all this is basically GeneralWaiter with a bespoke [Game]Carte added, so if we make the carte generic too [with a subscript? [and casting accessors a la JsonThingy?]] then we can do away with this class/code
 class GameWaiter: Waiter {
+	fileprivate let maitreD: MaitreD
+	
 	fileprivate var
 	customer: CustomerForWaiter!,
 	headChef: HeadChefForWaiter!,
 	carte_: CarteForCustomer?
 
-	required init(customer: CustomerForWaiter, headChef: HeadChefForWaiter?) {
+	required init(maitreD: MaitreD, customer: CustomerForWaiter, headChef: HeadChefForWaiter?) {
 //		lo("bonjour game waiter")
+		self.maitreD = maitreD
 		self.customer = customer
 		self.headChef = headChef
 	}

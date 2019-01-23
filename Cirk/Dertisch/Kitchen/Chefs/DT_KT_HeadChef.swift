@@ -14,7 +14,7 @@ public protocol HeadChefForKitchenMember {
 
 public protocol HeadChefForWaiter: GiveOrderProtocol {}
 
-public protocol HeadChef: HeadChefForWaiter, HeadChefForKitchenMember, StartShiftProtocol, EndShiftProtocol, CigaretteBreakProtocol {
+public protocol HeadChef: HeadChefForWaiter, HeadChefForKitchenMember, StartShiftProtocol, EndShiftProtocol, CigaretteBreakProtocol, SwitchesRelationshipProtocol {
 	init(_ sousChefs: [String: KitchenMember]?)
 	var waiter: WaiterForHeadChef? { get set }
 }
@@ -22,14 +22,16 @@ public protocol HeadChef: HeadChefForWaiter, HeadChefForKitchenMember, StartShif
 public extension HeadChef {
 	public func endBreak() {}
 	public func endShift() {}
-	public mutating func give(_ order: Order) {}
+	public func give(_ order: Order) {}
 	public func startBreak() {}
 	public func startShift() {}
 }
 
 public extension HeadChefForKitchenMember {
 	public func give(dishes: FulfilledOrder) {
-		guard var waiter = Rota().getColleague(WaiterForHeadChef.self, from: Mirror(reflecting: self)) else { return }
+		guard
+			var waiter = Rota().getColleague(WaiterForHeadChef.self, of: self as! SwitchesRelationshipProtocol)
+			else { return }
 		waiter.serve(main: dishes)
 	}
 }

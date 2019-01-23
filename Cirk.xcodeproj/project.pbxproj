@@ -39,7 +39,6 @@
 		A93BC34721905DD700C78B75 /* DT_RS_Waiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93BC34621905DD700C78B75 /* DT_RS_Waiter.swift */; };
 		A94577A321E78977006C1934 /* DT_UT_Rota.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94577A221E78977006C1934 /* DT_UT_Rota.swift */; };
 		A95764A821F87E6D00B25699 /* DT_KT_Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95764A721F87E6D00B25699 /* DT_KT_Member.swift */; };
-		A95764AA21F87E8E00B25699 /* DT_RS_Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95764A921F87E8E00B25699 /* DT_RS_Member.swift */; };
 		A971CDD2215393EF00F4BB29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971CDD1215393EF00F4BB29 /* AppDelegate.swift */; };
 		A971CDE7215393F100F4BB29 /* CirkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971CDE6215393F100F4BB29 /* CirkTests.swift */; };
 		A9776D992153962A00693C99 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776D7C2153962A00693C99 /* Consts.swift */; };
@@ -125,7 +124,6 @@
 		A93BC34621905DD700C78B75 /* DT_RS_Waiter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DT_RS_Waiter.swift; sourceTree = "<group>"; };
 		A94577A221E78977006C1934 /* DT_UT_Rota.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Rota.swift; sourceTree = "<group>"; };
 		A95764A721F87E6D00B25699 /* DT_KT_Member.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_KT_Member.swift; sourceTree = "<group>"; };
-		A95764A921F87E8E00B25699 /* DT_RS_Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DT_RS_Member.swift; sourceTree = "<group>"; };
 		A971CDCE215393EF00F4BB29 /* Cirk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cirk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A971CDD1215393EF00F4BB29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A971CDDD215393F100F4BB29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -238,7 +236,6 @@
 			children = (
 				A93382C7216B915200A2FCE3 /* Customers */,
 				A93382CB216B915200A2FCE3 /* Waiters */,
-				A95764A921F87E8E00B25699 /* DT_RS_Member.swift */,
 			);
 			path = Restaurant;
 			sourceTree = "<group>";
@@ -600,7 +597,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A95764AA21F87E8E00B25699 /* DT_RS_Member.swift in Sources */,
 				A9338324216B915200A2FCE3 /* DT_KT_BundledJson.swift in Sources */,
 				A9776DE42153E3F700693C99 /* LevelsMenu.swift in Sources */,
 				A933830D216B915200A2FCE3 /* DT_CS_CommonPhrases.swift in Sources */,

@@ -25,9 +25,7 @@ public protocol GiveOrderProtocol {
 }
 
 // tood we're here. staffmember is not the right place for var id: String because then sous chefs require it, which they don't need. maybe then we don't need staffmember but can shift StartShiftProtocol, EndShiftProtocol back into kitchenmember and restaurant member, then *somehow* ensure that only head chefs, waiters, and customers get var id: string. also var id: String *might* be better as some sort of specific struct?
-public protocol StaffMember: StartShiftProtocol, EndShiftProtocol {
-	var id: String { get }
-}
+public protocol StaffMember: StartShiftProtocol, EndShiftProtocol {}
 
 public protocol StartShiftProtocol {
 	func startShift()
@@ -41,6 +39,8 @@ public protocol FreezerEntityProtocol {
 }
 
 public protocol StorableDataType {}
+
+public protocol SwitchesRelationshipProtocol: class {}
 
 extension Bool: StorableDataType {}
 extension Double: StorableDataType {}

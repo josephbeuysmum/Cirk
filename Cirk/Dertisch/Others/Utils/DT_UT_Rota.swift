@@ -7,26 +7,24 @@
 //
 
 struct Rota {
-	func getAll<T>(_ type: T.Type, from mirror: Mirror) -> [T]? {
+	func getAllColleagues<T>(_ type: T.Type, from mirror: Mirror) -> [T]? {
 		return instances(of: type, from: mirror, getAll: true)
 	}
 	
-//	func getColleague<T>(_ type: T.Type, withIdOf id: String, from mirror: Mirror) -> T? {
-	func getColleague<T>(_ type: T.Type, from mirror: Mirror) -> T? {
+	func getColleague<T>(_ type: T.Type, of staffMember: SwitchesRelationshipProtocol) -> T? {
+		let mirror = Mirror(reflecting: staffMember)
 		guard
-			let maitreD = getMaitreD(from: mirror)
+			let maitreD = getMaitreD(from: mirror),
+			let colleague = instances(of: type, from: mirror, getAll: false)?[0],
+			let switchColleague = colleague as? SwitchesRelationshipProtocol
 			else { return nil }
-		return instances(of: type, from: mirror, getAll: false)?[0]
+		return maitreD.areColleagues(staffMember, switchColleague) ? colleague : nil
 	}
 	
 	
 	
 	private func getMaitreD(from mirror: Mirror) -> MaitreD? {
-		guard
-			let maitreDs: [MaitreD] = instances(of: MaitreD.self, from: mirror, getAll: true),
-			maitreDs.count == 1
-			else { return nil }
-		return maitreDs[0]
+		return instances(of: MaitreD.self, from: mirror, getAll: false)?[0]
 	}
 	
 	// kudos to everyone involved in this stack overflow thread:
@@ -47,6 +45,6 @@ struct Rota {
 				if !getAll { return values }
 			}
 		}
-		return values.count > 1 ? values : nil
+		return values.count > 0 ? values : nil
 	}
 }

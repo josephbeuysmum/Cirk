@@ -11,12 +11,15 @@
 class GeneralWaiter: Waiter {
 	var carte: CarteForCustomer? { return nil }
 	
+	fileprivate let maitreD: MaitreD
+	
 	fileprivate var
 	customer: CustomerForWaiter?,
 	headChef: HeadChefForWaiter?
 	
-	required init(customer: CustomerForWaiter, headChef: HeadChefForWaiter? = nil) {
+	required init(maitreD: MaitreD, customer: CustomerForWaiter, headChef: HeadChefForWaiter? = nil) {
 		//lo("bonjour general waiter")
+		self.maitreD = maitreD
 		self.customer = customer
 		self.headChef = headChef
 	}

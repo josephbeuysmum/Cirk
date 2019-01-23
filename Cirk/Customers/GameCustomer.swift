@@ -29,6 +29,10 @@ class GameCustomer: Customer {
 	@IBOutlet weak var timeValueLabel: UILabel!
 	@IBOutlet weak var titleLabel: UILabel!
 
+	public var id: String {
+		return ""
+	}
+	
 	private var ballSize: Double {
 		return round(Double((Int(screenBounds.height) + Metrics.screenMedian) / 2) / Metrics.ballHeightDivider)
 	}

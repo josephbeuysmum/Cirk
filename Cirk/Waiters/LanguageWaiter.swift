@@ -12,14 +12,17 @@ import Foundation
 class LanguageWaiter: Waiter {
 	func fillCarte(with entrees: FulfilledOrder) {}
 	
+	fileprivate let maitreD: MaitreD
+	
 	fileprivate weak var
 	customer: CustomerForWaiter!
 	
 	fileprivate var
 	carte_: CarteForCustomer?
 	
-	required init(customer: CustomerForWaiter, headChef: HeadChefForWaiter?) {
+	required init(maitreD: MaitreD, customer: CustomerForWaiter, headChef: HeadChefForWaiter?) {
 //		lo("bonjour language waiter")
+		self.maitreD = maitreD
 		self.customer = customer
 		
 		var languageNames: [LanguageCellEntre] = []

@@ -13,12 +13,15 @@ class LevelsWaiter: Waiter {
 	fileprivate weak var
 	customer: CustomerForWaiter!
 	
+	fileprivate let maitreD: MaitreD
+	
 	fileprivate var
 	headChef: HeadChefForWaiter!,
 	carte_: CarteForCustomer?
 
-	required init(customer: CustomerForWaiter, headChef: HeadChefForWaiter?) {
+	required init(maitreD: MaitreD, customer: CustomerForWaiter, headChef: HeadChefForWaiter?) {
 //		lo("bonjour levels waiter")
+		self.maitreD = maitreD
 		self.customer = customer
 		self.headChef = headChef
 	}

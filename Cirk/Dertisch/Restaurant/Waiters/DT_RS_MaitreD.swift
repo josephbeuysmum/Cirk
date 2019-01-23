@@ -34,13 +34,6 @@ public protocol MaitreDProtocol: MaitreDRegistrar {
 	func alert(actions: [UIAlertAction], title: String?, message: String?, style: UIAlertController.Style?)
 	func closeRestaurant()
 	func createNibFrom(name nibName: String, for owner: Customer) -> UIView?
-//	func create(_ customerId: String, from storyboard: String?) -> Customer?
-//	func createAlertWith(
-//		title: String,
-//		message: String,
-//		buttonLabel: String,
-//		handler: @escaping ((UIAlertAction) -> Void),
-//		plusExtraButtonLabel extraButtonLabel: String?) -> UIAlertController
 	func greet(firstCustomer customerId: String, through window: UIWindow, from storyboard: String?)
 	func present(popoverMenu menuId: String, inside rect: CGRect?, from storyboard: String?)
 	// todo is there a better solution to getting popover results to the underlying VC than passing chosenDishId?
@@ -81,10 +74,6 @@ public class MaitreD {
 
 
 extension MaitreD: MaitreDProtocol {
-//	public var menuId: String? {
-//		return menuSwitches?.customerID
-//	}
-	
 	public func alert(
 		actions: [UIAlertAction],
 		title: String? = nil,
@@ -111,44 +100,20 @@ extension MaitreD: MaitreDProtocol {
 		return viewArray[0] as? UIView
 	}
 	
-	internal func blah () {
-		lo()
-	}
-	
-//	public func create(_ customerId: String, from storyboard: String? = nil) -> Customer? {
-//		return createBundleFrom(customerId, and: storyboard)?.customer
-//	}
-	
-//	public func createAlertWith(
-//		title: String,
-//		message: String,
-//		buttonLabel: String,
-//		handler: @escaping((UIAlertAction) -> Void),
-//		plusExtraButtonLabel extraButtonLabel: String? = nil) -> UIAlertController {
-//		let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-//		// copy
-//		alert.addAction(UIAlertAction(title: buttonLabel, style: UIAlertActionStyle.default, handler: handler))
-//		if extraButtonLabel != nil {
-//			alert.addAction(UIAlertAction(title: extraButtonLabel!, style: UIAlertActionStyle.default, handler: nil))
-//		}
-//		return alert
-//	}
-	
 	public func greet(firstCustomer customerId: String, through window: UIWindow, from storyboard: String? = nil) {
 		// todo should this be a fatal error?
 		guard self.window == nil else { return }
 		Time.startInterval()
 		registerStaff(with: key)
-		// todo some sort of feedback for silent returns?
-		guard
-			let rootSwitches = createBundle(from: customerId, and: storyboard),
-			let rootCustomer = rootSwitches.customer
-			else { return }
+		
+		guard let rootSwitches = createBundle(from: customerId, and: storyboard) else { return }
+		currentSwitches = rootSwitches
+		currentSwitches!.waiter?.startShift()
+		currentSwitches!.headChef?.startShift()
 		self.window = window
 		self.window.makeKeyAndVisible()
-		self.window.rootViewController = rootCustomer
-		currentSwitches = rootSwitches
-		formerCustomers.append((rootCustomer, customerId))
+		self.window.rootViewController = rootSwitches.customer
+		formerCustomers.append((rootSwitches.customer, customerId))
 		sommelier.set(currentSwitches?.customer)
 	}
 	
@@ -170,30 +135,24 @@ extension MaitreD: MaitreDProtocol {
 			kitchenStaffTypes: kitchenStaffTypes)
 	}
 	
-	public func present(
-		popoverMenu menuId: String,
-		inside rect: CGRect? = nil,
-		from storyboard: String? = nil) {
+	public func present(popoverMenu menuId: String, inside rect: CGRect? = nil, from storyboard: String? = nil) {
 		guard
 			menuSwitches == nil,
 			let currentCustomer = currentSwitches?.customer,
-			let switchBundle = createBundle(from: menuId, and: storyboard),
-			let menu = switchBundle.customer
+			let menuBundle = createBundle(from: menuId, and: storyboard)
 			else { return }
+		menuSwitches = menuBundle
 		currentSwitches?.headChef?.startBreak()
 		currentSwitches?.waiter?.startBreak()
 		currentCustomer.peruseMenu()
-		menu.modalPresentationStyle = .popover
-		currentCustomer.present(menu, animated: true)
-//		{
-//			lo()
-////			self.dishes_.make(order: Order.popoverAdded)
-//		}
-		menu.popoverPresentationController?.sourceView = currentCustomer.view
+		menuSwitches!.waiter?.startShift()
+		menuSwitches!.headChef?.startShift()
+		menuSwitches!.customer.modalPresentationStyle = .popover
+		currentCustomer.present(menuSwitches!.customer, animated: true)
+		menuSwitches!.customer.popoverPresentationController?.sourceView = currentCustomer.view
 		if let safeRect = rect {
-			menu.popoverPresentationController?.sourceRect = safeRect
+			menuSwitches!.customer.popoverPresentationController?.sourceRect = safeRect
 		}
-		menuSwitches = switchBundle
 	}
 	
 	public func register(
@@ -209,37 +168,13 @@ extension MaitreD: MaitreDProtocol {
 	
 	public func removeMenu(_ chosenDishId: String? = nil) {
 		guard var strongMenuSwitches = menuSwitches else { return }
-		strongMenuSwitches.customer?.dismiss(animated: true)
-//		{ lo("removeMenu complete") }
+		strongMenuSwitches.customer.dismiss(animated: true) //{}
 		strongMenuSwitches.endShift()
 		menuSwitches = nil
 		currentSwitches?.headChef?.endBreak()
 		currentSwitches?.waiter?.endBreak()
-		currentSwitches?.customer?.returnMenuToWaiter(chosenDishId)
+		currentSwitches?.customer.returnMenuToWaiter(chosenDishId)
 	}
-	
-	// todo will we reinstate something like this in future?
-//	public func seat(
-//		_ customerId: String,
-//		via transitionType: CATransitionType? = nil,
-//		and transitionSubtype: CATransitionSubtype? = nil,
-//		from storyboard: String? = nil) {
-//		guard
-//			let switchBundle = createBundle(from: customerId, and: storyboard),
-//			let customer = switchBundle.customer
-//			else { return }
-//		if let transitionType = transitionType {
-//			let transition = CATransition()
-//			transition.duration = 0.25
-//			transition.timingFunction = CAMediaTimingFunction.init(name: .easeInEaseOut)
-//			transition.type = transitionType
-//			transition.subtype = transitionSubtype ?? .fromRight
-//			window.layer.add(transition, forKey: nil)
-//		}
-//		window.rootViewController = customer
-//		currentSwitches?.endShift()
-//		currentSwitches = switchBundle
-//	}
 	
 	public func seatNext(
 		_ customerId: String,
@@ -247,26 +182,29 @@ extension MaitreD: MaitreDProtocol {
 		from storyboard: String? = nil) {
 		guard
 			let currentCustomer = currentSwitches?.customer,
-			var switchBundle = createBundle(from: customerId, and: storyboard),
-			let nextCustomer = switchBundle.customer
+			var switchBundle = createBundle(from: customerId, and: storyboard)
 			else { return }
 		let animated = transitionStyle != nil
 		if animated {
-			nextCustomer.modalTransitionStyle = transitionStyle!
+			switchBundle.customer.modalTransitionStyle = transitionStyle!
 		}
-		currentCustomer.present(nextCustomer, animated: animated)
+		currentCustomer.present(switchBundle.customer, animated: animated)
 		currentSwitches?.endShift()
 		switchBundle.animated = animated
 		currentSwitches = switchBundle
+		currentSwitches!.waiter?.startShift()
+		currentSwitches!.headChef?.startShift()
 		sommelier.set(currentCustomer)
 	}
 	
 	public func usherOutCurrentCustomer() {
 		guard currentSwitches != nil else { return }
-		currentSwitches!.customer?.dismiss(animated: currentSwitches!.animated) { [unowned self] in
+		currentSwitches!.customer.dismiss(animated: currentSwitches!.animated) { [unowned self] in
 			self.currentSwitches!.endShift()
 			guard let formerCustomer = self.formerCustomers.popLast() else { return }
 			self.currentSwitches = self.createBundle(from: formerCustomer)
+			self.currentSwitches!.waiter?.startShift()
+			self.currentSwitches!.headChef?.startShift()
 		}
 	}
 	
@@ -274,17 +212,28 @@ extension MaitreD: MaitreDProtocol {
 	
 	
 	
+	internal func areColleagues(_ colleagueA: SwitchesRelationshipProtocol, _ colleagueB: SwitchesRelationshipProtocol) -> Bool {
+		if searchFor(colleagueA, and: colleagueB, in: currentSwitches) {
+			return true
+		} else {
+			return searchFor(colleagueA, and: colleagueB, in: menuSwitches)
+		}
+	}
+	
 	private func createBundle(from ticket: CustomerTicket) -> SwitchesRelationship? {
 		guard let switchesRelationship = switchesRelationships[ticket.id] else { return nil }
-		let kitchenStaff = getKitchenStaff(from: switchesRelationship.kitchenStaffTypes)
-		var headChef = switchesRelationship.headChefType != nil ? switchesRelationship.headChefType!.init(kitchenStaff) : nil
-		let waiter = switchesRelationship.waiterType != nil ?
-			switchesRelationship.waiterType!.init(customer: ticket.customer,  headChef: headChef) :
-			GeneralWaiter(customer: ticket.customer, headChef: headChef)
+		let
+		kitchenStaff = getKitchenStaff(from: switchesRelationship.kitchenStaffTypes),
+		headChef = switchesRelationship.headChefType != nil ?
+			switchesRelationship.headChefType!.init(kitchenStaff) :
+			nil,
+		waiter = switchesRelationship.waiterType != nil ?
+			switchesRelationship.waiterType!.init(maitreD: self, customer: ticket.customer, headChef: headChef) :
+			GeneralWaiter(maitreD: self, customer: ticket.customer, headChef: headChef)
 		headChef?.waiter = waiter
 		ticket.customer.assign(waiter, maitreD: self, and: sommelier)
-		waiter.startShift()
-		headChef?.startShift()
+//		waiter.startShift()
+//		headChef?.startShift()
 		return SwitchesRelationship(
 			customerID: ticket.id,
 			customer: ticket.customer,
@@ -313,5 +262,15 @@ extension MaitreD: MaitreDProtocol {
 			}
 		}
 		return kitchenStaff
+	}
+	
+	private func searchFor(
+		_ colleagueA: SwitchesRelationshipProtocol,
+		and colleagueB: SwitchesRelationshipProtocol,
+		in switchesRelationship: SwitchesRelationship?) -> Bool {
+		guard let switches = switchesRelationship else { return false }
+//		lo(colleagueA === switches.customer, colleagueA === switches.waiter, colleagueA === switches.headChef, colleagueB === switches.customer, colleagueB === switches.waiter, colleagueB === switches.headChef)
+		return  (colleagueA === switches.customer || colleagueA === switches.waiter || colleagueA === switches.headChef) &&
+				(colleagueB === switches.customer || colleagueB === switches.waiter || colleagueB === switches.headChef)
 	}
 }
