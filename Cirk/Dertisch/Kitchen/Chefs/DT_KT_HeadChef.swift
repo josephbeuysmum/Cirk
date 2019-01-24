@@ -29,6 +29,6 @@ public extension HeadChef {
 
 public extension HeadChefForKitchenMember {
 	public func give(dishes: FulfilledOrder) {
-		Rota().waiter(for: self as? SwitchesRelationshipProtocol)?.serve(main: dishes)
+		Rota().waiterForHeadChef(self as? SwitchesRelationshipProtocol)?.serve(main: dishes)
 	}
 }

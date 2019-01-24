@@ -221,7 +221,8 @@ public extension WaiterForCustomer {
 	}
 	
 	public func give(_ order: Order) {
-		Rota().headChef(for: self as? SwitchesRelationshipProtocol)?.give(order)
+		guard var headChef = Rota().headChefForWaiter(self as? SwitchesRelationshipProtocol) else { return }
+		headChef.give(order)
 	}
 }
 
@@ -233,7 +234,7 @@ public extension WaiterForWaiter {
 //		carte.stock(with: dishes)
 //		guard var waiter = self as? WaiterForWaiter else { return  }
 		fillCarte(with: dishes)
-		guard let customer = Rota().customer(for: self as? SwitchesRelationshipProtocol) else { return }
+		guard let customer = Rota().customerForWaiter(self as? SwitchesRelationshipProtocol) else { return }
 		// if we don't use dispatch queue we will cause a simultaneous-mutating-access error in the carte
 		DispatchQueue.main.async {
 			customer.present(dish: dishes.ticket)
@@ -249,7 +250,7 @@ public extension WaiterForHeadChef {
 	
 	public func serve(entrees: FulfilledOrder) {
 		guard
-			let customer = Rota().customer(for: self as? SwitchesRelationshipProtocol),
+			let customer = Rota().customerForWaiter(self as? SwitchesRelationshipProtocol),
 			var waiter = self as? WaiterForWaiter
 			else { return }
 		// todo reinstate stock?

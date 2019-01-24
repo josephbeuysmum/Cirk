@@ -43,7 +43,7 @@ open class Customer: UIViewController {
 	
 	override final public func viewDidLoad() {
 		super.viewDidLoad()
-		if let labels = Rota().getAllColleagues(UILabel.self, from: Mirror(reflecting: self)) {
+		if let labels = Rota().all(UILabel.self, from: Mirror(reflecting: self)) {
 			for label in labels {
 				label.text = nil
 			}
@@ -52,7 +52,7 @@ open class Customer: UIViewController {
 	}
 	
 	private final func checkReadinessToOrder() {
-		guard isViewLoaded, Rota().waiter(for: self)?.onShift ?? false else { return }
+		guard isViewLoaded, Rota().waiterForCustomer(self)?.onShift ?? false else { return }
 		placeOrder()
 		regionChosen()
 	}

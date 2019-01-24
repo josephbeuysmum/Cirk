@@ -7,36 +7,50 @@
 //
 
 internal struct Rota {
-	func customer(for staffMember: SwitchesRelationshipProtocol?) -> Customer? {
-		guard let staffMember = staffMember else { return nil }
-		return getMaitreD(for: staffMember)?.customer(for: staffMember)
-	}
-	
-	func headChef(for staffMember: SwitchesRelationshipProtocol?) -> HeadChef? {
-		guard let staffMember = staffMember else { return nil }
-		return getMaitreD(for: staffMember)?.headChef(for: staffMember)
-	}
-	
-	func waiter(for staffMember: SwitchesRelationshipProtocol?) -> Waiter? {
-		guard let staffMember = staffMember else { return nil }
-		return getMaitreD(for: staffMember)?.waiter(for: staffMember)
-	}
-	
-	func getAllColleagues<T>(_ type: T.Type, from mirror: Mirror) -> [T]? {
+	func all<T>(_ type: T.Type, from mirror: Mirror) -> [T]? {
 		return instances(of: type, from: mirror, getAll: true)
 	}
-
-//	func getColleague<T>(_ type: T.Type, of staffMember: SwitchesRelationshipProtocol) -> T? {
-//		let mirror = Mirror(reflecting: staffMember)
-//		guard
-//			let maitreD = instances(of: MaitreD.self, from: mirror, getAll: false)?[0],
-//			let colleague = instances(of: type, from: mirror, getAll: false)?[0],
-//			let switchColleague = colleague as? SwitchesRelationshipProtocol
-//			else { return nil }
-//		return maitreD.areColleagues(staffMember, switchColleague) ? colleague : nil
-//	}
 	
-	private func getMaitreD(for staffMember: SwitchesRelationshipProtocol) -> MaitreD? {
+	func customerForWaiter(_ staffMember: SwitchesRelationshipProtocol?) -> CustomerForWaiter? {
+		return getCustomer(staffMember)
+	}
+	
+	func headChefForWaiter(_ staffMember: SwitchesRelationshipProtocol?) -> HeadChefForWaiter? {
+		return getHeadChef(staffMember)
+	}
+	
+	func waiterForCustomer(_ staffMember: SwitchesRelationshipProtocol?) -> WaiterForCustomer? {
+		return getWaiter(staffMember)
+	}
+	
+	func waiterForHeadChef(_ staffMember: SwitchesRelationshipProtocol?) -> WaiterForHeadChef? {
+		return getWaiter(staffMember)
+	}
+	
+	func waiterForWaiter(_ staffMember: SwitchesRelationshipProtocol?) -> WaiterForWaiter? {
+		return getWaiter(staffMember)
+	}
+	
+
+	
+	
+	
+	private func getCustomer(_ staffMember: SwitchesRelationshipProtocol?) -> Customer? {
+		guard let staffMember = staffMember else { return nil }
+		return getMaitreD(staffMember)?.customer(for: staffMember)
+	}
+	
+	private func getWaiter(_ staffMember: SwitchesRelationshipProtocol?) -> Waiter? {
+		guard let staffMember = staffMember else { return nil }
+		return getMaitreD(staffMember)?.waiter(for: staffMember)
+	}
+	
+	private func getHeadChef(_ staffMember: SwitchesRelationshipProtocol?) -> HeadChef? {
+		guard let staffMember = staffMember else { return nil }
+		return getMaitreD(staffMember)?.headChef(for: staffMember)
+	}
+	
+	private func getMaitreD(_ staffMember: SwitchesRelationshipProtocol) -> MaitreD? {
 		let mirror = Mirror(reflecting: staffMember)
 		guard let maitreDs = instances(of: MaitreD.self, from: mirror, getAll: true) else { return nil }
 		return maitreDs.count == 1 ? maitreDs[0] : nil

@@ -113,7 +113,7 @@ class GameCustomer: Customer {
 		teal = getColor(by: Colors.teal),
 		timeTextSize = screenBounds.height < 415 ? 28 : 52
 		
-		supportedInterfaceOrientations = [.landscapeRight, .landscapeLeft]
+		supportedInterfaceOrientations = .landscapeRight
 		timeLabel = UILabel()
 		timeLabel.font = UIFont(name: "EraserDust", size: CGFloat(timeTextSize))
 		timeLabel.textAlignment = .center
