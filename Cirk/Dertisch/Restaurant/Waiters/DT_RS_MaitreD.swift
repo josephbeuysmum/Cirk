@@ -31,15 +31,15 @@ public protocol MaitreDRegistrar {
 
 public protocol MaitreDProtocol: MaitreDRegistrar {
 //	var menuId: String? { get }
-	func alert(actions: [UIAlertAction], title: String?, message: String?, style: UIAlertController.Style?)
-	func closeRestaurant()
-	func createNibFrom(name nibName: String, for owner: Customer) -> UIView?
-	func greet(firstCustomer customerId: String, through window: UIWindow, from storyboard: String?)
-	func present(popoverMenu menuId: String, inside rect: CGRect?, from storyboard: String?)
-	// todo is there a better solution to getting popover results to the underlying VC than passing chosenDishId?
-	func removeMenu(_ chosenDishId: String?)
-	func seat(_ customerId: String, via transitionStyle: UIModalTransitionStyle?, from storyboard: String?)
-	func usherOutCurrentCustomer()
+//	func alert(actions: [UIAlertAction], title: String?, message: String?, style: UIAlertController.Style?)
+//	func closeRestaurant()
+//	func createNibFrom(name nibName: String, for owner: Customer) -> UIView?
+//	func greet(firstCustomer customerId: String, through window: UIWindow, from storyboard: String?)
+//	func present(popoverMenu menuId: String, inside rect: CGRect?, from storyboard: String?)
+//	// todo is there a better solution to getting popover results to the underlying VC than passing chosenDishId?
+//	func removeMenu(_ chosenDishId: String?)
+//	func seat(_ customerId: String, via transitionStyle: UIModalTransitionStyle?, from storyboard: String?)
+//	func usherOutCurrentCustomer()
 }
 
 
@@ -212,13 +212,44 @@ extension MaitreD: MaitreDProtocol {
 	
 	
 	
-	internal func areColleagues(_ colleagueA: SwitchesRelationshipProtocol, _ colleagueB: SwitchesRelationshipProtocol) -> Bool {
-		if searchFor(colleagueA, and: colleagueB, in: currentSwitches) {
-			return true
-		} else {
-			return searchFor(colleagueA, and: colleagueB, in: menuSwitches)
+	internal func customer(for staffMember: SwitchesRelationshipProtocol) -> Customer? {
+		switch true {
+		case staffMember === currentSwitches?.waiter:	return currentSwitches!.customer
+		case staffMember === menuSwitches?.waiter:		return menuSwitches!.customer
+		default: 										return nil
 		}
 	}
+	
+	internal func headChef(for staffMember: SwitchesRelationshipProtocol) -> HeadChef? {
+		switch true {
+		case staffMember === currentSwitches?.waiter:	return currentSwitches!.headChef
+		case staffMember === menuSwitches?.waiter:		return menuSwitches!.headChef
+		default: 										return nil
+		}
+	}
+	
+	// todo change to conditional conformance
+	internal func waiter(for staffMember: SwitchesRelationshipProtocol) -> Waiter? {
+		switch true {
+		case staffMember === currentSwitches?.headChef,
+			 staffMember === currentSwitches?.customer:	return currentSwitches!.waiter
+		case staffMember === menuSwitches?.headChef,
+			 staffMember === menuSwitches?.customer:	return menuSwitches!.waiter
+		default: 										return nil
+		}
+	}
+	
+//	internal func areColleagues(_ colleagueA: SwitchesRelationshipProtocol, _ colleagueB: SwitchesRelationshipProtocol) -> Bool {
+//		if searchFor(colleagueA, and: colleagueB, in: currentSwitches) {
+//			return true
+//		} else {
+//			return searchFor(colleagueA, and: colleagueB, in: menuSwitches)
+//		}
+//	}
+	
+	
+	
+	
 	
 	private func createBundle(from ticket: CustomerTicket) -> SwitchesRelationship? {
 		guard let switchesRelationship = switchesRelationships[ticket.id] else { return nil }

@@ -1,6 +1,6 @@
 //
 //  DT_RS_Waiter.swift
-//  Cirk
+//  Dertisch
 //
 //  Created by Richard Willis on 05/11/2018.
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
@@ -221,10 +221,7 @@ public extension WaiterForCustomer {
 	}
 	
 	public func give(_ order: Order) {
-//		lo()
-		// todo replace the "get firsts" with some sort of generic ID
-		guard var headChef = Rota().getColleague(HeadChefForWaiter.self, of: self as! SwitchesRelationshipProtocol) else { return }
-		headChef.give(order)
+		Rota().headChef(for: self as? SwitchesRelationshipProtocol)?.give(order)
 	}
 }
 
@@ -236,10 +233,7 @@ public extension WaiterForWaiter {
 //		carte.stock(with: dishes)
 //		guard var waiter = self as? WaiterForWaiter else { return  }
 		fillCarte(with: dishes)
-		guard
-			let customer = Rota().getColleague(CustomerForWaiter.self, of: self as! SwitchesRelationshipProtocol)
-			else {
-				return }
+		guard let customer = Rota().customer(for: self as? SwitchesRelationshipProtocol) else { return }
 		// if we don't use dispatch queue we will cause a simultaneous-mutating-access error in the carte
 		DispatchQueue.main.async {
 			customer.present(dish: dishes.ticket)
@@ -255,10 +249,9 @@ public extension WaiterForHeadChef {
 	
 	public func serve(entrees: FulfilledOrder) {
 		guard
-			let customer = Rota().getColleague(CustomerForWaiter.self, of: self as! SwitchesRelationshipProtocol),
+			let customer = Rota().customer(for: self as? SwitchesRelationshipProtocol),
 			var waiter = self as? WaiterForWaiter
-			else {
-				return }
+			else { return }
 		// todo reinstate stock?
 //		if let carte = Rota().getColleague(CarteForWaiter.self, from: Mirror(reflecting: self)) {
 //			carte.stock(with: entrees)

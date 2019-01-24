@@ -52,11 +52,7 @@ open class Customer: UIViewController {
 	}
 	
 	private final func checkReadinessToOrder() {
-		guard
-			isViewLoaded,
-			let waiter = Rota().getColleague(WaiterForCustomer.self, of: self),
-			waiter.onShift
-			else { return }
+		guard isViewLoaded, Rota().waiter(for: self)?.onShift ?? false else { return }
 		placeOrder()
 		regionChosen()
 	}
