@@ -9,13 +9,14 @@
 //import Dertisch
 
 class GameHeadChef: HeadChef {
-	var waiter: WaiterForHeadChef?
+	private var
+	sousChef: CirkSousChef?,
+	waiter: WaiterForHeadChef?
 	
-	fileprivate var sousChef: CirkSousChef?
-	
-	required init(_ sousChefs: [String: KitchenMember]?) {
+	required init(waiter: WaiterForHeadChef?, resources: [String: KitchenResource]?) {
 //		lo("bonjour game head chef")
-		sousChef = sousChefs?[CirkSousChef.staticId] as? CirkSousChef
+		sousChef = resources?[CirkSousChef.staticId] as? CirkSousChef
+		self.waiter = waiter
 		sousChef?.headChef = self
 	}
 	
@@ -51,14 +52,14 @@ extension GameHeadChef: EndShiftProtocol {
 	}
 }
 
-extension GameHeadChef: StartShiftProtocol {
-	func startShift() {
+extension GameHeadChef: BeginShiftProtocol {
+	func beginShift() {
 		setLevel()
 	}
 }
 
 extension GameHeadChef: HeadChefForWaiter {
-	func give(_ order: Order) {
+	func give(_ order: CustomerOrder) {
 		switch order.ticket {
 		case Tickets.personalBest:
 			sousChef?.set(personalBest: order.content as? PBMetrics)

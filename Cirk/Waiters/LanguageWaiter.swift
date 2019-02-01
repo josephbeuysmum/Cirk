@@ -20,10 +20,9 @@ class LanguageWaiter: Waiter {
 	fileprivate var
 	carte_: CarteForCustomer?
 	
-	required init(maitreD: MaitreD, customer: CustomerForWaiter, headChef: HeadChefForWaiter?) {
+	required init(maitreD: MaitreD) {
 //		lo("bonjour language waiter")
 		self.maitreD = maitreD
-		self.customer = customer
 		
 		var languageNames: [LanguageCellEntre] = []
 		Languages.allCases.forEach {
@@ -37,4 +36,10 @@ class LanguageWaiter: Waiter {
 
 extension LanguageWaiter: WaiterForCustomer {
 	var carte: CarteForCustomer? { return carte_ }
+}
+
+extension LanguageWaiter: WaiterForMaitreD {
+	func introduce(_ customer: CustomerForWaiter, and headChef: HeadChefForWaiter?) {
+		self.customer = customer
+	}
 }

@@ -16,58 +16,61 @@
 		A932AEEE2196032500D4D3DC /* electronicRunning.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A932AEED2196032500D4D3DC /* electronicRunning.mp3 */; };
 		A932AEF5219638D900D4D3DC /* beepLong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A932AEF3219638D900D4D3DC /* beepLong.mp3 */; };
 		A932AEF6219638D900D4D3DC /* beepShort.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A932AEF4219638D900D4D3DC /* beepShort.mp3 */; };
-		A9338301216B915200A2FCE3 /* DT_RS_Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382C8216B915200A2FCE3 /* DT_RS_Customer.swift */; };
-		A9338302216B915200A2FCE3 /* DT_RS_TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382C9216B915200A2FCE3 /* DT_RS_TableCell.swift */; };
-		A9338303216B915200A2FCE3 /* DT_RS_PageCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382CA216B915200A2FCE3 /* DT_RS_PageCustomer.swift */; };
-		A9338305216B915200A2FCE3 /* DT_RS_MaitreD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382CD216B915200A2FCE3 /* DT_RS_MaitreD.swift */; };
-		A933830B216B915200A2FCE3 /* DT_CS_Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382D6216B915200A2FCE3 /* DT_CS_Logs.swift */; };
-		A933830C216B915200A2FCE3 /* DT_CS_Chars.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382D7216B915200A2FCE3 /* DT_CS_Chars.swift */; };
-		A933830D216B915200A2FCE3 /* DT_CS_CommonPhrases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382D8216B915200A2FCE3 /* DT_CS_CommonPhrases.swift */; };
-		A9338312216B915200A2FCE3 /* DT_UT_Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382DE216B915200A2FCE3 /* DT_UT_Log.swift */; };
-		A9338313216B915200A2FCE3 /* DT_UT_Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382DF216B915200A2FCE3 /* DT_UT_Constraints.swift */; };
-		A9338314216B915200A2FCE3 /* DT_UT_Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382E0216B915200A2FCE3 /* DT_UT_Time.swift */; };
-		A9338315216B915200A2FCE3 /* DT_UT_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382E1216B915200A2FCE3 /* DT_UT_Extensions.swift */; };
-		A9338316216B915200A2FCE3 /* DT_UT_String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382E2216B915200A2FCE3 /* DT_UT_String.swift */; };
-		A9338324216B915200A2FCE3 /* DT_KT_BundledJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382F5216B915200A2FCE3 /* DT_KT_BundledJson.swift */; };
-		A9338325216B915200A2FCE3 /* DT_KT_Freezer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382F6216B915200A2FCE3 /* DT_KT_Freezer.swift */; };
-		A9338326216B915200A2FCE3 /* DT_KT_UrlSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382F7216B915200A2FCE3 /* DT_KT_UrlSession.swift */; };
-		A9338327216B915200A2FCE3 /* DT_KT_HeadChef.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93382F9216B915200A2FCE3 /* DT_KT_HeadChef.swift */; };
-		A9338331216BB44D00A2FCE3 /* DT_RS_Sommelier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9338330216BB44D00A2FCE3 /* DT_RS_Sommelier.swift */; };
-		A9338335216CAC6D00A2FCE3 /* DT_RS_GeneralWaiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9338334216CAC6D00A2FCE3 /* DT_RS_GeneralWaiter.swift */; };
-		A9338338216CDAEC00A2FCE3 /* DT_KT_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9338336216CDAEC00A2FCE3 /* DT_KT_Image.swift */; };
-		A9338339216CDAEC00A2FCE3 /* DT_KT_TemporaryValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9338337216CDAEC00A2FCE3 /* DT_KT_TemporaryValues.swift */; };
-		A93BC34721905DD700C78B75 /* DT_RS_Waiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93BC34621905DD700C78B75 /* DT_RS_Waiter.swift */; };
-		A94577A321E78977006C1934 /* DT_UT_Rota.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94577A221E78977006C1934 /* DT_UT_Rota.swift */; };
-		A95764A821F87E6D00B25699 /* DT_KT_Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95764A721F87E6D00B25699 /* DT_KT_Member.swift */; };
+		A942283F22030AA10026A11E /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942281C22030AA10026A11E /* Cells.swift */; };
+		A942284022030AA10026A11E /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942281D22030AA10026A11E /* Customer.swift */; };
+		A942284122030AA10026A11E /* PageCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942281E22030AA10026A11E /* PageCustomer.swift */; };
+		A942284222030AA10026A11E /* Sommelier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942282022030AA10026A11E /* Sommelier.swift */; };
+		A942284322030AA10026A11E /* GeneralWaiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942282122030AA10026A11E /* GeneralWaiter.swift */; };
+		A942284422030AA10026A11E /* Waiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942282222030AA10026A11E /* Waiter.swift */; };
+		A942284522030AA10026A11E /* MaitreD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942282322030AA10026A11E /* MaitreD.swift */; };
+		A942284622030AA10026A11E /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942282622030AA10026A11E /* Constraints.swift */; };
+		A942284722030AA10026A11E /* Rota.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942282722030AA10026A11E /* Rota.swift */; };
+		A942284822030AA10026A11E /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942282822030AA10026A11E /* Consts.swift */; };
+		A942284922030AA10026A11E /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942282922030AA10026A11E /* Log.swift */; };
+		A942284A22030AA10026A11E /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942282A22030AA10026A11E /* StringUtils.swift */; };
+		A942284B22030AA10026A11E /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942282B22030AA10026A11E /* Time.swift */; };
+		A942284C22030AA10026A11E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942282C22030AA10026A11E /* Extensions.swift */; };
+		A942284D22030AA10026A11E /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942282D22030AA10026A11E /* Protocols.swift */; };
+		A942284E22030AA10026A11E /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942282E22030AA10026A11E /* Typealiases.swift */; };
+		A942284F22030AA10026A11E /* SwitchesRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942283022030AA10026A11E /* SwitchesRelationship.swift */; };
+		A942285022030AA10026A11E /* FreezerSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942283122030AA10026A11E /* FreezerSections.swift */; };
+		A942285122030AA10026A11E /* Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942283222030AA10026A11E /* Orders.swift */; };
+		A942285222030AA10026A11E /* RawIngredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942283322030AA10026A11E /* RawIngredients.swift */; };
+		A942285322030AA10026A11E /* InternalSwitchRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942283422030AA10026A11E /* InternalSwitchRelationship.swift */; };
+		A942285422030AA10026A11E /* Freezer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942283722030AA10026A11E /* Freezer.swift */; };
+		A942285522030AA10026A11E /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942283822030AA10026A11E /* Ingredient.swift */; };
+		A942285622030AA10026A11E /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942283922030AA10026A11E /* Images.swift */; };
+		A942285722030AA10026A11E /* Larder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942283A22030AA10026A11E /* Larder.swift */; };
+		A942285822030AA10026A11E /* FoodDelivery.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942283B22030AA10026A11E /* FoodDelivery.swift */; };
+		A942285922030AA10026A11E /* HeadChef.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942283D22030AA10026A11E /* HeadChef.swift */; };
+		A942285A22030AA10026A11E /* SousChef.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942283E22030AA10026A11E /* SousChef.swift */; };
+		A942285C220310290026A11E /* MaitreDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942285B220310290026A11E /* MaitreDExtension.swift */; };
+		A94228642203486A0026A11E /* LevelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94228622203486A0026A11E /* LevelsViewController.swift */; };
+		A9422867220348820026A11E /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9422866220348820026A11E /* LanguageViewController.swift */; };
+		A942286922034CB80026A11E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942286822034CB80026A11E /* GameViewController.swift */; };
+		A942286B22034DBE0026A11E /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942286A22034DBE0026A11E /* IntroViewController.swift */; };
+		A942286D2204E7710026A11E /* TableAndChairs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942286C2204E7710026A11E /* TableAndChairs.swift */; };
 		A971CDD2215393EF00F4BB29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971CDD1215393EF00F4BB29 /* AppDelegate.swift */; };
 		A971CDE7215393F100F4BB29 /* CirkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971CDE6215393F100F4BB29 /* CirkTests.swift */; };
-		A9776D992153962A00693C99 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776D7C2153962A00693C99 /* Consts.swift */; };
+		A9776D992153962A00693C99 /* CirkConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776D7C2153962A00693C99 /* CirkConsts.swift */; };
 		A9776D9B2153962A00693C99 /* LevelEntrees.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776D7E2153962A00693C99 /* LevelEntrees.swift */; };
-		A9776D9C2153962A00693C99 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776D7F2153962A00693C99 /* Extensions.swift */; };
 		A9776D9D2153962A00693C99 /* CircleRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776D802153962A00693C99 /* CircleRenderer.swift */; };
 		A9776DA82153962A00693C99 /* erasdust.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A9776D8D2153962A00693C99 /* erasdust.ttf */; };
 		A9776DA92153962A00693C99 /* CirkData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A9776D8E2153962A00693C99 /* CirkData.xcdatamodeld */; };
 		A9776DD12153B63C00693C99 /* GameWaiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776DC82153B63C00693C99 /* GameWaiter.swift */; };
 		A9776DD22153B63C00693C99 /* LevelsWaiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776DC92153B63C00693C99 /* LevelsWaiter.swift */; };
-		A9776DDF2153E3F700693C99 /* LevelsMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776DD92153E3F700693C99 /* LevelsMenuItem.swift */; };
+		A9776DDF2153E3F700693C99 /* LevelsCustomerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776DD92153E3F700693C99 /* LevelsCustomerItem.swift */; };
 		A9776DE02153E3F700693C99 /* GameCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776DDA2153E3F700693C99 /* GameCustomer.swift */; };
 		A9776DE32153E3F700693C99 /* IntroCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776DDD2153E3F700693C99 /* IntroCustomer.swift */; };
-		A9776DE42153E3F700693C99 /* LevelsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776DDE2153E3F700693C99 /* LevelsMenu.swift */; };
-		A98795BC219B16BB0041CA40 /* DT_UT_Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98795BB219B16BB0041CA40 /* DT_UT_Typealiases.swift */; };
-		A98795C4219C1CC20041CA40 /* DT_ET_StaffRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98795BE219C1CC20041CA40 /* DT_ET_StaffRelationship.swift */; };
-		A98795C5219C1CC20041CA40 /* DT_ET_Tickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98795BF219C1CC20041CA40 /* DT_ET_Tickets.swift */; };
-		A98795C6219C1CC20041CA40 /* DT_ET_SwitchesRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98795C0219C1CC20041CA40 /* DT_ET_SwitchesRelationship.swift */; };
-		A98795C7219C1CC20041CA40 /* DT_ET_RawIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98795C1219C1CC20041CA40 /* DT_ET_RawIngredient.swift */; };
-		A98795C8219C1CC20041CA40 /* DT_ET_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98795C2219C1CC20041CA40 /* DT_ET_CoreData.swift */; };
+		A9776DE42153E3F700693C99 /* LevelsCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776DDE2153E3F700693C99 /* LevelsCustomer.swift */; };
 		A98795CF219CC2920041CA40 /* tickTock.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A98795CE219CC2920041CA40 /* tickTock.mp3 */; };
-		A993ED2B21728785005351EF /* DT_UT_Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993ED2A21728785005351EF /* DT_UT_Protocols.swift */; };
 		A9B011F721A467BA008212C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9B011F621A467BA008212C7 /* Assets.xcassets */; };
-		A9B011F921A58AC2008212C7 /* LanguageMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B011F821A58AC2008212C7 /* LanguageMenuItem.swift */; };
+		A9B011F921A58AC2008212C7 /* LanguageCustomerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B011F821A58AC2008212C7 /* LanguageCustomerItem.swift */; };
 		A9B011FB21A58BB1008212C7 /* LanguageEntrees.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B011FA21A58BB1008212C7 /* LanguageEntrees.swift */; };
-		A9B011FF21A58D0A008212C7 /* LanguageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B011FE21A58D0A008212C7 /* LanguageMenu.swift */; };
+		A9B011FF21A58D0A008212C7 /* LanguageCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B011FE21A58D0A008212C7 /* LanguageCustomer.swift */; };
 		A9B0120121A58EC3008212C7 /* MenuCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B0120021A58EC3008212C7 /* MenuCustomer.swift */; };
 		A9B0120321A59019008212C7 /* LanguageWaiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B0120221A59019008212C7 /* LanguageWaiter.swift */; };
-		A9CCBCE4217E1E19009F04DC /* Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CCBCE3217E1E19009F04DC /* Orders.swift */; };
+		A9CCBCE4217E1E19009F04DC /* CirkTypealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CCBCE3217E1E19009F04DC /* CirkTypealiases.swift */; };
 		A9D5AEAE21A6B97F006EF751 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9D5AEAA21A6B97F006EF751 /* LaunchScreen.storyboard */; };
 		A9D5AEAF21A6B97F006EF751 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9D5AEAC21A6B97F006EF751 /* Main.storyboard */; };
 		A9D5AEB721A6B994006EF751 /* LevelsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9D5AEB121A6B994006EF751 /* LevelsCell.xib */; };
@@ -101,62 +104,65 @@
 		A932AEED2196032500D4D3DC /* electronicRunning.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = electronicRunning.mp3; sourceTree = "<group>"; };
 		A932AEF3219638D900D4D3DC /* beepLong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beepLong.mp3; sourceTree = "<group>"; };
 		A932AEF4219638D900D4D3DC /* beepShort.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beepShort.mp3; sourceTree = "<group>"; };
-		A93382C8216B915200A2FCE3 /* DT_RS_Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_RS_Customer.swift; sourceTree = "<group>"; };
-		A93382C9216B915200A2FCE3 /* DT_RS_TableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_RS_TableCell.swift; sourceTree = "<group>"; };
-		A93382CA216B915200A2FCE3 /* DT_RS_PageCustomer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_RS_PageCustomer.swift; sourceTree = "<group>"; };
-		A93382CD216B915200A2FCE3 /* DT_RS_MaitreD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_RS_MaitreD.swift; sourceTree = "<group>"; };
-		A93382D6216B915200A2FCE3 /* DT_CS_Logs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_Logs.swift; sourceTree = "<group>"; };
-		A93382D7216B915200A2FCE3 /* DT_CS_Chars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_Chars.swift; sourceTree = "<group>"; };
-		A93382D8216B915200A2FCE3 /* DT_CS_CommonPhrases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_CS_CommonPhrases.swift; sourceTree = "<group>"; };
-		A93382DE216B915200A2FCE3 /* DT_UT_Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Log.swift; sourceTree = "<group>"; };
-		A93382DF216B915200A2FCE3 /* DT_UT_Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Constraints.swift; sourceTree = "<group>"; };
-		A93382E0216B915200A2FCE3 /* DT_UT_Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Time.swift; sourceTree = "<group>"; };
-		A93382E1216B915200A2FCE3 /* DT_UT_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Extensions.swift; sourceTree = "<group>"; };
-		A93382E2216B915200A2FCE3 /* DT_UT_String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_String.swift; sourceTree = "<group>"; };
-		A93382F5216B915200A2FCE3 /* DT_KT_BundledJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_KT_BundledJson.swift; sourceTree = "<group>"; };
-		A93382F6216B915200A2FCE3 /* DT_KT_Freezer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_KT_Freezer.swift; sourceTree = "<group>"; };
-		A93382F7216B915200A2FCE3 /* DT_KT_UrlSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_KT_UrlSession.swift; sourceTree = "<group>"; };
-		A93382F9216B915200A2FCE3 /* DT_KT_HeadChef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_KT_HeadChef.swift; sourceTree = "<group>"; };
-		A9338330216BB44D00A2FCE3 /* DT_RS_Sommelier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DT_RS_Sommelier.swift; sourceTree = "<group>"; };
-		A9338334216CAC6D00A2FCE3 /* DT_RS_GeneralWaiter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DT_RS_GeneralWaiter.swift; sourceTree = "<group>"; };
-		A9338336216CDAEC00A2FCE3 /* DT_KT_Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_KT_Image.swift; sourceTree = "<group>"; };
-		A9338337216CDAEC00A2FCE3 /* DT_KT_TemporaryValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_KT_TemporaryValues.swift; sourceTree = "<group>"; };
-		A93BC34621905DD700C78B75 /* DT_RS_Waiter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DT_RS_Waiter.swift; sourceTree = "<group>"; };
-		A94577A221E78977006C1934 /* DT_UT_Rota.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Rota.swift; sourceTree = "<group>"; };
-		A95764A721F87E6D00B25699 /* DT_KT_Member.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_KT_Member.swift; sourceTree = "<group>"; };
+		A942281C22030AA10026A11E /* Cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
+		A942281D22030AA10026A11E /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		A942281E22030AA10026A11E /* PageCustomer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCustomer.swift; sourceTree = "<group>"; };
+		A942282022030AA10026A11E /* Sommelier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sommelier.swift; sourceTree = "<group>"; };
+		A942282122030AA10026A11E /* GeneralWaiter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralWaiter.swift; sourceTree = "<group>"; };
+		A942282222030AA10026A11E /* Waiter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Waiter.swift; sourceTree = "<group>"; };
+		A942282322030AA10026A11E /* MaitreD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaitreD.swift; sourceTree = "<group>"; };
+		A942282622030AA10026A11E /* Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
+		A942282722030AA10026A11E /* Rota.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rota.swift; sourceTree = "<group>"; };
+		A942282822030AA10026A11E /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
+		A942282922030AA10026A11E /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		A942282A22030AA10026A11E /* StringUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
+		A942282B22030AA10026A11E /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		A942282C22030AA10026A11E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		A942282D22030AA10026A11E /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		A942282E22030AA10026A11E /* Typealiases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
+		A942283022030AA10026A11E /* SwitchesRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchesRelationship.swift; sourceTree = "<group>"; };
+		A942283122030AA10026A11E /* FreezerSections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreezerSections.swift; sourceTree = "<group>"; };
+		A942283222030AA10026A11E /* Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Orders.swift; sourceTree = "<group>"; };
+		A942283322030AA10026A11E /* RawIngredients.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawIngredients.swift; sourceTree = "<group>"; };
+		A942283422030AA10026A11E /* InternalSwitchRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalSwitchRelationship.swift; sourceTree = "<group>"; };
+		A942283722030AA10026A11E /* Freezer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Freezer.swift; sourceTree = "<group>"; };
+		A942283822030AA10026A11E /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		A942283922030AA10026A11E /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		A942283A22030AA10026A11E /* Larder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Larder.swift; sourceTree = "<group>"; };
+		A942283B22030AA10026A11E /* FoodDelivery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodDelivery.swift; sourceTree = "<group>"; };
+		A942283D22030AA10026A11E /* HeadChef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadChef.swift; sourceTree = "<group>"; };
+		A942283E22030AA10026A11E /* SousChef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SousChef.swift; sourceTree = "<group>"; };
+		A942285B220310290026A11E /* MaitreDExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaitreDExtension.swift; sourceTree = "<group>"; };
+		A94228622203486A0026A11E /* LevelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsViewController.swift; sourceTree = "<group>"; };
+		A9422866220348820026A11E /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
+		A942286822034CB80026A11E /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		A942286A22034DBE0026A11E /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		A942286C2204E7710026A11E /* TableAndChairs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableAndChairs.swift; sourceTree = "<group>"; };
 		A971CDCE215393EF00F4BB29 /* Cirk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cirk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A971CDD1215393EF00F4BB29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A971CDDD215393F100F4BB29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A971CDE2215393F100F4BB29 /* CirkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CirkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A971CDE6215393F100F4BB29 /* CirkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirkTests.swift; sourceTree = "<group>"; };
 		A971CDE8215393F100F4BB29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A9776D7C2153962A00693C99 /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
+		A9776D7C2153962A00693C99 /* CirkConsts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CirkConsts.swift; sourceTree = "<group>"; };
 		A9776D7E2153962A00693C99 /* LevelEntrees.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelEntrees.swift; sourceTree = "<group>"; };
-		A9776D7F2153962A00693C99 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A9776D802153962A00693C99 /* CircleRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleRenderer.swift; sourceTree = "<group>"; };
 		A9776D8D2153962A00693C99 /* erasdust.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = erasdust.ttf; sourceTree = "<group>"; };
 		A9776D8F2153962A00693C99 /* CirkData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CirkData.xcdatamodel; sourceTree = "<group>"; };
 		A9776DC82153B63C00693C99 /* GameWaiter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameWaiter.swift; sourceTree = "<group>"; };
 		A9776DC92153B63C00693C99 /* LevelsWaiter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsWaiter.swift; sourceTree = "<group>"; };
-		A9776DD92153E3F700693C99 /* LevelsMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsMenuItem.swift; sourceTree = "<group>"; };
+		A9776DD92153E3F700693C99 /* LevelsCustomerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsCustomerItem.swift; sourceTree = "<group>"; };
 		A9776DDA2153E3F700693C99 /* GameCustomer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCustomer.swift; sourceTree = "<group>"; };
 		A9776DDD2153E3F700693C99 /* IntroCustomer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroCustomer.swift; sourceTree = "<group>"; };
-		A9776DDE2153E3F700693C99 /* LevelsMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsMenu.swift; sourceTree = "<group>"; };
-		A98795BB219B16BB0041CA40 /* DT_UT_Typealiases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Typealiases.swift; sourceTree = "<group>"; };
-		A98795BE219C1CC20041CA40 /* DT_ET_StaffRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_StaffRelationship.swift; sourceTree = "<group>"; };
-		A98795BF219C1CC20041CA40 /* DT_ET_Tickets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_Tickets.swift; sourceTree = "<group>"; };
-		A98795C0219C1CC20041CA40 /* DT_ET_SwitchesRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_SwitchesRelationship.swift; sourceTree = "<group>"; };
-		A98795C1219C1CC20041CA40 /* DT_ET_RawIngredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_RawIngredient.swift; sourceTree = "<group>"; };
-		A98795C2219C1CC20041CA40 /* DT_ET_CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_ET_CoreData.swift; sourceTree = "<group>"; };
+		A9776DDE2153E3F700693C99 /* LevelsCustomer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsCustomer.swift; sourceTree = "<group>"; };
 		A98795CE219CC2920041CA40 /* tickTock.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tickTock.mp3; sourceTree = "<group>"; };
-		A993ED2A21728785005351EF /* DT_UT_Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DT_UT_Protocols.swift; sourceTree = "<group>"; };
 		A9B011F621A467BA008212C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A9B011F821A58AC2008212C7 /* LanguageMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageMenuItem.swift; sourceTree = "<group>"; };
+		A9B011F821A58AC2008212C7 /* LanguageCustomerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCustomerItem.swift; sourceTree = "<group>"; };
 		A9B011FA21A58BB1008212C7 /* LanguageEntrees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageEntrees.swift; sourceTree = "<group>"; };
-		A9B011FE21A58D0A008212C7 /* LanguageMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageMenu.swift; sourceTree = "<group>"; };
+		A9B011FE21A58D0A008212C7 /* LanguageCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCustomer.swift; sourceTree = "<group>"; };
 		A9B0120021A58EC3008212C7 /* MenuCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCustomer.swift; sourceTree = "<group>"; };
 		A9B0120221A59019008212C7 /* LanguageWaiter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageWaiter.swift; sourceTree = "<group>"; };
-		A9CCBCE3217E1E19009F04DC /* Orders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orders.swift; sourceTree = "<group>"; };
+		A9CCBCE3217E1E19009F04DC /* CirkTypealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirkTypealiases.swift; sourceTree = "<group>"; };
 		A9D5AEAB21A6B97F006EF751 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A9D5AEAD21A6B97F006EF751 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A9D5AEB121A6B994006EF751 /* LevelsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LevelsCell.xib; sourceTree = "<group>"; };
@@ -221,109 +227,123 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
-		A93382C5216B915200A2FCE3 /* Dertisch */ = {
+		A942281922030AA10026A11E /* Dertisch */ = {
 			isa = PBXGroup;
 			children = (
-				A93382F3216B915200A2FCE3 /* Kitchen */,
-				A93382D3216B915200A2FCE3 /* Others */,
-				A93382C6216B915200A2FCE3 /* Restaurant */,
+				A942283522030AA10026A11E /* Kitchen */,
+				A942282422030AA10026A11E /* Others */,
+				A942281A22030AA10026A11E /* Restaurant */,
 			);
 			path = Dertisch;
 			sourceTree = "<group>";
 		};
-		A93382C6216B915200A2FCE3 /* Restaurant */ = {
+		A942281A22030AA10026A11E /* Restaurant */ = {
 			isa = PBXGroup;
 			children = (
-				A93382C7216B915200A2FCE3 /* Customers */,
-				A93382CB216B915200A2FCE3 /* Waiters */,
+				A942281B22030AA10026A11E /* Customers */,
+				A942281F22030AA10026A11E /* Waiters */,
 			);
 			path = Restaurant;
 			sourceTree = "<group>";
 		};
-		A93382C7216B915200A2FCE3 /* Customers */ = {
+		A942281B22030AA10026A11E /* Customers */ = {
 			isa = PBXGroup;
 			children = (
-				A93382C8216B915200A2FCE3 /* DT_RS_Customer.swift */,
-				A93382CA216B915200A2FCE3 /* DT_RS_PageCustomer.swift */,
-				A93382C9216B915200A2FCE3 /* DT_RS_TableCell.swift */,
+				A942281C22030AA10026A11E /* Cells.swift */,
+				A942281D22030AA10026A11E /* Customer.swift */,
+				A942281E22030AA10026A11E /* PageCustomer.swift */,
+				A942286C2204E7710026A11E /* TableAndChairs.swift */,
 			);
 			path = Customers;
 			sourceTree = "<group>";
 		};
-		A93382CB216B915200A2FCE3 /* Waiters */ = {
+		A942281F22030AA10026A11E /* Waiters */ = {
 			isa = PBXGroup;
 			children = (
-				A93BC34621905DD700C78B75 /* DT_RS_Waiter.swift */,
-				A9338334216CAC6D00A2FCE3 /* DT_RS_GeneralWaiter.swift */,
-				A93382CD216B915200A2FCE3 /* DT_RS_MaitreD.swift */,
-				A9338330216BB44D00A2FCE3 /* DT_RS_Sommelier.swift */,
+				A942282022030AA10026A11E /* Sommelier.swift */,
+				A942282122030AA10026A11E /* GeneralWaiter.swift */,
+				A942282222030AA10026A11E /* Waiter.swift */,
+				A942282322030AA10026A11E /* MaitreD.swift */,
 			);
 			path = Waiters;
 			sourceTree = "<group>";
 		};
-		A93382D3216B915200A2FCE3 /* Others */ = {
+		A942282422030AA10026A11E /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				A93382D4216B915200A2FCE3 /* Constants */,
-				A98795BD219C1CC20041CA40 /* Entrees */,
-				A93382D9216B915200A2FCE3 /* Utils */,
+				A942282522030AA10026A11E /* Utils */,
+				A942282F22030AA10026A11E /* Entrees */,
 			);
 			path = Others;
 			sourceTree = "<group>";
 		};
-		A93382D4216B915200A2FCE3 /* Constants */ = {
+		A942282522030AA10026A11E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				A93382D6216B915200A2FCE3 /* DT_CS_Logs.swift */,
-				A93382D7216B915200A2FCE3 /* DT_CS_Chars.swift */,
-				A93382D8216B915200A2FCE3 /* DT_CS_CommonPhrases.swift */,
-			);
-			path = Constants;
-			sourceTree = "<group>";
-		};
-		A93382D9216B915200A2FCE3 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				A93382DF216B915200A2FCE3 /* DT_UT_Constraints.swift */,
-				A93382E1216B915200A2FCE3 /* DT_UT_Extensions.swift */,
-				A93382DE216B915200A2FCE3 /* DT_UT_Log.swift */,
-				A993ED2A21728785005351EF /* DT_UT_Protocols.swift */,
-				A94577A221E78977006C1934 /* DT_UT_Rota.swift */,
-				A93382E2216B915200A2FCE3 /* DT_UT_String.swift */,
-				A93382E0216B915200A2FCE3 /* DT_UT_Time.swift */,
-				A98795BB219B16BB0041CA40 /* DT_UT_Typealiases.swift */,
+				A942282622030AA10026A11E /* Constraints.swift */,
+				A942282722030AA10026A11E /* Rota.swift */,
+				A942282822030AA10026A11E /* Consts.swift */,
+				A942282922030AA10026A11E /* Log.swift */,
+				A942282A22030AA10026A11E /* StringUtils.swift */,
+				A942282B22030AA10026A11E /* Time.swift */,
+				A942282C22030AA10026A11E /* Extensions.swift */,
+				A942282D22030AA10026A11E /* Protocols.swift */,
+				A942282E22030AA10026A11E /* Typealiases.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		A93382F3216B915200A2FCE3 /* Kitchen */ = {
+		A942282F22030AA10026A11E /* Entrees */ = {
 			isa = PBXGroup;
 			children = (
-				A93382F4216B915200A2FCE3 /* Ingredients */,
-				A93382F8216B915200A2FCE3 /* Chefs */,
-				A95764A721F87E6D00B25699 /* DT_KT_Member.swift */,
+				A942283022030AA10026A11E /* SwitchesRelationship.swift */,
+				A942283122030AA10026A11E /* FreezerSections.swift */,
+				A942283222030AA10026A11E /* Orders.swift */,
+				A942283322030AA10026A11E /* RawIngredients.swift */,
+				A942283422030AA10026A11E /* InternalSwitchRelationship.swift */,
+			);
+			path = Entrees;
+			sourceTree = "<group>";
+		};
+		A942283522030AA10026A11E /* Kitchen */ = {
+			isa = PBXGroup;
+			children = (
+				A942283622030AA10026A11E /* Ingredients */,
+				A942283C22030AA10026A11E /* Chefs */,
 			);
 			path = Kitchen;
 			sourceTree = "<group>";
 		};
-		A93382F4216B915200A2FCE3 /* Ingredients */ = {
+		A942283622030AA10026A11E /* Ingredients */ = {
 			isa = PBXGroup;
 			children = (
-				A93382F5216B915200A2FCE3 /* DT_KT_BundledJson.swift */,
-				A93382F6216B915200A2FCE3 /* DT_KT_Freezer.swift */,
-				A93382F7216B915200A2FCE3 /* DT_KT_UrlSession.swift */,
+				A942283722030AA10026A11E /* Freezer.swift */,
+				A942283822030AA10026A11E /* Ingredient.swift */,
+				A942283922030AA10026A11E /* Images.swift */,
+				A942283A22030AA10026A11E /* Larder.swift */,
+				A942283B22030AA10026A11E /* FoodDelivery.swift */,
 			);
 			path = Ingredients;
 			sourceTree = "<group>";
 		};
-		A93382F8216B915200A2FCE3 /* Chefs */ = {
+		A942283C22030AA10026A11E /* Chefs */ = {
 			isa = PBXGroup;
 			children = (
-				A93382F9216B915200A2FCE3 /* DT_KT_HeadChef.swift */,
-				A9338336216CDAEC00A2FCE3 /* DT_KT_Image.swift */,
-				A9338337216CDAEC00A2FCE3 /* DT_KT_TemporaryValues.swift */,
+				A942283D22030AA10026A11E /* HeadChef.swift */,
+				A942283E22030AA10026A11E /* SousChef.swift */,
 			);
 			path = Chefs;
+			sourceTree = "<group>";
+		};
+		A94228612203486A0026A11E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A942286822034CB80026A11E /* GameViewController.swift */,
+				A942286A22034DBE0026A11E /* IntroViewController.swift */,
+				A9422866220348820026A11E /* LanguageViewController.swift */,
+				A94228622203486A0026A11E /* LevelsViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		A971CDC5215393EF00F4BB29 = {
@@ -351,11 +371,12 @@
 			children = (
 				A9D5AEBC21A70542006EF751 /* Chefs */,
 				A9776DD82153E3F700693C99 /* Customers */,
-				A93382C5216B915200A2FCE3 /* Dertisch */,
+				A942281922030AA10026A11E /* Dertisch */,
 				A9D5AEB321A6B994006EF751 /* Json */,
 				A9776D7B2153962A00693C99 /* Misc */,
 				A9D5AEB021A6B994006EF751 /* Nibs */,
 				A932AEDA2195D2DF00D4D3DC /* Sounds */,
+				A94228612203486A0026A11E /* ViewControllers */,
 				A9776DC62153B63C00693C99 /* Waiters */,
 				A971CDD1215393EF00F4BB29 /* AppDelegate.swift */,
 				A9D5AEAC21A6B97F006EF751 /* Main.storyboard */,
@@ -382,11 +403,10 @@
 			children = (
 				A9FBBF8621EF9BD0005BA6D4 /* BallbearingPlayer.swift */,
 				A9776D802153962A00693C99 /* CircleRenderer.swift */,
-				A9776D7C2153962A00693C99 /* Consts.swift */,
-				A9776D7F2153962A00693C99 /* Extensions.swift */,
+				A9776D7C2153962A00693C99 /* CirkConsts.swift */,
 				A9B011FA21A58BB1008212C7 /* LanguageEntrees.swift */,
 				A9776D7E2153962A00693C99 /* LevelEntrees.swift */,
-				A9CCBCE3217E1E19009F04DC /* Orders.swift */,
+				A9CCBCE3217E1E19009F04DC /* CirkTypealiases.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -397,6 +417,7 @@
 				A9776DC82153B63C00693C99 /* GameWaiter.swift */,
 				A9B0120221A59019008212C7 /* LanguageWaiter.swift */,
 				A9776DC92153B63C00693C99 /* LevelsWaiter.swift */,
+				A942285B220310290026A11E /* MaitreDExtension.swift */,
 			);
 			path = Waiters;
 			sourceTree = "<group>";
@@ -406,25 +427,13 @@
 			children = (
 				A9776DDA2153E3F700693C99 /* GameCustomer.swift */,
 				A9776DDD2153E3F700693C99 /* IntroCustomer.swift */,
-				A9B011FE21A58D0A008212C7 /* LanguageMenu.swift */,
-				A9B011F821A58AC2008212C7 /* LanguageMenuItem.swift */,
-				A9776DDE2153E3F700693C99 /* LevelsMenu.swift */,
-				A9776DD92153E3F700693C99 /* LevelsMenuItem.swift */,
+				A9B011FE21A58D0A008212C7 /* LanguageCustomer.swift */,
+				A9B011F821A58AC2008212C7 /* LanguageCustomerItem.swift */,
+				A9776DDE2153E3F700693C99 /* LevelsCustomer.swift */,
+				A9776DD92153E3F700693C99 /* LevelsCustomerItem.swift */,
 				A9B0120021A58EC3008212C7 /* MenuCustomer.swift */,
 			);
 			path = Customers;
-			sourceTree = "<group>";
-		};
-		A98795BD219C1CC20041CA40 /* Entrees */ = {
-			isa = PBXGroup;
-			children = (
-				A98795C2219C1CC20041CA40 /* DT_ET_CoreData.swift */,
-				A98795C1219C1CC20041CA40 /* DT_ET_RawIngredient.swift */,
-				A98795BE219C1CC20041CA40 /* DT_ET_StaffRelationship.swift */,
-				A98795C0219C1CC20041CA40 /* DT_ET_SwitchesRelationship.swift */,
-				A98795BF219C1CC20041CA40 /* DT_ET_Tickets.swift */,
-			);
-			path = Entrees;
 			sourceTree = "<group>";
 		};
 		A9D5AEB021A6B994006EF751 /* Nibs */ = {
@@ -597,58 +606,61 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9338324216B915200A2FCE3 /* DT_KT_BundledJson.swift in Sources */,
-				A9776DE42153E3F700693C99 /* LevelsMenu.swift in Sources */,
-				A933830D216B915200A2FCE3 /* DT_CS_CommonPhrases.swift in Sources */,
-				A98795C4219C1CC20041CA40 /* DT_ET_StaffRelationship.swift in Sources */,
+				A9776DE42153E3F700693C99 /* LevelsCustomer.swift in Sources */,
+				A942285122030AA10026A11E /* Orders.swift in Sources */,
+				A942285522030AA10026A11E /* Ingredient.swift in Sources */,
+				A942284822030AA10026A11E /* Consts.swift in Sources */,
+				A942285422030AA10026A11E /* Freezer.swift in Sources */,
+				A942284B22030AA10026A11E /* Time.swift in Sources */,
+				A942285022030AA10026A11E /* FreezerSections.swift in Sources */,
+				A942285222030AA10026A11E /* RawIngredients.swift in Sources */,
+				A942285322030AA10026A11E /* InternalSwitchRelationship.swift in Sources */,
+				A942284922030AA10026A11E /* Log.swift in Sources */,
 				A9776DE32153E3F700693C99 /* IntroCustomer.swift in Sources */,
 				A9776DA92153962A00693C99 /* CirkData.xcdatamodeld in Sources */,
-				A9338305216B915200A2FCE3 /* DT_RS_MaitreD.swift in Sources */,
-				A9338335216CAC6D00A2FCE3 /* DT_RS_GeneralWaiter.swift in Sources */,
-				A9338338216CDAEC00A2FCE3 /* DT_KT_Image.swift in Sources */,
+				A94228642203486A0026A11E /* LevelsViewController.swift in Sources */,
+				A942284222030AA10026A11E /* Sommelier.swift in Sources */,
+				A942284022030AA10026A11E /* Customer.swift in Sources */,
+				A9422867220348820026A11E /* LanguageViewController.swift in Sources */,
+				A942284122030AA10026A11E /* PageCustomer.swift in Sources */,
+				A942285622030AA10026A11E /* Images.swift in Sources */,
 				A9D5AEC221A70542006EF751 /* CirkSousChef.swift in Sources */,
-				A933830C216B915200A2FCE3 /* DT_CS_Chars.swift in Sources */,
-				A9338331216BB44D00A2FCE3 /* DT_RS_Sommelier.swift in Sources */,
-				A95764A821F87E6D00B25699 /* DT_KT_Member.swift in Sources */,
-				A9338313216B915200A2FCE3 /* DT_UT_Constraints.swift in Sources */,
-				A9CCBCE4217E1E19009F04DC /* Orders.swift in Sources */,
-				A9338302216B915200A2FCE3 /* DT_RS_TableCell.swift in Sources */,
-				A9B011F921A58AC2008212C7 /* LanguageMenuItem.swift in Sources */,
-				A93BC34721905DD700C78B75 /* DT_RS_Waiter.swift in Sources */,
-				A9338314216B915200A2FCE3 /* DT_UT_Time.swift in Sources */,
-				A9B011FF21A58D0A008212C7 /* LanguageMenu.swift in Sources */,
-				A9338339216CDAEC00A2FCE3 /* DT_KT_TemporaryValues.swift in Sources */,
-				A98795BC219B16BB0041CA40 /* DT_UT_Typealiases.swift in Sources */,
-				A9338327216B915200A2FCE3 /* DT_KT_HeadChef.swift in Sources */,
+				A9CCBCE4217E1E19009F04DC /* CirkTypealiases.swift in Sources */,
+				A942284A22030AA10026A11E /* StringUtils.swift in Sources */,
+				A9B011F921A58AC2008212C7 /* LanguageCustomerItem.swift in Sources */,
+				A9B011FF21A58D0A008212C7 /* LanguageCustomer.swift in Sources */,
 				A9B0120321A59019008212C7 /* LanguageWaiter.swift in Sources */,
-				A9338312216B915200A2FCE3 /* DT_UT_Log.swift in Sources */,
-				A98795C6219C1CC20041CA40 /* DT_ET_SwitchesRelationship.swift in Sources */,
-				A9338316216B915200A2FCE3 /* DT_UT_String.swift in Sources */,
-				A98795C5219C1CC20041CA40 /* DT_ET_Tickets.swift in Sources */,
-				A9338325216B915200A2FCE3 /* DT_KT_Freezer.swift in Sources */,
-				A9338326216B915200A2FCE3 /* DT_KT_UrlSession.swift in Sources */,
-				A9776DDF2153E3F700693C99 /* LevelsMenuItem.swift in Sources */,
+				A9776DDF2153E3F700693C99 /* LevelsCustomerItem.swift in Sources */,
 				A9776DD22153B63C00693C99 /* LevelsWaiter.swift in Sources */,
+				A942283F22030AA10026A11E /* Cells.swift in Sources */,
+				A942285822030AA10026A11E /* FoodDelivery.swift in Sources */,
 				A9B0120121A58EC3008212C7 /* MenuCustomer.swift in Sources */,
+				A942286B22034DBE0026A11E /* IntroViewController.swift in Sources */,
+				A942284C22030AA10026A11E /* Extensions.swift in Sources */,
+				A942284722030AA10026A11E /* Rota.swift in Sources */,
 				A9776D9D2153962A00693C99 /* CircleRenderer.swift in Sources */,
-				A98795C7219C1CC20041CA40 /* DT_ET_RawIngredient.swift in Sources */,
-				A9338303216B915200A2FCE3 /* DT_RS_PageCustomer.swift in Sources */,
-				A9338315216B915200A2FCE3 /* DT_UT_Extensions.swift in Sources */,
-				A94577A321E78977006C1934 /* DT_UT_Rota.swift in Sources */,
+				A942285722030AA10026A11E /* Larder.swift in Sources */,
+				A942284322030AA10026A11E /* GeneralWaiter.swift in Sources */,
+				A942285C220310290026A11E /* MaitreDExtension.swift in Sources */,
 				A9776DE02153E3F700693C99 /* GameCustomer.swift in Sources */,
+				A942285A22030AA10026A11E /* SousChef.swift in Sources */,
 				A9B011FB21A58BB1008212C7 /* LanguageEntrees.swift in Sources */,
-				A9338301216B915200A2FCE3 /* DT_RS_Customer.swift in Sources */,
 				A9D5AEC121A70542006EF751 /* GameHeadChef.swift in Sources */,
+				A942286922034CB80026A11E /* GameViewController.swift in Sources */,
 				A9FBBF8721EF9BD0005BA6D4 /* BallbearingPlayer.swift in Sources */,
-				A933830B216B915200A2FCE3 /* DT_CS_Logs.swift in Sources */,
 				A971CDD2215393EF00F4BB29 /* AppDelegate.swift in Sources */,
-				A993ED2B21728785005351EF /* DT_UT_Protocols.swift in Sources */,
-				A9776D992153962A00693C99 /* Consts.swift in Sources */,
-				A98795C8219C1CC20041CA40 /* DT_ET_CoreData.swift in Sources */,
+				A942284622030AA10026A11E /* Constraints.swift in Sources */,
+				A942286D2204E7710026A11E /* TableAndChairs.swift in Sources */,
+				A9776D992153962A00693C99 /* CirkConsts.swift in Sources */,
+				A942284422030AA10026A11E /* Waiter.swift in Sources */,
 				A9D5AEC021A70542006EF751 /* LevelsHeadChef.swift in Sources */,
 				A9776DD12153B63C00693C99 /* GameWaiter.swift in Sources */,
+				A942285922030AA10026A11E /* HeadChef.swift in Sources */,
 				A9776D9B2153962A00693C99 /* LevelEntrees.swift in Sources */,
-				A9776D9C2153962A00693C99 /* Extensions.swift in Sources */,
+				A942284522030AA10026A11E /* MaitreD.swift in Sources */,
+				A942284D22030AA10026A11E /* Protocols.swift in Sources */,
+				A942284F22030AA10026A11E /* SwitchesRelationship.swift in Sources */,
+				A942284E22030AA10026A11E /* Typealiases.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,7 +12,7 @@ import CoreData
 class CirkSousChef {
 	var
 	mode: Modes,
-	headChef: HeadChefForKitchenMember?
+	headChef: HeadChefForSousChef?
 	
 	// todo uppercase these
 	private let
@@ -20,17 +20,17 @@ class CirkSousChef {
 	indexKey: String,
 	modeKey: String,
 	personalBestKey: String,
-	coreData: Freezer?,
-	bundledJson: BundledJson?
+	freezer: Freezer?,
+	bundledJson: Larder?
 	
 	private var
 	levels: [Level],
 	levelsJson: LevelsJson?,
 	selectedLevelIndex: Int?
 	
-	required init(_ kitchenStaff: [String: KitchenMember]?) {
-		coreData = kitchenStaff?[Freezer.staticId] as? Freezer
-		bundledJson = kitchenStaff?[BundledJson.staticId] as? BundledJson
+	required init(_ kitchenStaff: [String: KitchenResource]?) {
+		freezer = kitchenStaff?[Freezer.staticId] as? Freezer
+		bundledJson = kitchenStaff?[Larder.staticId] as? Larder
 		levelKey = "DTCDLevel"
 		indexKey = "index"
 		personalBestKey = CarteKeys.personalBest
@@ -95,7 +95,7 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 	
 	func endShift() {
 		// todo? remove this temporary deletion
-		coreData?.delete(levelKey) { [weak self] _ in
+		freezer?.delete(levelKey) { [weak self] _ in
 			lo("deleted")
 			self?.levels.removeAll()
 		}
@@ -113,7 +113,7 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 	
 	func set(personalBest: PBMetrics?) {
 		guard let pb = personalBest else { return }
-		coreData?.update(
+		freezer?.update(
 			levelKey,
 			to: FreezerAttribute(personalBestKey, pb.value),
 			by: "index == \(pb.levelIndex)") { [weak self] managedObjects in
@@ -123,11 +123,11 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 					else { return }
 				strongSelf.set(levels: strongManagedObjects)
 				guard let level = strongSelf.getLevel(by: pb.levelIndex) else { return }
-				strongSelf.headChef?.give(dishes: FulfilledOrder(Tickets.personalBest, dishes: level))
+				strongSelf.headChef?.give(prep: InternalOrder(Tickets.personalBest, dishes: level))
 		}
 	}
 	
-	func startShift() {
+	func beginShift() {
 		guard let rawLevelsJson = bundledJson?.decode(json: "levels", into: LevelsJson.self) else {
 			lo("levels json error")
 			return
@@ -140,9 +140,9 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 			preparedLevels.append(level)
 		}
 		self.levelsJson = LevelsJson(levels: preparedLevels)
-		coreData?.dataModelName = "CirkData"
+		freezer?.dataModelName = "CirkData"
 //		endShift(); return;
-		coreData?.retrieve(levelKey) { [weak self] managedObjects in
+		freezer?.retrieve(levelKey) { [weak self] managedObjects in
 			guard let strongSelf = self else { return }
 			if let strongManagedObjects = managedObjects {
 				strongSelf.set(levels: strongManagedObjects)
@@ -223,10 +223,10 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 			levelEntity.add(-1.0, by: personalBestKey)
 			else { return }
 //		lo("CREATE", index, -1.0)
-		coreData?.store(levelEntity) { [weak self] objects in
+		freezer?.store(levelEntity) { [weak self] objects in
 			self?.set(levels: objects)
 		}
 	}
 }
 
-extension CirkSousChef: KitchenMember {}
+extension CirkSousChef: KitchenResource {}

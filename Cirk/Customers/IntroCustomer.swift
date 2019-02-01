@@ -11,42 +11,35 @@
 import UIKit
 
 class IntroCustomer: Customer {
-	@IBOutlet weak var backgroundImage: UIImageView!
-	@IBOutlet weak var playButton: UIButton!
-	@IBOutlet weak var titleLabel: UILabel!
-	@IBOutlet weak var descriptionLabel: UILabel!
-	@IBOutlet weak var levelsButton: UIButton!
-	@IBOutlet weak var languageButton: UIButton!
+	var restaurantTable: RestaurantTable? { return viewController }
+	
+	private let
+	maitreD: MaitreD,
+	sommelier: Sommelier!,
+	viewController: IntroViewController?
 	
 	private var
-	ball: UIImageView?,
-	maitreD: MaitreD?,
-	sommelier: Sommelier?,
 	waiter: WaiterForCustomer?,
-	shape_layer: CAShapeLayer?
+	ball: UIImageView?,
+	shapeLayer: CAShapeLayer?
 	
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-//		lo("bonjour intro customer")
-	}
-	
-//	deinit { lo("au revoir intro customer") }
-	
-	override func assign(_ waiter: WaiterForCustomer, maitreD: MaitreD, and sommelier: Sommelier) {
-		self.waiter = waiter
+	required init(maitreD: MaitreD, restaurantTable: RestaurantTable, waiter: WaiterForCustomer, sommelier: Sommelier?) {
 		self.maitreD = maitreD
-		self.sommelier = sommelier
+		self.viewController = restaurantTable as? IntroViewController
+		self.waiter = waiter
+		self.sommelier = sommelier!
 	}
 	
-	override func finishMeal() {
+	func presentCheck() {
 		waiter = nil
 	}
 	
-	override func placeOrder() {
-		languageButton.addTarget(self, action: #selector(languageButtonTarget), for: .touchUpInside)
-		levelsButton.addTarget(self, action: #selector(levelsButtonTarget), for: .touchUpInside)
+	func showToTable() {
+		guard let restaurantTable = viewController else { return }
+		restaurantTable.languageButton.addTarget(self, action: #selector(languageButtonTarget), for: .touchUpInside)
+		restaurantTable.levelsButton.addTarget(self, action: #selector(levelsButtonTarget), for: .touchUpInside)
 		let
-		screenBounds = view.bounds,
+		screenBounds = restaurantTable.view.bounds,
 		screenHeight = screenBounds.height < screenBounds.width ? screenBounds.height : screenBounds.width,
 		circX = CGFloat(screenHeight / 4),
 		circY = CGFloat(screenHeight / 3),
@@ -54,22 +47,22 @@ class IntroCustomer: Customer {
 		ballSize = CGFloat(round(Double((Int(screenHeight) + Metrics.screenMedian) / 2) / Metrics.ballHeightDivider)),
 		halfBallSize = ballSize / 2,
 		teal = Colors.teal
-		backgroundImage.contentMode = .scaleAspectFill
-		backgroundImage.image = UIImage(named: ImageNames.surface)
-		titleLabel.text = "Cirk"
-		descriptionLabel.makeWrappable()
+		restaurantTable.backgroundImage.contentMode = .scaleAspectFill
+		restaurantTable.backgroundImage.image = UIImage(named: ImageNames.surface)
+		restaurantTable.titleLabel.text = "Cirk"
+		restaurantTable.descriptionLabel.makeWrappable()
 		
 		ball = UIImageView(frame: CGRect(x: circX - halfBallSize,y: circY - halfBallSize, width: ballSize, height: ballSize))
 		ball!.image = UIImage(named: ImageNames.ball)
-		view.addSubview(ball!)
+		restaurantTable.view.addSubview(ball!)
 		
-		playButton.addTarget(self, action: #selector(playButtonTarget), for: .touchUpInside)
+		restaurantTable.playButton.addTarget(self, action: #selector(playButtonTarget), for: .touchUpInside)
 		
 		var count = 5
 		_ = Timer.scheduledTimer(withTimeInterval: TimeInterval(0.5), repeats: true) { [weak self] timer in
 			guard let strongSelf = self else { return }
 			let shapeLayer: CAShapeLayer
-			if let formerShapeLayer = strongSelf.shape_layer {
+			if let formerShapeLayer = strongSelf.shapeLayer {
 				for sublayer in formerShapeLayer.sublayers ?? [] {
 					sublayer.removeFromSuperlayer()
 				}
@@ -93,31 +86,32 @@ class IntroCustomer: Customer {
 				alpha: Colors.alpha).cgColor
 			shapeLayer.fillColor = UIColor.clear.cgColor
 			shapeLayer.lineWidth = strokeWidth
-			strongSelf.view.layer.addSublayer(shapeLayer)
-			strongSelf.shape_layer = shapeLayer
+			restaurantTable.view.layer.addSublayer(shapeLayer)
+			strongSelf.shapeLayer = shapeLayer
 			count += 1
 		}
 	}
 	
-	override func regionChosen() {
-		descriptionLabel.text = sommelier?[SommelierKeys.gameDescription]
-		playButton.setTitle(sommelier?[SommelierKeys.play], for: .normal)
+	func regionChosen() {
+		guard let restaurantTable = viewController else { return }
+		restaurantTable.descriptionLabel.text = sommelier?[SommelierKeys.gameDescription]
+		restaurantTable.playButton.setTitle(sommelier?[SommelierKeys.play], for: .normal)
 	}
 	
-	override func returnMenuToWaiter(_ chosenDishId: String?) {
+	func returnMenuToWaiter(_ chosenDishId: String?) {
 		guard chosenDishId != nil else { return }
-		maitreD?.seat(Views.gameCustomer)
+		maitreD.seat(Views.game)
 	}
 	
 	@objc private func languageButtonTarget() {
-		maitreD?.present(popoverMenu: Views.languageMenu)
+		maitreD.present(popoverMenu: Views.language)
 	}
 	
 	@objc private func levelsButtonTarget() {
-		maitreD?.present(popoverMenu: Views.levelsMenu)
+		maitreD.present(popoverMenu: Views.levels)
 	}
 	
 	@objc private func playButtonTarget() {
-		maitreD?.seat(Views.gameCustomer)
+		maitreD.seat(Views.game)
 	}
 }

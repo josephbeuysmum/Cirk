@@ -14,20 +14,7 @@ fileprivate typealias AlertDetails = (header: String, actions: [UIAlertAction], 
 fileprivate typealias AnimDetails = (text: String, effect: Effects)
 
 class GameCustomer: Customer {
-	@IBOutlet weak var backgroundImage: UIImageView!
-	@IBOutlet weak var cirksKeyLabel: UILabel!
-	@IBOutlet weak var cirksValueLabel: UILabel!
-	@IBOutlet weak var levelsButton: UIButton!
-	@IBOutlet weak var levelKeyLabel: UILabel!
-	@IBOutlet weak var levelValueLabel: UILabel!
-	@IBOutlet weak var personalBestKeyLabel: UILabel!
-	@IBOutlet weak var personalBestValueLabel: UILabel!
-	@IBOutlet weak var restartButton: UIButton!
-	@IBOutlet weak var targetKeyLabel: UILabel!
-	@IBOutlet weak var targetValueLabel: UILabel!
-	@IBOutlet weak var timeKeyLabel: UILabel!
-	@IBOutlet weak var timeValueLabel: UILabel!
-	@IBOutlet weak var titleLabel: UILabel!
+	var restaurantTable: RestaurantTable?  { return viewController }
 
 	public var id: String {
 		return ""
@@ -37,77 +24,75 @@ class GameCustomer: Customer {
 		return round(Double((Int(screenBounds.height) + Metrics.screenMedian) / 2) / Metrics.ballHeightDivider)
 	}
 	
-	private let ballbearingPlayer: BallbearingPlayer
-	
+	private let
+	ballbearingPlayer: BallbearingPlayer,
+	maitreD: MaitreD,
+	sommelier: Sommelier!,
+	viewController: GameViewController?
+
 	private var
-	alertDetails: AlertDetails?,
-	animationDetails: [AnimDetails]?,
-	arrow: UIImageView?,
+	countBallbearing: Int,
+	orientations: UIInterfaceOrientationMask,
+	currentCircle: CAShapeLayer,
+	
 	ball: UIImageView!,
 	ballX: CGFloat!,
 	ballY: CGFloat!,
 	circleIndex: Int!,
 	cirk: UIImageView!,
-	countBallbearing: Int,
 	countdownLabel: UILabel!,
-	currentCircle: CAShapeLayer,
 	gameTime: Float!,
-	maitreD: MaitreD!,
 	motionManager: CMMotionManager!,
-	nextCircle: CAShapeLayer?,
-	orientations: UIInterfaceOrientationMask,
 	screenBounds: CGRect!,
-	sommelier: Sommelier!,
 	timeInsideCircle: Float!,
 	timeLabel: UILabel!,
-	timer: Timer?,
-	waiter: WaiterForCustomer!
 
-	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+	alertDetails: AlertDetails?,
+	animationDetails: [AnimDetails]?,
+	arrow: UIImageView?,
+	nextCircle: CAShapeLayer?,
+	timer: Timer?,
+	waiter: WaiterForCustomer?
+
+	var supportedInterfaceOrientations: UIInterfaceOrientationMask {
 		get { return orientations }
 		set { orientations = newValue }
 	}
 	
-	
-	
-	required init?(coder aDecoder: NSCoder) {
-//		lo("bonjour game customer")
+	required init(maitreD: MaitreD, restaurantTable: RestaurantTable, waiter: WaiterForCustomer, sommelier: Sommelier?) {
+		self.maitreD = maitreD
+		self.viewController = restaurantTable as? GameViewController
+		self.waiter = waiter
+		self.sommelier = sommelier
 		motionManager = CMMotionManager()
 		currentCircle = CAShapeLayer()
 		ballbearingPlayer = BallbearingPlayer()
 //		textAnimationComplete = "textAnimationComplete"
 		orientations = []
 		countBallbearing = 0
-		super.init(coder: aDecoder)
 	}
 	
-//	deinit { lo("au revoir game customer") }
 	
-	override func assign(_ waiter: WaiterForCustomer, maitreD: MaitreD, and sommelier: Sommelier) {
-		self.waiter = waiter
-		self.maitreD = maitreD
-		self.sommelier = sommelier
-	}
-	
-	override func finishMeal() {
+	func presentCheck() {
 		invalidateTimer()
 		waiter = nil
 	}
 	
-	override func firstDishServed() {
+	func layTable() {
 		initilizeLevel()
 	}
 	
-	override func placeOrder() {
-		guard screenBounds == nil else { return }
-		
+	func showToTable() {
+		guard
+			let restaurantTable = viewController,
+			screenBounds == nil
+			else { return }
 		let
 		tempScreenBounds = UIScreen.main.bounds,
 		widthIsLargest = tempScreenBounds.width > tempScreenBounds.height
 		screenBounds = widthIsLargest ?
 			CGRect(x: 0, y: 0, width: tempScreenBounds.width, height: tempScreenBounds.height) :
 			CGRect(x: 0, y: 0, width: tempScreenBounds.height, height: tempScreenBounds.width)
-		
 		let
 		black = getColor(by: Colors.black),
 		teal = getColor(by: Colors.teal),
@@ -118,44 +103,45 @@ class GameCustomer: Customer {
 		timeLabel.font = UIFont(name: "EraserDust", size: CGFloat(timeTextSize))
 		timeLabel.textAlignment = .center
 		timeLabel.textColor = black
-		levelKeyLabel.textColor = black
-		targetKeyLabel.textColor = black
-		cirksKeyLabel.textColor = black
-		timeKeyLabel.textColor = black
-		personalBestKeyLabel.textColor = black
-		levelValueLabel.textColor = black
-		cirksValueLabel.textColor = black
-		targetValueLabel.textColor = black
-		timeValueLabel.textColor = black
-		personalBestValueLabel.textColor = teal
-		titleLabel.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 1.9)
-		titleLabel.textColor = getColor(by: Colors.brown, and: 0.4)
+		restaurantTable.levelKeyLabel.textColor = black
+		restaurantTable.targetKeyLabel.textColor = black
+		restaurantTable.cirksKeyLabel.textColor = black
+		restaurantTable.timeKeyLabel.textColor = black
+		restaurantTable.personalBestKeyLabel.textColor = black
+		restaurantTable.levelValueLabel.textColor = black
+		restaurantTable.cirksValueLabel.textColor = black
+		restaurantTable.targetValueLabel.textColor = black
+		restaurantTable.timeValueLabel.textColor = black
+		restaurantTable.personalBestValueLabel.textColor = teal
+		restaurantTable.titleLabel.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 1.9)
+		restaurantTable.titleLabel.textColor = getColor(by: Colors.brown, and: 0.4)
 
 		ball = UIImageView(image: UIImage(named: ImageNames.ball))
 		
 		let label = UILabel()
 		label.font = UIFont.systemFont(ofSize: 168)
 		countdownLabel = label
-		backgroundImage.contentMode = .scaleAspectFill
-		backgroundImage.image = UIImage(named: ImageNames.surface)
+		restaurantTable.backgroundImage.contentMode = .scaleAspectFill
+		restaurantTable.backgroundImage.image = UIImage(named: ImageNames.surface)
 		
-		restartButton.addTarget(self, action: #selector(restartButtonTarget), for: .touchUpInside)
-		levelsButton.addTarget(self, action: #selector(levelsButtonTarget), for: .touchUpInside)
+		restaurantTable.restartButton.addTarget(self, action: #selector(restartButtonTarget), for: .touchUpInside)
+		restaurantTable.levelsButton.addTarget(self, action: #selector(levelsButtonTarget), for: .touchUpInside)
 	}
 	
-	override func present(dish dishId: String) {
+	func present(dish dishId: String) {
 //		lo(dishId)
 		if dishId == Tickets.setLevel {
 			initilizeLevel()
 		}
 	}
 	
-	override func regionChosen() {
-		levelKeyLabel.text = "\(sommelier[SommelierKeys.level]!):"
-		targetKeyLabel.text = "\(sommelier[SommelierKeys.unlockTime]!):"
-		cirksKeyLabel.text = "\(sommelier[SommelierKeys.cirks]!):"
-		timeKeyLabel.text = "\(sommelier[SommelierKeys.total]!):"
-		personalBestKeyLabel.text = "\(sommelier[SommelierKeys.personalBest]!):"
+	func regionChosen() {
+		guard let restaurantTable = viewController else { return }
+		restaurantTable.levelKeyLabel.text = "\(sommelier[SommelierKeys.level]!):"
+		restaurantTable.targetKeyLabel.text = "\(sommelier[SommelierKeys.unlockTime]!):"
+		restaurantTable.cirksKeyLabel.text = "\(sommelier[SommelierKeys.cirks]!):"
+		restaurantTable.timeKeyLabel.text = "\(sommelier[SommelierKeys.total]!):"
+		restaurantTable.personalBestKeyLabel.text = "\(sommelier[SommelierKeys.personalBest]!):"
 	}
 	
 	
@@ -164,11 +150,12 @@ class GameCustomer: Customer {
 	
 	private func analyseResult() {
 		guard
-			let carte = waiter.carte,
+			let carte = waiter?.carte,
 			let unlockTime: Float = carte.des(CarteKeys.jsonUnlock),
 			let levelIndex: Int = carte.des(CarteKeys.jsonIndex),
 			let nextLevelAlreadyUnlocked: Bool = carte.des(CarteKeys.nextLevelUnlocked),
-			let countLevels: Int = carte.des(CarteKeys.countLevels)
+			let countLevels: Int = carte.des(CarteKeys.countLevels),
+			let restaurantTable = viewController
 			else { return }
 		var
 		personalBest: Float = carte.des(CarteKeys.personalBest) ?? 0,
@@ -185,11 +172,11 @@ class GameCustomer: Customer {
 		textColor: CircleColors,
 		title: String
 		
-		restartButton.isEnabled = false
-		levelsButton.isEnabled = false
+		restaurantTable.restartButton.isEnabled = false
+		restaurantTable.levelsButton.isEnabled = false
 		timeLabel.textColor = getColor(by: Colors.crimson)
 		timeLabel.text = "0.0"
-		timeValueLabel.text = "\(roundedGameTime)"
+		restaurantTable.timeValueLabel.text = "\(roundedGameTime)"
 		invalidateTimer()
 		
 		if newPersonalBest {
@@ -225,7 +212,7 @@ class GameCustomer: Customer {
 					getNextLevelAction(),
 					getReplayAction(with: SommelierKeys.improvePersonalBest)]
 				title = sommelier[SommelierKeys.levelUnlocked]!
-				waiter.give(Order(Tickets.unlock, levelIndex + 1))
+				waiter?.give(CustomerOrder(Tickets.unlock, levelIndex + 1))
 			} else {
 				textColor = Colors.black
 				let titleKey = almostUnlocked ? SommelierKeys.almost : SommelierKeys.playAgain
@@ -243,9 +230,9 @@ class GameCustomer: Customer {
 				title,
 				success: unlocked || (nextLevelAlreadyUnlocked && newPersonalBest)),
 			color: getColor(by: textColor))
-		personalBestValueLabel.text = "\(roundFloat(personalBest))"
+		restaurantTable.personalBestValueLabel.text = "\(roundFloat(personalBest))"
 		if newPersonalBest {
-			waiter.give(Order(
+			waiter?.give(CustomerOrder(
 				Tickets.personalBest,
 				PBMetrics(value: personalBest, levelIndex: levelIndex)))
 		}
@@ -304,7 +291,10 @@ class GameCustomer: Customer {
 	}
 	
 	private func drawCircles() {
-		guard let level: Level = waiter.carte?.entrees() else { return }
+		guard
+			let level: Level = waiter?.carte?.entrees(),
+			let restaurantTable = viewController
+			else { return }
 		ball.removeFromSuperview()
 		countdownLabel.removeFromSuperview()
 		let
@@ -321,7 +311,7 @@ class GameCustomer: Customer {
 		drawCircle(
 			with: currentCircle,
 			from: circleData,
-			onto: view.layer,
+			onto: restaurantTable.view.layer,
 			within: screenBounds,
 			colored: getColor(by: Colors.teal).cgColor,
 			withStrokeOf: strokeWidth,
@@ -338,10 +328,10 @@ class GameCustomer: Customer {
 		case potentialLeftX > potentialRightX:	timeLabelX = potentialRightX
 		default: 								timeLabelX = potentialLeftX
 		}
-		if cirkCenterPoint.y + radius + timeLabelHeightFloat < timeKeyLabel.frame.origin.y {
+		if cirkCenterPoint.y + radius + timeLabelHeightFloat < restaurantTable.timeKeyLabel.frame.origin.y {
 			// room for text label beneath cirk
 			timeLabelY = Int(cirkCenterPoint.y + radius)
-		} else if cirkCenterPoint.y - radius - timeLabelHeightFloat > targetKeyLabel.frame.origin.y + targetKeyLabel.frame.height {
+		} else if cirkCenterPoint.y - radius - timeLabelHeightFloat > restaurantTable.targetKeyLabel.frame.origin.y + restaurantTable.targetKeyLabel.frame.height {
 			// room for text label above cirk
 			timeLabelY = Int(cirkCenterPoint.y - radius) - timeLabelHeight
 		} else {
@@ -359,8 +349,8 @@ class GameCustomer: Customer {
 		}
 		timeLabel.frame = CGRect(x: timeLabelX, y: timeLabelY, width: timeLabelWidth, height: timeLabelHeight)
 
-		view.addSubview(timeLabel)
-		view.layer.addSublayer(currentCircle)
+		restaurantTable.view.addSubview(timeLabel)
+		restaurantTable.view.layer.addSublayer(currentCircle)
 
 		if nextCircleIndex < circles.count {
 			let nextCircleData = circles[nextCircleIndex]
@@ -368,15 +358,15 @@ class GameCustomer: Customer {
 			drawCircle(
 				with: nextCircle!,
 				from: nextCircleData,
-				onto: view.layer,
+				onto: restaurantTable.view.layer,
 				within: screenBounds,
 				colored: getColor(by: Colors.teal, and: 0.25).cgColor,
 				withStrokeOf: strokeWidth,
 				andRadius: getRadius(by: nextCircleData.radius, and: ballSizeInt))
-			view.layer.addSublayer(nextCircle!)
+			restaurantTable.view.layer.addSublayer(nextCircle!)
 		}
-		view.addSubview(ball)
-		view.addSubview(countdownLabel)
+		restaurantTable.view.addSubview(ball)
+		restaurantTable.view.addSubview(countdownLabel)
 	}
 	
 	private func getAnimDetails(_ title: String, success: Bool) -> [AnimDetails] {
@@ -405,7 +395,7 @@ class GameCustomer: Customer {
 	
 	private func getChooseLevelAction() -> UIAlertAction {
 		return UIAlertAction(title: sommelier[SommelierKeys.changeLevel], style: .default) { [weak self] _ in
-			self?.maitreD.present(popoverMenu: Views.levelsMenu)
+			self?.maitreD.present(popoverMenu: Views.levels)
 		}
 	}
 	
@@ -413,15 +403,15 @@ class GameCustomer: Customer {
 		return UIAlertAction(title: sommelier[SommelierKeys.playNextLevel], style: .default) { [weak self] _ in
 			guard
 				let strongSelf = self,
-				let levelIndex: Int = strongSelf.waiter.carte?.des(CarteKeys.jsonIndex)
+				let levelIndex: Int = strongSelf.waiter?.carte?.des(CarteKeys.jsonIndex)
 				else { return }
-			strongSelf.waiter.give(Order(Tickets.setLevel, levelIndex + 1))
+			strongSelf.waiter?.give(CustomerOrder(Tickets.setLevel, levelIndex + 1))
 		}
 	}
 	
 	private func getReplayAction(with title: String) -> UIAlertAction {
 		return UIAlertAction(title: sommelier[title], style: .default) { [weak self] _ in
-			self?.firstDishServed()
+			self?.layTable()
 		}
 	}
 	
@@ -441,13 +431,14 @@ class GameCustomer: Customer {
 	
 	private func initilizeLevel() {
 		guard
-			let carte = waiter.carte,
+			let carte = waiter?.carte,
 			let unlockTime: Float = carte.des(CarteKeys.jsonUnlock),
 			let personalBest: Float = carte.des(CarteKeys.personalBest),
 			let levelIndex: Int = carte.des(CarteKeys.jsonIndex),
 			let countCircles: String = carte.des(CarteKeys.countCircles),
 			let firstCircleTime: String = carte.des(CarteKeys.circleTime),
-			let countLevels: Int = carte.des(CarteKeys.countLevels)
+			let countLevels: Int = carte.des(CarteKeys.countLevels),
+			let restaurantTable = viewController
 			else { return }
 		currentCircle.removeFromSuperlayer()
 		nextCircle?.removeFromSuperlayer()
@@ -458,16 +449,16 @@ class GameCustomer: Customer {
 		circleIndex = 0
 		
 		ballbearingPlayer.set(audioOn: true)
-		personalBestValueLabel.text = personalBest < 0 ? "..." : "\(roundFloat(personalBest))"
-		timeValueLabel.text = "0.0"
-		cirksValueLabel.text = countCircles
-		levelValueLabel.text = "\(levelIndex + 1)/\(countLevels)"
-		targetValueLabel.text = "\(unlockTime)"
+		restaurantTable.personalBestValueLabel.text = personalBest < 0 ? "..." : "\(roundFloat(personalBest))"
+		restaurantTable.timeValueLabel.text = "0.0"
+		restaurantTable.cirksValueLabel.text = countCircles
+		restaurantTable.levelValueLabel.text = "\(levelIndex + 1)/\(countLevels)"
+		restaurantTable.targetValueLabel.text = "\(unlockTime)"
 		timeLabel.textColor = getColor(by: Colors.black)
 		timeLabel.text = firstCircleTime
 		
 		let title: String? = carte.des(CarteKeys.jsonTitle)
-		titleLabel.text = title
+		restaurantTable.titleLabel.text = title
 		
 		let
 		ballStartX: Float = carte.des(CarteKeys.ballX) ?? 0.5,
@@ -485,8 +476,8 @@ class GameCustomer: Customer {
 			[("3", Effects.beep), ("2", Effects.beep), ("1", Effects.beep), (sommelier[SommelierKeys.go]!, Effects.start)],
 			color: getColor(by: Colors.crimson))
 		
-		restartButton.isEnabled = true
-		levelsButton.isEnabled = true
+		restaurantTable.restartButton.isEnabled = true
+		restaurantTable.levelsButton.isEnabled = true
 	}
 	
 	private func invalidateTimer() {
@@ -496,7 +487,7 @@ class GameCustomer: Customer {
 
 	@objc private func levelsButtonTarget() {
 		stopLevel()
-		maitreD.present(popoverMenu: Views.levelsMenu)
+		maitreD.present(popoverMenu: Views.levels)
 	}
 	
 	@objc private func restartButtonTarget() {
@@ -509,7 +500,10 @@ class GameCustomer: Customer {
 	}
 	
 	private func startBallRolling() {
-		guard let level: Level = waiter.carte?.entrees() else { return }
+		guard
+			let level: Level = waiter?.carte?.entrees(),
+			let restaurantTable = viewController
+			else { return }
 		let circles = level.json.circles
 		var
 		circleData = circles[circleIndex],
@@ -574,7 +568,7 @@ class GameCustomer: Customer {
 
 			strongSelf.gameTime = strongSelf.gameTime + frameTime
 			let roundedGameTime = strongSelf.roundFloat(strongSelf.gameTime)
-			strongSelf.timeValueLabel.text = "\(roundedGameTime)"
+			restaurantTable.timeValueLabel.text = "\(roundedGameTime)"
 
 			if isInsideCirk {
 				if !wasInsideCirk {
@@ -598,7 +592,7 @@ class GameCustomer: Customer {
 							and: ballSizeInt) - ((ballSizeCGFloat + strokeWidth) / 2) + shadowWidth
 						cirkCenterPoint = strongSelf.getCenterPoint(by: circleData, and: strongSelf.screenBounds)
 						strongSelf.timeLabel.text = "\(circles[strongSelf.circleIndex].time)"
-						strongSelf.cirksValueLabel.text = "\(countCircles - strongSelf.circleIndex)"
+						restaurantTable.cirksValueLabel.text = "\(countCircles - strongSelf.circleIndex)"
 						strongSelf.drawCircles()
 					} else {
 						levelOver = true
@@ -620,7 +614,7 @@ class GameCustomer: Customer {
 						y: screenCenterPoint.y - (arrowHeight / 2),
 						width: arrowWidth,
 						height: arrowHeight)
-					strongSelf.view.addSubview(strongSelf.arrow!)
+					restaurantTable.view.addSubview(strongSelf.arrow!)
 				}
 				strongSelf.arrow!.transform = CGAffineTransform(rotationAngle: (atan2(
 					ballX - screenCenterPoint.x + halfBallSize,

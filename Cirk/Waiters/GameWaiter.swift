@@ -18,11 +18,9 @@ class GameWaiter: Waiter {
 	headChef: HeadChefForWaiter!,
 	carte_: CarteForCustomer?
 
-	required init(maitreD: MaitreD, customer: CustomerForWaiter, headChef: HeadChefForWaiter?) {
+	required init(maitreD: MaitreD) {
 //		lo("bonjour game waiter")
 		self.maitreD = maitreD
-		self.customer = customer
-		self.headChef = headChef
 	}
 	
 //	deinit { lo("au revoir game waiter") }
@@ -38,6 +36,13 @@ extension GameWaiter: EndShiftProtocol {
 extension GameWaiter: WaiterForCustomer {
 	var carte: CarteForCustomer? {
 		return carte_
+	}
+}
+
+extension GameWaiter: WaiterForMaitreD {
+	func introduce(_ customer: CustomerForWaiter, and headChef: HeadChefForWaiter?) {
+		self.customer = customer
+		self.headChef = headChef
 	}
 }
 

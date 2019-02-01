@@ -9,13 +9,14 @@
 //import Dertisch
 
 class LevelsHeadChef: HeadChef {
-	var waiter: WaiterForHeadChef?
+	private var
+	sousChef: CirkSousChef?,
+	waiter: WaiterForHeadChef?
 	
-	fileprivate var sousChef: CirkSousChef?
-	
-	required init(_ sousChefs: [String: KitchenMember]?) {
+	required init(waiter: WaiterForHeadChef?, resources: [String: KitchenResource]?) {
 //		lo("bonjour levels head chef")
-		sousChef = sousChefs?[CirkSousChef.staticId] as? CirkSousChef
+		self.sousChef = resources?[CirkSousChef.staticId] as? CirkSousChef
+		self.waiter = waiter
 	}
 	
 //	deinit { lo("au revoir levels head chef") }
@@ -30,7 +31,7 @@ extension LevelsHeadChef: EndShiftProtocol {
 }
 
 extension LevelsHeadChef: HeadChefForWaiter {
-	func give(_ order: Order) {
+	func give(_ order: CustomerOrder) {
 		guard
 			order.ticket == Tickets.setLevel,
 			let index = order.content as? Int
@@ -39,8 +40,8 @@ extension LevelsHeadChef: HeadChefForWaiter {
 	}
 }
 
-extension LevelsHeadChef: StartShiftProtocol {
-	func startShift() {
+extension LevelsHeadChef: BeginShiftProtocol {
+	func beginShift() {
 		guard let allLevels = sousChef?.allLevels else { return }
 		waiter?.serve(entrees: FulfilledOrder(Tickets.allLevels, dishes: allLevels))
 	}

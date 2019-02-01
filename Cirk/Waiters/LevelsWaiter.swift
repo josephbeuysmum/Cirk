@@ -7,7 +7,6 @@
 //
 
 //import Dertisch
-import Foundation
 
 class LevelsWaiter: Waiter {
 	fileprivate weak var
@@ -19,11 +18,9 @@ class LevelsWaiter: Waiter {
 	headChef: HeadChefForWaiter!,
 	carte_: CarteForCustomer?
 
-	required init(maitreD: MaitreD, customer: CustomerForWaiter, headChef: HeadChefForWaiter?) {
+	required init(maitreD: MaitreD) {
 //		lo("bonjour levels waiter")
 		self.maitreD = maitreD
-		self.customer = customer
-		self.headChef = headChef
 	}
 	
 //	deinit { lo("au revoir levels waiter") }
@@ -39,6 +36,13 @@ extension LevelsWaiter: EndShiftProtocol {
 extension LevelsWaiter: WaiterForCustomer {
 	var carte: CarteForCustomer? {
 		return carte_
+	}
+}
+
+extension LevelsWaiter: WaiterForMaitreD {
+	func introduce(_ customer: CustomerForWaiter, and headChef: HeadChefForWaiter?) {
+		self.customer = customer
+		self.headChef = headChef
 	}
 }
 
