@@ -19,11 +19,11 @@ class GameWaiter: Waiter {
 	carte_: CarteForCustomer?
 
 	required init(maitreD: MaitreD) {
-//		lo("bonjour game waiter")
+//		lo("BONJOUR  ", self)
 		self.maitreD = maitreD
 	}
 	
-//	deinit { lo("au revoir game waiter") }
+//	deinit { lo("AU REVOIR", self) }
 }
 
 extension GameWaiter: EndShiftProtocol {
@@ -47,8 +47,17 @@ extension GameWaiter: WaiterForMaitreD {
 }
 
 extension GameWaiter: WaiterForWaiter {
+	func addToCarte(_ main: FulfilledOrder) {
+		setCarte(with: main)
+	}
+	
 	func fillCarte(with entrees: FulfilledOrder) {
-		guard let dishes = entrees.dishes else { return }
+		setCarte(with: entrees)
+	}
+	
+	private func setCarte(with order: FulfilledOrder) {
+		guard let dishes = order.dishes else { return }
+//		lo(dishes)
 		carte_ = Carte(dishes)
 	}
 }

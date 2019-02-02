@@ -101,7 +101,8 @@ extension Freezer: FreezerProtocol {
 			}
 		}
 		// this is where a fail sometimes happens
-		do { try privateContext.execute(asyncFetchRequest)
+		do {
+			try privateContext.execute(asyncFetchRequest)
 		} catch let error {
 			loWarning("NSAsynchronousFetchRequest error: \(error)")
 		}

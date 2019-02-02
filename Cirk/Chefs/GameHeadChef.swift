@@ -10,17 +10,19 @@
 
 class GameHeadChef: HeadChef {
 	private var
+	maitreD: MaitreD?,
 	sousChef: CirkSousChef?,
 	waiter: WaiterForHeadChef?
 	
-	required init(waiter: WaiterForHeadChef?, resources: [String: KitchenResource]?) {
-//		lo("bonjour game head chef")
+	required init(maitreD: MaitreD, waiter: WaiterForHeadChef?, resources: [String: KitchenResource]?) {
+//		lo("BONJOUR  ", self)
+		self.maitreD = maitreD
 		sousChef = resources?[CirkSousChef.staticId] as? CirkSousChef
 		self.waiter = waiter
 		sousChef?.headChef = self
 	}
 	
-//	deinit { lo("au revoir game head chef") }
+//	deinit { lo("AU REVOIR", self) }
 	
 	private func setLevel() {
 		var level: Level?
@@ -49,6 +51,7 @@ extension GameHeadChef: EndShiftProtocol {
 	func endShift() {
 		sousChef?.headChef = nil
 		waiter = nil
+		maitreD = nil
 	}
 }
 
@@ -60,9 +63,10 @@ extension GameHeadChef: BeginShiftProtocol {
 
 extension GameHeadChef: HeadChefForWaiter {
 	func give(_ order: CustomerOrder) {
+		lo(order.ticket)
 		switch order.ticket {
 		case Tickets.personalBest:
-			sousChef?.set(personalBest: order.content as? PBMetrics)
+			sousChef?.personalBest(order.content as? PBMetrics)
 		case Tickets.setLevel:
 			guard
 				let index = order.content as? Int,

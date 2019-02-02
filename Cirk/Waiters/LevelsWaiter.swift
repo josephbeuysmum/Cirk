@@ -19,11 +19,11 @@ class LevelsWaiter: Waiter {
 	carte_: CarteForCustomer?
 
 	required init(maitreD: MaitreD) {
-//		lo("bonjour levels waiter")
 		self.maitreD = maitreD
+		lo("BONJOUR  ", self)
 	}
 	
-//	deinit { lo("au revoir levels waiter") }
+//	deinit { lo("AU REVOIR", self) }
 }
 
 // todo we've managed to make Customer nillify itself via a weak ref., let's do the same for the head chef etc.

@@ -154,7 +154,8 @@ public extension CarteForCustomer {
 	}
 }
 
-public class Carte: CarteProtocol {
+// tood class or struct?
+public struct Carte: CarteProtocol {
 	// todo do these need trailing underscores?
 	fileprivate let entrees_: Dishionarizer
 	fileprivate var dishes_: Dishes?
@@ -195,7 +196,6 @@ public protocol WaiterForMaitreD {
 public protocol WaiterForWaiter {
 	mutating func addToCarte(_ main: FulfilledOrder)
 	mutating func fillCarte(with entrees: FulfilledOrder)
-	mutating func serve(dishes: FulfilledOrder)
 }
 
 // todo add :class conformance (for now at least, so people can't use to make structs). also get rid of mutating
@@ -226,30 +226,26 @@ public extension WaiterForCustomer {
 
 public extension WaiterForWaiter {
 	mutating func addToCarte(_ main: FulfilledOrder) {}
-	
-	mutating func serve(dishes: FulfilledOrder) {
-		guard
-			let selfAsSwitchesRelationship = self as? SwitchesRelationshipProtocol,
-			let customer = Rota().customerForWaiter(selfAsSwitchesRelationship)
-			else { return }
-		Rota().hasCarte(selfAsSwitchesRelationship) ? addToCarte(dishes) : fillCarte(with: dishes)
-		DispatchQueue.main.async {
-			customer.present(dish: dishes.ticket)
-		}
-	}
 }
 
 public extension WaiterForHeadChef {
 	// todo the waiter calls a serve function on itself from a serve function: is this necessary?
 	public func serve(main: FulfilledOrder) {
-		guard var waiter = self as? WaiterForWaiter else { return }
-		waiter.serve(dishes: main)
+		guard
+			var waiter = self as? WaiterForWaiter,
+			let selfAsSwitchesRelationship = self as? SwitchesRelationshipProtocol,
+			let customer = Rota().customerForWaiter(selfAsSwitchesRelationship)
+			else { return }
+		Rota().hasCarte(selfAsSwitchesRelationship) ? waiter.addToCarte(main) : waiter.fillCarte(with: main)
+		DispatchQueue.main.async {
+			customer.present(dish: main.ticket)
+		}
 	}
 	
 	public func serve(entrees: FulfilledOrder) {
 		guard
-			let customer = Rota().customerForWaiter(self as? SwitchesRelationshipProtocol),
-			var waiter = self as? WaiterForWaiter
+			var waiter = self as? WaiterForWaiter,
+			let customer = Rota().customerForWaiter(self as? SwitchesRelationshipProtocol)
 			else { return }
 		waiter.fillCarte(with: entrees)
 		customer.present(dish: entrees.ticket)

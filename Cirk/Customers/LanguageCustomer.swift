@@ -19,14 +19,16 @@ class LanguageCustomer: NSObject, Customer {
 
 	private var waiter: WaiterForCustomer?
 	
-	//	deinit { lo("au revoir language menu") }
-	
 	required init(maitreD: MaitreD, restaurantTable: RestaurantTable, waiter: WaiterForCustomer, sommelier: Sommelier?) {
 		self.viewController = restaurantTable as? LanguageViewController
 		self.maitreD = maitreD
 		self.waiter = waiter
 		self.sommelier = sommelier
+		super.init()
+//		lo("BONJOUR  ", self)
 	}
+	
+//	deinit { lo("AU REVOIR", self) }
 	
 	func presentCheck() {
 		waiter = nil

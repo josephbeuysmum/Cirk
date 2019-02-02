@@ -23,10 +23,4 @@ class GameViewController: RestaurantTable {
 	@IBOutlet weak var timeKeyLabel: UILabel!
 	@IBOutlet weak var timeValueLabel: UILabel!
 	@IBOutlet weak var titleLabel: UILabel!
-	
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-		lo()
-	}
-	
 }

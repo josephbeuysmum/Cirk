@@ -55,7 +55,7 @@ public class MaitreD {
 	resources: Dictionary<String, KitchenResource>,
 	switchesRelationships: Dictionary<String, InternalSwitchRelationship>,
 	window: UIWindow!,
-	backgroundCustomers: [CustomerTicket],
+	backgroundRestaurantTables: [CustomerTicket],
 	currentRelationships: SwitchesRelationship?,
 	menuRelationships: SwitchesRelationship?
 	
@@ -63,7 +63,7 @@ public class MaitreD {
 		key = NSUUID().uuidString
 		resources = [:]
 		switchesRelationships = [:]
-		backgroundCustomers = []
+		backgroundRestaurantTables = []
 		let larder = Larder()
 		resources[Larder.staticId] = larder
 		sommelier = Sommelier(larder: larder)
@@ -105,7 +105,7 @@ extension MaitreD: MaitreDProtocol {
 		self.window = window
 		self.window.makeKeyAndVisible()
 		self.window.rootViewController = rootRestaurantTable
-		sommelier.assign(currentRelationships!.customer)
+//		sommelier.assign(currentRelationships!.customer)
 		currentRelationships!.waiter?.beginShift()
 		currentRelationships!.headChef?.beginShift()
 	}
@@ -148,7 +148,7 @@ extension MaitreD: MaitreDProtocol {
 			menuRelationships!.customer?.restaurantTable?.popoverPresentationController?.sourceRect = safeRect
 		}
 		
-		sommelier.assign(menuRelationships!.customer)
+//		sommelier.assign(menuRelationships!.customer)
 		menuRelationships!.waiter?.beginShift()
 		menuRelationships!.headChef?.beginShift()
 	}
@@ -192,31 +192,32 @@ extension MaitreD: MaitreDProtocol {
 			let nextRestaurantTable = nextCustomer.restaurantTable
 			else { return }
 		let ticket = CustomerTicket(restaurantTable: currentRestaurantTable, id: currentRelationships!.customerID, animated: animated)
-		backgroundCustomers.append(ticket)
+		backgroundRestaurantTables.append(ticket)
 		endShift(for: currentRelationships)
+		currentRelationships = nil
+		currentRelationships = nextCurrentRelationships
 		
 		if animated {
-			nextCurrentRelationships.customer?.restaurantTable?.modalTransitionStyle = transitionStyle!
+			currentRelationships!.customer?.restaurantTable?.modalTransitionStyle = transitionStyle!
 		}
 		
-		currentRelationships = nextCurrentRelationships
 		currentRestaurantTable.present(nextRestaurantTable, animated: animated)
-		sommelier.assign(currentCustomer)
+//		sommelier.assign(currentCustomer)
 		currentRelationships!.waiter?.beginShift()
 		currentRelationships!.headChef?.beginShift()
 	}
 	
 	public func usherOutCurrentCustomer() {
-		guard currentRelationships != nil else { return }
-		currentRelationships!.customer?.restaurantTable?.dismiss(animated: currentRelationships!.animated) { [unowned self] in
-			self.endShift(for: self.currentRelationships)
-			guard let formerCustomer = self.backgroundCustomers.popLast() else { return }
-			guard let formerRelationships = self.createRelationships(ticket: formerCustomer) else { return }
-			self.currentRelationships = formerRelationships
-			self.sommelier.assign(self.currentRelationships!.customer)
-			self.currentRelationships!.waiter?.beginShift()
-			self.currentRelationships!.headChef?.beginShift()
-		}
+//		guard currentRelationships != nil else { return }
+//		currentRelationships!.customer?.restaurantTable?.dismiss(animated: currentRelationships!.animated) { [unowned self] in
+//			self.endShift(for: self.currentRelationships)
+//			guard let formerCustomer = self.backgroundRestaurantTables.popLast() else { return }
+//			guard let formerRelationships = self.createRelationships(ticket: formerCustomer) else { return }
+//			self.currentRelationships = formerRelationships
+//			self.sommelier.assign(self.currentRelationships!.customer)
+//			self.currentRelationships!.waiter?.beginShift()
+//			self.currentRelationships!.headChef?.beginShift()
+//		}
 	}
 	
 	
@@ -263,6 +264,7 @@ extension MaitreD: MaitreDProtocol {
 			GeneralWaiter(maitreD: self)
 		let headChef = switchesRelationship.headChefType != nil ?
 			switchesRelationship.headChefType!.init(
+				maitreD: self,
 				waiter: waiter,
 				resources: getResources(from: switchesRelationship.kitchenResourceTypes)) :
 			nil
@@ -304,10 +306,10 @@ extension MaitreD: MaitreDProtocol {
 	}
 	
 	private func endShift(for switchesRelationship: SwitchesRelationship?) {
-		guard switchesRelationship != nil else { return }
-		switchesRelationship!.customer?.presentCheck()
-		switchesRelationship!.waiter?.endShift()
-		switchesRelationship!.headChef?.endShift()
+		guard var switchesRelationship = switchesRelationship else { return }
+		switchesRelationship.customer?.presentCheck()
+		switchesRelationship.waiter?.endShift()
+		switchesRelationship.headChef?.endShift()
 	}
 	
 	private func searchFor(

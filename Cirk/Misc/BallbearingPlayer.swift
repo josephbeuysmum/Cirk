@@ -1,5 +1,5 @@
 //
-//  GameCarte.swift
+//  BallbearingPlayer.swift
 //  Cirk
 //
 //  Created by Richard Willis on 14/11/2018.
@@ -7,29 +7,6 @@
 //
 
 import AVFoundation
-//import Foundation
-//
-//class GameCarte: NSObject, Carte {
-//	fileprivate var
-//	level: Level?
-//
-//	required init<T>(_ entrees: T) {
-////		lo("bonjour game carte")
-//		level = entrees as? Level
-//	}
-//	
-////	deinit { lo("au revoir game carte") }
-//}
-//
-//	var circles: [CircleJson]? { return level?.json.circles }
-//	var levelIndex: Int? { return level?.index }
-//	var personalBest: Float? { return level?.personalBest }
-//	var nextLevelUnlocked: Bool? { return level?.nextLevelUnlocked }
-//	var unlockTime: Float? {
-//		let unlockInt = level?.json.unlockTime
-//		return unlockInt != nil ? Float(unlockInt!) : nil
-//	}
-
 
 class BallbearingPlayer: NSObject {
 	fileprivate var
@@ -112,15 +89,3 @@ extension BallbearingPlayer: AVAudioPlayerDelegate {
 		}
 	}
 }
-
-//extension GameCarte: CarteForWaiter {
-//	func empty() {
-//		stopSoundEffect()
-//		stopBallbearingSound()
-//	}
-//
-//	func stock(with order: FulfilledOrder) {
-//		guard let updatedLevel = order.dishes as? Level else { return }
-//		level = updatedLevel
-//	}
-//}

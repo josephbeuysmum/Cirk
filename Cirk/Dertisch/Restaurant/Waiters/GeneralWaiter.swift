@@ -10,24 +10,22 @@ class GeneralWaiter: Waiter {
 	var carte: CarteForCustomer? { return nil }
 	
 	fileprivate let maitreD: MaitreD
-	
+
 	fileprivate var
 	customer: CustomerForWaiter?,
 	headChef: HeadChefForWaiter?
 	
 	required init(maitreD: MaitreD) {
-//		lo("bonjour general waiter")
 		self.maitreD = maitreD
+		lo("BONJOUR  ", self)
 	}
 	
-//	deinit { lo("au revoir general waiter") }
+	deinit { lo("AU REVOIR", self) }
 	
 	public func endShift() {
 		customer = nil
 		headChef = nil
 	}
-	
-	public func beginShift() {}
 }
 
 extension GeneralWaiter: WaiterForHeadChef {
@@ -44,5 +42,4 @@ extension GeneralWaiter: WaiterForMaitreD {
 extension GeneralWaiter: WaiterForWaiter {
 	func addToCarte(_ main: FulfilledOrder) {}
 	func fillCarte(with entrees: FulfilledOrder) {}
-	func serve(dishes: FulfilledOrder) {}
 }

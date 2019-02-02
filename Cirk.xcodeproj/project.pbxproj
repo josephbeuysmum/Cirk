@@ -49,7 +49,7 @@
 		A9422867220348820026A11E /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9422866220348820026A11E /* LanguageViewController.swift */; };
 		A942286922034CB80026A11E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942286822034CB80026A11E /* GameViewController.swift */; };
 		A942286B22034DBE0026A11E /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942286A22034DBE0026A11E /* IntroViewController.swift */; };
-		A942286D2204E7710026A11E /* TableAndChairs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942286C2204E7710026A11E /* TableAndChairs.swift */; };
+		A942286D2204E7710026A11E /* RestaurantTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942286C2204E7710026A11E /* RestaurantTable.swift */; };
 		A971CDD2215393EF00F4BB29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971CDD1215393EF00F4BB29 /* AppDelegate.swift */; };
 		A971CDE7215393F100F4BB29 /* CirkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971CDE6215393F100F4BB29 /* CirkTests.swift */; };
 		A9776D992153962A00693C99 /* CirkConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9776D7C2153962A00693C99 /* CirkConsts.swift */; };
@@ -68,7 +68,6 @@
 		A9B011F921A58AC2008212C7 /* LanguageCustomerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B011F821A58AC2008212C7 /* LanguageCustomerItem.swift */; };
 		A9B011FB21A58BB1008212C7 /* LanguageEntrees.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B011FA21A58BB1008212C7 /* LanguageEntrees.swift */; };
 		A9B011FF21A58D0A008212C7 /* LanguageCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B011FE21A58D0A008212C7 /* LanguageCustomer.swift */; };
-		A9B0120121A58EC3008212C7 /* MenuCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B0120021A58EC3008212C7 /* MenuCustomer.swift */; };
 		A9B0120321A59019008212C7 /* LanguageWaiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B0120221A59019008212C7 /* LanguageWaiter.swift */; };
 		A9CCBCE4217E1E19009F04DC /* CirkTypealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CCBCE3217E1E19009F04DC /* CirkTypealiases.swift */; };
 		A9D5AEAE21A6B97F006EF751 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9D5AEAA21A6B97F006EF751 /* LaunchScreen.storyboard */; };
@@ -137,7 +136,7 @@
 		A9422866220348820026A11E /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
 		A942286822034CB80026A11E /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		A942286A22034DBE0026A11E /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
-		A942286C2204E7710026A11E /* TableAndChairs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableAndChairs.swift; sourceTree = "<group>"; };
+		A942286C2204E7710026A11E /* RestaurantTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTable.swift; sourceTree = "<group>"; };
 		A971CDCE215393EF00F4BB29 /* Cirk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cirk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A971CDD1215393EF00F4BB29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A971CDDD215393F100F4BB29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -160,7 +159,6 @@
 		A9B011F821A58AC2008212C7 /* LanguageCustomerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCustomerItem.swift; sourceTree = "<group>"; };
 		A9B011FA21A58BB1008212C7 /* LanguageEntrees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageEntrees.swift; sourceTree = "<group>"; };
 		A9B011FE21A58D0A008212C7 /* LanguageCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCustomer.swift; sourceTree = "<group>"; };
-		A9B0120021A58EC3008212C7 /* MenuCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCustomer.swift; sourceTree = "<group>"; };
 		A9B0120221A59019008212C7 /* LanguageWaiter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageWaiter.swift; sourceTree = "<group>"; };
 		A9CCBCE3217E1E19009F04DC /* CirkTypealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirkTypealiases.swift; sourceTree = "<group>"; };
 		A9D5AEAB21A6B97F006EF751 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -252,7 +250,7 @@
 				A942281C22030AA10026A11E /* Cells.swift */,
 				A942281D22030AA10026A11E /* Customer.swift */,
 				A942281E22030AA10026A11E /* PageCustomer.swift */,
-				A942286C2204E7710026A11E /* TableAndChairs.swift */,
+				A942286C2204E7710026A11E /* RestaurantTable.swift */,
 			);
 			path = Customers;
 			sourceTree = "<group>";
@@ -431,7 +429,6 @@
 				A9B011F821A58AC2008212C7 /* LanguageCustomerItem.swift */,
 				A9776DDE2153E3F700693C99 /* LevelsCustomer.swift */,
 				A9776DD92153E3F700693C99 /* LevelsCustomerItem.swift */,
-				A9B0120021A58EC3008212C7 /* MenuCustomer.swift */,
 			);
 			path = Customers;
 			sourceTree = "<group>";
@@ -634,7 +631,6 @@
 				A9776DD22153B63C00693C99 /* LevelsWaiter.swift in Sources */,
 				A942283F22030AA10026A11E /* Cells.swift in Sources */,
 				A942285822030AA10026A11E /* FoodDelivery.swift in Sources */,
-				A9B0120121A58EC3008212C7 /* MenuCustomer.swift in Sources */,
 				A942286B22034DBE0026A11E /* IntroViewController.swift in Sources */,
 				A942284C22030AA10026A11E /* Extensions.swift in Sources */,
 				A942284722030AA10026A11E /* Rota.swift in Sources */,
@@ -650,7 +646,7 @@
 				A9FBBF8721EF9BD0005BA6D4 /* BallbearingPlayer.swift in Sources */,
 				A971CDD2215393EF00F4BB29 /* AppDelegate.swift in Sources */,
 				A942284622030AA10026A11E /* Constraints.swift in Sources */,
-				A942286D2204E7710026A11E /* TableAndChairs.swift in Sources */,
+				A942286D2204E7710026A11E /* RestaurantTable.swift in Sources */,
 				A9776D992153962A00693C99 /* CirkConsts.swift in Sources */,
 				A942284422030AA10026A11E /* Waiter.swift in Sources */,
 				A9D5AEC021A70542006EF751 /* LevelsHeadChef.swift in Sources */,

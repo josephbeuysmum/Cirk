@@ -53,6 +53,7 @@ public final class Sommelier {
 	}
 	
 	public func assign(_ customer: CustomerForSommelier?) {
+		lo("assign", customer)
 		self.customer = customer
 	}
 }

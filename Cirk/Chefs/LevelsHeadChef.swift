@@ -10,16 +10,18 @@
 
 class LevelsHeadChef: HeadChef {
 	private var
+	maitreD: MaitreD?,
 	sousChef: CirkSousChef?,
 	waiter: WaiterForHeadChef?
 	
-	required init(waiter: WaiterForHeadChef?, resources: [String: KitchenResource]?) {
-//		lo("bonjour levels head chef")
+	required init(maitreD: MaitreD, waiter: WaiterForHeadChef?, resources: [String: KitchenResource]?) {
+		lo("BONJOUR  ", self)
+		self.maitreD = maitreD
 		self.sousChef = resources?[CirkSousChef.staticId] as? CirkSousChef
 		self.waiter = waiter
 	}
 	
-//	deinit { lo("au revoir levels head chef") }
+	deinit { lo("AU REVOIR", self) }
 }
 
 extension LevelsHeadChef: EndShiftProtocol {
@@ -27,6 +29,7 @@ extension LevelsHeadChef: EndShiftProtocol {
 		// todo can we genericise sousChef?.headChef = nil somehow? maybe nillify all sousChef headChefs at screen change time?
 		sousChef?.headChef = nil
 		waiter = nil
+		maitreD = nil
 	}
 }
 

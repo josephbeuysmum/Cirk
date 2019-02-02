@@ -111,8 +111,8 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 		selectedLevelIndex = countJson != nil && index > -1 && index < countJson! ? index : nil
 	}
 	
-	func set(personalBest: PBMetrics?) {
-		guard let pb = personalBest else { return }
+	func personalBest(_ value: PBMetrics?) {
+		guard let pb = value else { return }
 		freezer?.update(
 			levelKey,
 			to: FreezerAttribute(personalBestKey, pb.value),
@@ -121,7 +121,7 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 					let strongSelf = self,
 					let strongManagedObjects = managedObjects
 					else { return }
-				strongSelf.set(levels: strongManagedObjects)
+				strongSelf.setLevels(strongManagedObjects)
 				guard let level = strongSelf.getLevel(by: pb.levelIndex) else { return }
 				strongSelf.headChef?.give(prep: InternalOrder(Tickets.personalBest, dishes: level))
 		}
@@ -129,7 +129,7 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 	
 	func beginShift() {
 		guard let rawLevelsJson = bundledJson?.decode(json: "levels", into: LevelsJson.self) else {
-			lo("levels json error")
+			lo("LEVELS JSON ERROR NEEDS HANDLING")
 			return
 		}
 		var preparedLevels: [LevelJson] = []
@@ -145,7 +145,7 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 		freezer?.retrieve(levelKey) { [weak self] managedObjects in
 			guard let strongSelf = self else { return }
 			if let strongManagedObjects = managedObjects {
-				strongSelf.set(levels: strongManagedObjects)
+				strongSelf.setLevels(strongManagedObjects)
 			} else {
 				strongSelf.store(level: 0)
 			}
@@ -175,7 +175,7 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 		return nil
 	}
 	
-	private func set(levels: [NSManagedObject]?) {
+	private func setLevels(_ levels: [NSManagedObject]?) {
 		guard
 			let strongLevels = levels as? [DTCDLevel],
 			let countLevels = levelsJson?.levels.count
@@ -224,7 +224,7 @@ extension CirkSousChef {//}: CirkSousChefProtocol {
 			else { return }
 //		lo("CREATE", index, -1.0)
 		freezer?.store(levelEntity) { [weak self] objects in
-			self?.set(levels: objects)
+			self?.setLevels(objects)
 		}
 	}
 }

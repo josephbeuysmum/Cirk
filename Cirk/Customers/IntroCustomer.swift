@@ -15,10 +15,10 @@ class IntroCustomer: Customer {
 	
 	private let
 	maitreD: MaitreD,
-	sommelier: Sommelier!,
-	viewController: IntroViewController?
-	
+	sommelier: Sommelier?
+
 	private var
+	viewController: IntroViewController?,
 	waiter: WaiterForCustomer?,
 	ball: UIImageView?,
 	shapeLayer: CAShapeLayer?
@@ -28,10 +28,14 @@ class IntroCustomer: Customer {
 		self.viewController = restaurantTable as? IntroViewController
 		self.waiter = waiter
 		self.sommelier = sommelier!
+		lo("BONJOUR  ", self)
 	}
+	
+	deinit { lo("AU REVOIR", self) }
 	
 	func presentCheck() {
 		waiter = nil
+		viewController = nil
 	}
 	
 	func showToTable() {

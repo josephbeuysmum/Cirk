@@ -18,14 +18,17 @@ class LevelsCustomer: NSObject, Customer {
 	viewController: LevelsViewController?
 	
 	private var waiter: WaiterForCustomer?
-	//	deinit { lo("au revoir levels menu") }
 	
 	required init(maitreD: MaitreD, restaurantTable: RestaurantTable, waiter: WaiterForCustomer, sommelier: Sommelier?) {
 		self.maitreD = maitreD
 		self.viewController = restaurantTable as? LevelsViewController
 		self.waiter = waiter
 		self.sommelier = sommelier
+		super.init()
+//		lo("BONJOUR  ", self)
 	}
+	
+//	deinit { lo("AU REVOIR", self) }
 
 	func presentCheck() {
 		waiter = nil

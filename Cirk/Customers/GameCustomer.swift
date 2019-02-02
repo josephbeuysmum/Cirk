@@ -60,6 +60,7 @@ class GameCustomer: Customer {
 	}
 	
 	required init(maitreD: MaitreD, restaurantTable: RestaurantTable, waiter: WaiterForCustomer, sommelier: Sommelier?) {
+//		lo("BONJOUR  ", self)
 		self.maitreD = maitreD
 		self.viewController = restaurantTable as? GameViewController
 		self.waiter = waiter
@@ -72,8 +73,10 @@ class GameCustomer: Customer {
 		countBallbearing = 0
 	}
 	
+//	deinit { lo("AU REVOIR", self) }
 	
 	func presentCheck() {
+		lo()
 		invalidateTimer()
 		waiter = nil
 	}
@@ -129,7 +132,6 @@ class GameCustomer: Customer {
 	}
 	
 	func present(dish dishId: String) {
-//		lo(dishId)
 		if dishId == Tickets.setLevel {
 			initilizeLevel()
 		}

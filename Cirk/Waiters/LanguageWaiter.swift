@@ -21,9 +21,9 @@ class LanguageWaiter: Waiter {
 	carte_: CarteForCustomer?
 	
 	required init(maitreD: MaitreD) {
-//		lo("bonjour language waiter")
 		self.maitreD = maitreD
-		
+		lo("BONJOUR  ", self)
+
 		var languageNames: [LanguageCellEntre] = []
 		Languages.allCases.forEach {
 			languageNames.append(LanguageCellEntre(name: $0.rawValue))
@@ -31,7 +31,7 @@ class LanguageWaiter: Waiter {
 		carte_ = Carte(LanguageCellEntrees(names: languageNames))
 	}
 	
-//	deinit { lo("au revoir language waiter") }
+//	deinit { lo("AU REVOIR", self) }
 }
 
 extension LanguageWaiter: WaiterForCustomer {

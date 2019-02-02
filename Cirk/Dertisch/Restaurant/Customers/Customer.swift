@@ -22,8 +22,8 @@ public protocol CustomerForSommelier {
 }
 
 public protocol CustomerForRestaurantTable {
-	func tableIsLaid()
 	func seat()
+	func tableAssigned()
 }
 
 public protocol CustomerForWaiter: class {
@@ -53,7 +53,7 @@ public extension CustomerForRestaurantTable {
 		(self as? CustomerForCustomer)?.layTable()
 	}
 	
-	public func tableIsLaid() {
+	public func tableAssigned() {
 		(self as? CustomerForCustomer)?.showToTable()
 		(self as? CustomerForSommelier)?.regionChosen()
 	}
