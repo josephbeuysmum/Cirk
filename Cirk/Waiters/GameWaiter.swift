@@ -19,11 +19,11 @@ class GameWaiter: Waiter {
 	carte_: CarteForCustomer?
 
 	required init(maitreD: MaitreD) {
-//		lo("BONJOUR  ", self)
 		self.maitreD = maitreD
+		lo("BONJOUR  ", self)
 	}
 	
-//	deinit { lo("AU REVOIR", self) }
+	deinit { lo("AU REVOIR", self) }
 }
 
 extension GameWaiter: EndShiftProtocol {

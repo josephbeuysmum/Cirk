@@ -60,7 +60,6 @@ class GameCustomer: Customer {
 	}
 	
 	required init(maitreD: MaitreD, restaurantTable: RestaurantTable, waiter: WaiterForCustomer, sommelier: Sommelier?) {
-//		lo("BONJOUR  ", self)
 		self.maitreD = maitreD
 		self.viewController = restaurantTable as? GameViewController
 		self.waiter = waiter
@@ -71,9 +70,10 @@ class GameCustomer: Customer {
 //		textAnimationComplete = "textAnimationComplete"
 		orientations = []
 		countBallbearing = 0
+		lo("BONJOUR  ", self)
 	}
 	
-//	deinit { lo("AU REVOIR", self) }
+	deinit { lo("AU REVOIR", self) }
 	
 	func presentCheck() {
 		lo()

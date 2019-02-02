@@ -24,5 +24,6 @@ public class RestaurantTable: UIViewController {
 	override public func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
 		customer = nil
+		lo(customer)
 	}
 }

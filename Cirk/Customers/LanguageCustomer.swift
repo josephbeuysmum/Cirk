@@ -10,30 +10,48 @@
 import UIKit
 
 class LanguageCustomer: NSObject, Customer {
-	var restaurantTable: RestaurantTable? { return viewController }
-	
 	private let
 	maitreD: MaitreD,
-	sommelier: Sommelier!,
-	viewController: LanguageViewController?
+	sommelier: Sommelier!
 
-	private var waiter: WaiterForCustomer?
+	private var
+	viewController: LanguageViewController?,
+	waiter: WaiterForCustomer?
 	
 	required init(maitreD: MaitreD, restaurantTable: RestaurantTable, waiter: WaiterForCustomer, sommelier: Sommelier?) {
-		self.viewController = restaurantTable as? LanguageViewController
 		self.maitreD = maitreD
+		self.viewController = restaurantTable as? LanguageViewController
 		self.waiter = waiter
 		self.sommelier = sommelier
 		super.init()
-//		lo("BONJOUR  ", self)
+		lo("BONJOUR  ", self)
 	}
 	
-//	deinit { lo("AU REVOIR", self) }
+	deinit { lo("AU REVOIR", self) }
+}
+
+extension LanguageCustomer {
+	@objc func dismissButtonTarget() {
+		maitreD.removeMenu()
+	}
 	
+	private func getCarteName(by indexPath: IndexPath) -> String {
+		return "names.\(indexPath.row).name"
+	}
+}
+
+extension LanguageCustomer: CustomerForWaiter {
 	func presentCheck() {
 		waiter = nil
+		viewController = nil
 	}
-	
+}
+
+extension LanguageCustomer: CustomerForMaitreD {
+	var restaurantTable: RestaurantTable? { return viewController }
+}
+
+extension LanguageCustomer: CustomerForCustomer {
 	func showToTable() {
 		guard let restaurantTable = viewController else { return }
 		restaurantTable.tableView.delegate = self
@@ -44,19 +62,7 @@ class LanguageCustomer: NSObject, Customer {
 		restaurantTable.dismissButton.setTitle(sommelier[SommelierKeys.close]!, for: .normal)
 		restaurantTable.dismissButton.addTarget(self, action: #selector(dismissButtonTarget), for: .touchUpInside)
 	}
-	
-	
-	
-	@objc func dismissButtonTarget() {
-		maitreD.removeMenu()
-	}
-	
-	private func getCarteName(by indexPath: IndexPath) -> String {
-		return "names.\(indexPath.row).name"
-	}
 }
-
-
 
 extension LanguageCustomer: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

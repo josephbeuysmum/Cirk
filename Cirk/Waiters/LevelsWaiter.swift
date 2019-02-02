@@ -9,26 +9,28 @@
 //import Dertisch
 
 class LevelsWaiter: Waiter {
-	fileprivate weak var
-	customer: CustomerForWaiter!
+	// tood reinstate weak vars
+//	fileprivate weak var customer: CustomerForWaiter!
+
+	private let maitreD: MaitreD
 	
-	fileprivate let maitreD: MaitreD
-	
-	fileprivate var
-	headChef: HeadChefForWaiter!,
-	carte_: CarteForCustomer?
+	private var
+	headChef: HeadChefForWaiter?,
+	carte_: CarteForCustomer?,
+	customer: CustomerForWaiter?
 
 	required init(maitreD: MaitreD) {
 		self.maitreD = maitreD
 		lo("BONJOUR  ", self)
 	}
 	
-//	deinit { lo("AU REVOIR", self) }
+	deinit { lo("AU REVOIR", self) }
 }
 
 // todo we've managed to make Customer nillify itself via a weak ref., let's do the same for the head chef etc.
 extension LevelsWaiter: EndShiftProtocol {
 	func endShift() {
+		customer = nil
 		headChef = nil
 	}
 }

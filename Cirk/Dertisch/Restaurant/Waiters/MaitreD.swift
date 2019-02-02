@@ -208,16 +208,18 @@ extension MaitreD: MaitreDProtocol {
 	}
 	
 	public func usherOutCurrentCustomer() {
-//		guard currentRelationships != nil else { return }
-//		currentRelationships!.customer?.restaurantTable?.dismiss(animated: currentRelationships!.animated) { [unowned self] in
-//			self.endShift(for: self.currentRelationships)
-//			guard let formerCustomer = self.backgroundRestaurantTables.popLast() else { return }
-//			guard let formerRelationships = self.createRelationships(ticket: formerCustomer) else { return }
-//			self.currentRelationships = formerRelationships
+		guard currentRelationships != nil else { return }
+		currentRelationships!.customer?.restaurantTable?.dismiss(animated: currentRelationships!.animated) { [unowned self] in
+			self.endShift(for: self.currentRelationships)
+			guard
+				let formerCustomer = self.backgroundRestaurantTables.popLast(),
+				let formerRelationships = self.createRelationships(ticket: formerCustomer)
+				else { return }
+			self.currentRelationships = formerRelationships
 //			self.sommelier.assign(self.currentRelationships!.customer)
-//			self.currentRelationships!.waiter?.beginShift()
-//			self.currentRelationships!.headChef?.beginShift()
-//		}
+			self.currentRelationships!.waiter?.beginShift()
+			self.currentRelationships!.headChef?.beginShift()
+		}
 	}
 	
 	

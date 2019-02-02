@@ -9,17 +9,13 @@
 //import Dertisch
 import Foundation
 
-class LanguageWaiter: Waiter {
-	func fillCarte(with entrees: FulfilledOrder) {}
+class LanguageWaiter: Waiter {	
+	private let maitreD: MaitreD
 	
-	fileprivate let maitreD: MaitreD
-	
-	fileprivate weak var
-	customer: CustomerForWaiter!
-	
-	fileprivate var
-	carte_: CarteForCustomer?
-	
+	private var
+	carte_: CarteForCustomer?,
+	customer: CustomerForWaiter?
+
 	required init(maitreD: MaitreD) {
 		self.maitreD = maitreD
 		lo("BONJOUR  ", self)
@@ -31,7 +27,7 @@ class LanguageWaiter: Waiter {
 		carte_ = Carte(LanguageCellEntrees(names: languageNames))
 	}
 	
-//	deinit { lo("AU REVOIR", self) }
+	deinit { lo("AU REVOIR", self) }
 }
 
 extension LanguageWaiter: WaiterForCustomer {
@@ -41,5 +37,11 @@ extension LanguageWaiter: WaiterForCustomer {
 extension LanguageWaiter: WaiterForMaitreD {
 	func introduce(_ customer: CustomerForWaiter, and headChef: HeadChefForWaiter?) {
 		self.customer = customer
+	}
+}
+
+extension LanguageWaiter: EndShiftProtocol {
+	func endShift() {
+		customer = nil
 	}
 }

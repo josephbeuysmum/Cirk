@@ -10,14 +10,13 @@
 import UIKit
 
 class LevelsCustomer: NSObject, Customer {
-	var restaurantTable: RestaurantTable? { return viewController }
-	
 	private let
 	maitreD: MaitreD,
-	sommelier: Sommelier!,
-	viewController: LevelsViewController?
+	sommelier: Sommelier!
 	
-	private var waiter: WaiterForCustomer?
+	private var
+	viewController: LevelsViewController?,
+	waiter: WaiterForCustomer?
 	
 	required init(maitreD: MaitreD, restaurantTable: RestaurantTable, waiter: WaiterForCustomer, sommelier: Sommelier?) {
 		self.maitreD = maitreD
@@ -25,15 +24,30 @@ class LevelsCustomer: NSObject, Customer {
 		self.waiter = waiter
 		self.sommelier = sommelier
 		super.init()
-//		lo("BONJOUR  ", self)
+		lo("BONJOUR  ", self)
 	}
 	
-//	deinit { lo("AU REVOIR", self) }
+	deinit { lo("AU REVOIR", self) }
+}
 
+extension LevelsCustomer {
+	@objc private func dismissButtonTarget() {
+		maitreD.removeMenu()
+	}
+}
+
+extension LevelsCustomer: CustomerForWaiter {
 	func presentCheck() {
 		waiter = nil
+		viewController = nil
 	}
-	
+}
+
+extension LevelsCustomer: CustomerForMaitreD {
+	var restaurantTable: RestaurantTable? { return viewController }
+}
+
+extension LevelsCustomer: CustomerForCustomer {
 	func showToTable() {
 		guard let restaurantTable = viewController else { return }
 		restaurantTable.tableView.delegate = self
@@ -44,15 +58,8 @@ class LevelsCustomer: NSObject, Customer {
 		restaurantTable.dismissButton.setTitle(sommelier[SommelierKeys.close]!, for: .normal)
 		restaurantTable.dismissButton.addTarget(self, action: #selector(dismissButtonTarget), for: .touchUpInside)
 	}
-	
-	
-	
-	@objc private func dismissButtonTarget() {
-		maitreD.removeMenu()
-	}
 }
-
-
+	
 
 extension LevelsCustomer: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

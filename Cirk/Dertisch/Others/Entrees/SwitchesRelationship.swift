@@ -6,7 +6,8 @@
 //
 
 internal struct SwitchesRelationship {
-	let
+	// tood return to let?
+	var
 	customerID: String,
 	animated: Bool,
 	customer: Customer?,

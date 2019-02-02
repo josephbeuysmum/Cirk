@@ -11,8 +11,6 @@
 import UIKit
 
 class IntroCustomer: Customer {
-	var restaurantTable: RestaurantTable? { return viewController }
-	
 	private let
 	maitreD: MaitreD,
 	sommelier: Sommelier?
@@ -32,12 +30,30 @@ class IntroCustomer: Customer {
 	}
 	
 	deinit { lo("AU REVOIR", self) }
+}
+
+extension IntroCustomer {
+	@objc private func languageButtonTarget() {
+		maitreD.present(popoverMenu: Views.language)
+	}
 	
+	@objc private func levelsButtonTarget() {
+		maitreD.present(popoverMenu: Views.levels)
+	}
+	
+	@objc private func playButtonTarget() {
+		maitreD.seat(Views.game)
+	}
+}
+
+extension IntroCustomer: CustomerForWaiter {
 	func presentCheck() {
 		waiter = nil
 		viewController = nil
 	}
-	
+}
+
+extension IntroCustomer: CustomerForCustomer {
 	func showToTable() {
 		guard let restaurantTable = viewController else { return }
 		restaurantTable.languageButton.addTarget(self, action: #selector(languageButtonTarget), for: .touchUpInside)
@@ -95,27 +111,21 @@ class IntroCustomer: Customer {
 			count += 1
 		}
 	}
-	
-	func regionChosen() {
-		guard let restaurantTable = viewController else { return }
-		restaurantTable.descriptionLabel.text = sommelier?[SommelierKeys.gameDescription]
-		restaurantTable.playButton.setTitle(sommelier?[SommelierKeys.play], for: .normal)
-	}
+}
+
+extension IntroCustomer: CustomerForMaitreD {
+	var restaurantTable: RestaurantTable? { return viewController }
 	
 	func returnMenuToWaiter(_ chosenDishId: String?) {
 		guard chosenDishId != nil else { return }
 		maitreD.seat(Views.game)
 	}
-	
-	@objc private func languageButtonTarget() {
-		maitreD.present(popoverMenu: Views.language)
-	}
-	
-	@objc private func levelsButtonTarget() {
-		maitreD.present(popoverMenu: Views.levels)
-	}
-	
-	@objc private func playButtonTarget() {
-		maitreD.seat(Views.game)
+}
+
+extension IntroCustomer: CustomerForSommelier {
+	func regionChosen() {
+		guard let restaurantTable = viewController else { return }
+		restaurantTable.descriptionLabel.text = sommelier?[SommelierKeys.gameDescription]
+		restaurantTable.playButton.setTitle(sommelier?[SommelierKeys.play], for: .normal)
 	}
 }

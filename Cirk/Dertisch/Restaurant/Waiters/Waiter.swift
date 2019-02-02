@@ -226,6 +226,7 @@ public extension WaiterForCustomer {
 
 public extension WaiterForWaiter {
 	mutating func addToCarte(_ main: FulfilledOrder) {}
+	mutating func fillCarte(with entrees: FulfilledOrder) {}
 }
 
 public extension WaiterForHeadChef {

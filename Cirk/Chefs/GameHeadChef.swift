@@ -6,23 +6,26 @@
 //  Copyright © 2018 Rich Text Format Ltd. All rights reserved.
 //
 
+
+import Foundation
 //import Dertisch
 
 class GameHeadChef: HeadChef {
+	private let maitreD: MaitreD
+	
 	private var
-	maitreD: MaitreD?,
 	sousChef: CirkSousChef?,
 	waiter: WaiterForHeadChef?
 	
 	required init(maitreD: MaitreD, waiter: WaiterForHeadChef?, resources: [String: KitchenResource]?) {
-//		lo("BONJOUR  ", self)
 		self.maitreD = maitreD
 		sousChef = resources?[CirkSousChef.staticId] as? CirkSousChef
 		self.waiter = waiter
 		sousChef?.headChef = self
+		lo("BONJOUR  ", self)
 	}
 	
-//	deinit { lo("AU REVOIR", self) }
+	deinit { lo("AU REVOIR", self) }
 	
 	private func setLevel() {
 		var level: Level?
@@ -39,7 +42,9 @@ class GameHeadChef: HeadChef {
 extension GameHeadChef: CigaretteBreakProtocol {
 	func endBreak() {
 		sousChef?.headChef = self
-		setLevel()
+		DispatchQueue.main.async { [weak self] in
+			self?.setLevel()
+		}
 	}
 	
 	func startBreak() {
@@ -51,7 +56,7 @@ extension GameHeadChef: EndShiftProtocol {
 	func endShift() {
 		sousChef?.headChef = nil
 		waiter = nil
-		maitreD = nil
+//		maitreD = nil
 	}
 }
 
