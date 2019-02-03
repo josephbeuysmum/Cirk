@@ -16,10 +16,6 @@ fileprivate typealias AnimDetails = (text: String, effect: Effects)
 class GameCustomer: Customer {
 	var restaurantTable: RestaurantTable?  { return viewController }
 
-	public var id: String {
-		return ""
-	}
-	
 	private var ballSize: Double {
 		return round(Double((Int(screenBounds.height) + Metrics.screenMedian) / 2) / Metrics.ballHeightDivider)
 	}
@@ -28,7 +24,7 @@ class GameCustomer: Customer {
 	ballbearingPlayer: BallbearingPlayer,
 	maitreD: MaitreD,
 	sommelier: Sommelier!,
-	viewController: GameViewController?
+	viewController: GameRestaurantTable?
 
 	private var
 	countBallbearing: Int,
@@ -61,95 +57,21 @@ class GameCustomer: Customer {
 	
 	required init(maitreD: MaitreD, restaurantTable: RestaurantTable, waiter: WaiterForCustomer, sommelier: Sommelier?) {
 		self.maitreD = maitreD
-		self.viewController = restaurantTable as? GameViewController
+		self.viewController = restaurantTable as? GameRestaurantTable
 		self.waiter = waiter
 		self.sommelier = sommelier
 		motionManager = CMMotionManager()
 		currentCircle = CAShapeLayer()
 		ballbearingPlayer = BallbearingPlayer()
-//		textAnimationComplete = "textAnimationComplete"
 		orientations = []
 		countBallbearing = 0
-		lo("BONJOUR  ", self)
+//		lo("BONJOUR  ", self)
 	}
 	
-	deinit { lo("AU REVOIR", self) }
+//	deinit { lo("AU REVOIR", self) }
+}
 	
-	func presentCheck() {
-		lo()
-		invalidateTimer()
-		waiter = nil
-	}
-	
-	func layTable() {
-		initilizeLevel()
-	}
-	
-	func showToTable() {
-		guard
-			let restaurantTable = viewController,
-			screenBounds == nil
-			else { return }
-		let
-		tempScreenBounds = UIScreen.main.bounds,
-		widthIsLargest = tempScreenBounds.width > tempScreenBounds.height
-		screenBounds = widthIsLargest ?
-			CGRect(x: 0, y: 0, width: tempScreenBounds.width, height: tempScreenBounds.height) :
-			CGRect(x: 0, y: 0, width: tempScreenBounds.height, height: tempScreenBounds.width)
-		let
-		black = getColor(by: Colors.black),
-		teal = getColor(by: Colors.teal),
-		timeTextSize = screenBounds.height < 415 ? 28 : 52
-		
-		supportedInterfaceOrientations = .landscapeRight
-		timeLabel = UILabel()
-		timeLabel.font = UIFont(name: "EraserDust", size: CGFloat(timeTextSize))
-		timeLabel.textAlignment = .center
-		timeLabel.textColor = black
-		restaurantTable.levelKeyLabel.textColor = black
-		restaurantTable.targetKeyLabel.textColor = black
-		restaurantTable.cirksKeyLabel.textColor = black
-		restaurantTable.timeKeyLabel.textColor = black
-		restaurantTable.personalBestKeyLabel.textColor = black
-		restaurantTable.levelValueLabel.textColor = black
-		restaurantTable.cirksValueLabel.textColor = black
-		restaurantTable.targetValueLabel.textColor = black
-		restaurantTable.timeValueLabel.textColor = black
-		restaurantTable.personalBestValueLabel.textColor = teal
-		restaurantTable.titleLabel.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 1.9)
-		restaurantTable.titleLabel.textColor = getColor(by: Colors.brown, and: 0.4)
-
-		ball = UIImageView(image: UIImage(named: ImageNames.ball))
-		
-		let label = UILabel()
-		label.font = UIFont.systemFont(ofSize: 168)
-		countdownLabel = label
-		restaurantTable.backgroundImage.contentMode = .scaleAspectFill
-		restaurantTable.backgroundImage.image = UIImage(named: ImageNames.surface)
-		
-		restaurantTable.restartButton.addTarget(self, action: #selector(restartButtonTarget), for: .touchUpInside)
-		restaurantTable.levelsButton.addTarget(self, action: #selector(levelsButtonTarget), for: .touchUpInside)
-	}
-	
-	func present(dish dishId: String) {
-		if dishId == Tickets.setLevel {
-			initilizeLevel()
-		}
-	}
-	
-	func regionChosen() {
-		guard let restaurantTable = viewController else { return }
-		restaurantTable.levelKeyLabel.text = "\(sommelier[SommelierKeys.level]!):"
-		restaurantTable.targetKeyLabel.text = "\(sommelier[SommelierKeys.unlockTime]!):"
-		restaurantTable.cirksKeyLabel.text = "\(sommelier[SommelierKeys.cirks]!):"
-		restaurantTable.timeKeyLabel.text = "\(sommelier[SommelierKeys.total]!):"
-		restaurantTable.personalBestKeyLabel.text = "\(sommelier[SommelierKeys.personalBest]!):"
-	}
-	
-	
-	
-	
-	
+extension GameCustomer {
 	private func analyseResult() {
 		guard
 			let carte = waiter?.carte,
@@ -391,6 +313,7 @@ class GameCustomer: Customer {
 	
 	private func getCancelAction() -> UIAlertAction {
 		return UIAlertAction(title: sommelier[SommelierKeys.cancel], style: .cancel) { [weak self] _ in
+			lo()
 			self?.maitreD.usherOutCurrentCustomer()
 		}
 	}
@@ -639,4 +562,88 @@ class GameCustomer: Customer {
 	}
 }
 
-extension GameCustomer: CircleRendererProtocol {}
+extension GameCustomer: CircleRenderable {}
+
+extension GameCustomer: CustomerForCustomer {
+	func layTable() {
+		initilizeLevel()
+	}
+	
+	func showToTable() {
+		guard
+			let restaurantTable = viewController,
+			screenBounds == nil
+			else { return }
+		let
+		tempScreenBounds = UIScreen.main.bounds,
+		widthIsLargest = tempScreenBounds.width > tempScreenBounds.height
+		screenBounds = widthIsLargest ?
+			CGRect(x: 0, y: 0, width: tempScreenBounds.width, height: tempScreenBounds.height) :
+			CGRect(x: 0, y: 0, width: tempScreenBounds.height, height: tempScreenBounds.width)
+		let
+		black = getColor(by: Colors.black),
+		teal = getColor(by: Colors.teal),
+		timeTextSize = screenBounds.height < 415 ? 28 : 52
+		
+		supportedInterfaceOrientations = .landscapeRight
+		timeLabel = UILabel()
+		timeLabel.font = UIFont(name: "EraserDust", size: CGFloat(timeTextSize))
+		timeLabel.textAlignment = .center
+		timeLabel.textColor = black
+		restaurantTable.levelKeyLabel.textColor = black
+		restaurantTable.targetKeyLabel.textColor = black
+		restaurantTable.cirksKeyLabel.textColor = black
+		restaurantTable.timeKeyLabel.textColor = black
+		restaurantTable.personalBestKeyLabel.textColor = black
+		restaurantTable.levelValueLabel.textColor = black
+		restaurantTable.cirksValueLabel.textColor = black
+		restaurantTable.targetValueLabel.textColor = black
+		restaurantTable.timeValueLabel.textColor = black
+		restaurantTable.personalBestValueLabel.textColor = teal
+		restaurantTable.titleLabel.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 1.9)
+		restaurantTable.titleLabel.textColor = getColor(by: Colors.brown, and: 0.4)
+		
+		ball = UIImageView(image: UIImage(named: ImageNames.ball))
+		
+		let label = UILabel()
+		label.font = UIFont.systemFont(ofSize: 168)
+		countdownLabel = label
+		restaurantTable.backgroundImage.contentMode = .scaleAspectFill
+		restaurantTable.backgroundImage.image = UIImage(named: ImageNames.surface)
+		
+		restaurantTable.restartButton.addTarget(self, action: #selector(restartButtonTarget), for: .touchUpInside)
+		restaurantTable.levelsButton.addTarget(self, action: #selector(levelsButtonTarget), for: .touchUpInside)
+	}
+}
+
+extension GameCustomer: CustomerForMaitreD {
+	func menuReturnedToWaiter(_ chosenDishId: String?) {
+		guard chosenDishId == nil else { return }
+		maitreD.usherOutCurrentCustomer()
+	}
+}
+
+extension GameCustomer: CustomerForSommelier {
+	func regionChosen() {
+		guard let restaurantTable = viewController else { return }
+		restaurantTable.levelKeyLabel.text = "\(sommelier[SommelierKeys.level]!):"
+		restaurantTable.targetKeyLabel.text = "\(sommelier[SommelierKeys.unlockTime]!):"
+		restaurantTable.cirksKeyLabel.text = "\(sommelier[SommelierKeys.cirks]!):"
+		restaurantTable.timeKeyLabel.text = "\(sommelier[SommelierKeys.total]!):"
+		restaurantTable.personalBestKeyLabel.text = "\(sommelier[SommelierKeys.personalBest]!):"
+	}
+}
+
+extension GameCustomer: CustomerForWaiter {
+	func presentCheck() {
+		invalidateTimer()
+		waiter = nil
+	}
+	
+	func present(dish dishId: String) {
+		if dishId == Tickets.setLevel {
+			initilizeLevel()
+		}
+	}
+}
+

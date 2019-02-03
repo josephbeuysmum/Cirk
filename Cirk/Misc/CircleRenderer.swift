@@ -1,5 +1,5 @@
 //
-//  CircleRenderer.swift
+//  CircleRenderable.swift
 //  Cirk
 //
 //  Created by Richard Willis on 30/07/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension CircleRendererProtocol {
+extension CircleRenderable {
 	func drawCircle(
 		with circle: CAShapeLayer,
 		from circleData: CircleJson,
@@ -38,7 +38,7 @@ extension CircleRendererProtocol {
 	}
 }
 
-protocol CircleRendererProtocol {}
+protocol CircleRenderable {}
 
 struct CircleColors {
 	let red: CGFloat, green: CGFloat, blue: CGFloat

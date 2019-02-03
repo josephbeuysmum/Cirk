@@ -13,7 +13,7 @@ import UIKit
 //	var level: Level? { return level_ }
 //}
 
-class LevelsCustomerItem: RestaurantTableViewCell, CircleRendererProtocol {
+class LevelsCustomerItem: RestaurantTableViewCell, CircleRenderable {
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var levelLabel: UILabel!
 	@IBOutlet weak var targetLabel: UILabel!

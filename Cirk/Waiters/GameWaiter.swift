@@ -20,13 +20,13 @@ class GameWaiter: Waiter {
 
 	required init(maitreD: MaitreD) {
 		self.maitreD = maitreD
-		lo("BONJOUR  ", self)
+//		lo("BONJOUR  ", self)
 	}
 	
-	deinit { lo("AU REVOIR", self) }
+//	deinit { lo("AU REVOIR", self) }
 }
 
-extension GameWaiter: EndShiftProtocol {
+extension GameWaiter: EndShiftable {
 	func endShift() {
 		customer = nil
 		headChef = nil

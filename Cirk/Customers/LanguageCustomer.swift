@@ -15,19 +15,19 @@ class LanguageCustomer: NSObject, Customer {
 	sommelier: Sommelier!
 
 	private var
-	viewController: LanguageViewController?,
+	viewController: LanguageRestaurantTable?,
 	waiter: WaiterForCustomer?
 	
 	required init(maitreD: MaitreD, restaurantTable: RestaurantTable, waiter: WaiterForCustomer, sommelier: Sommelier?) {
 		self.maitreD = maitreD
-		self.viewController = restaurantTable as? LanguageViewController
+		self.viewController = restaurantTable as? LanguageRestaurantTable
 		self.waiter = waiter
 		self.sommelier = sommelier
 		super.init()
-		lo("BONJOUR  ", self)
+//		lo("BONJOUR  ", self)
 	}
 	
-	deinit { lo("AU REVOIR", self) }
+//	deinit { lo("AU REVOIR", self) }
 }
 
 extension LanguageCustomer {

@@ -22,10 +22,10 @@ class GameHeadChef: HeadChef {
 		sousChef = resources?[CirkSousChef.staticId] as? CirkSousChef
 		self.waiter = waiter
 		sousChef?.headChef = self
-		lo("BONJOUR  ", self)
+//		lo("BONJOUR  ", self)
 	}
 	
-	deinit { lo("AU REVOIR", self) }
+//	deinit { lo("AU REVOIR", self) }
 	
 	private func setLevel() {
 		var level: Level?
@@ -39,7 +39,7 @@ class GameHeadChef: HeadChef {
 	}
 }
 
-extension GameHeadChef: CigaretteBreakProtocol {
+extension GameHeadChef: CigaretteBreakable {
 	func endBreak() {
 		sousChef?.headChef = self
 		DispatchQueue.main.async { [weak self] in
@@ -52,7 +52,7 @@ extension GameHeadChef: CigaretteBreakProtocol {
 	}
 }
 
-extension GameHeadChef: EndShiftProtocol {
+extension GameHeadChef: EndShiftable {
 	func endShift() {
 		sousChef?.headChef = nil
 		waiter = nil
@@ -60,7 +60,7 @@ extension GameHeadChef: EndShiftProtocol {
 	}
 }
 
-extension GameHeadChef: BeginShiftProtocol {
+extension GameHeadChef: BeginShiftable {
 	func beginShift() {
 		setLevel()
 	}
@@ -68,7 +68,7 @@ extension GameHeadChef: BeginShiftProtocol {
 
 extension GameHeadChef: HeadChefForWaiter {
 	func give(_ order: CustomerOrder) {
-		lo(order.ticket)
+//		lo(order.ticket)
 		switch order.ticket {
 		case Tickets.personalBest:
 			sousChef?.personalBest(order.content as? PBMetrics)

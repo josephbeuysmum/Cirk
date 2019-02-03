@@ -40,7 +40,7 @@ class CirkSousChef {
 	}
 }
 
-extension CirkSousChef {//}: CirkSousChefProtocol {
+extension CirkSousChef {
 	var allLevels: LevelCollection? {
 		guard
 			let countJson = levelsJson?.levels.count,

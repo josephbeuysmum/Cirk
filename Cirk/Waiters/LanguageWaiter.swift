@@ -18,7 +18,7 @@ class LanguageWaiter: Waiter {
 
 	required init(maitreD: MaitreD) {
 		self.maitreD = maitreD
-		lo("BONJOUR  ", self)
+//		lo("BONJOUR  ", self)
 
 		var languageNames: [LanguageCellEntre] = []
 		Languages.allCases.forEach {
@@ -27,7 +27,7 @@ class LanguageWaiter: Waiter {
 		carte_ = Carte(LanguageCellEntrees(names: languageNames))
 	}
 	
-	deinit { lo("AU REVOIR", self) }
+//	deinit { lo("AU REVOIR", self) }
 }
 
 extension LanguageWaiter: WaiterForCustomer {
@@ -40,7 +40,7 @@ extension LanguageWaiter: WaiterForMaitreD {
 	}
 }
 
-extension LanguageWaiter: EndShiftProtocol {
+extension LanguageWaiter: EndShiftable {
 	func endShift() {
 		customer = nil
 	}

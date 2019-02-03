@@ -15,19 +15,19 @@ class LevelsCustomer: NSObject, Customer {
 	sommelier: Sommelier!
 	
 	private var
-	viewController: LevelsViewController?,
+	viewController: LevelsRestaurantTable?,
 	waiter: WaiterForCustomer?
 	
 	required init(maitreD: MaitreD, restaurantTable: RestaurantTable, waiter: WaiterForCustomer, sommelier: Sommelier?) {
 		self.maitreD = maitreD
-		self.viewController = restaurantTable as? LevelsViewController
+		self.viewController = restaurantTable as? LevelsRestaurantTable
 		self.waiter = waiter
 		self.sommelier = sommelier
 		super.init()
-		lo("BONJOUR  ", self)
+//		lo("BONJOUR  ", self)
 	}
 	
-	deinit { lo("AU REVOIR", self) }
+//	deinit { lo("AU REVOIR", self) }
 }
 
 extension LevelsCustomer {
