@@ -9,11 +9,11 @@
 import AVFoundation
 //import Dertisch
 
-// todo all this is basically GeneralWaiter with a bespoke [Game]Carte added, so if we make the carte generic too [with a subscript? [and casting accessors a la JsonThingy?]] then we can do away with this class/code
+// todo all this is basically GeneralWaiter with a bespoke [Game]Carte added, so if we make the carte generic too then we can do away with this class/code
 class GameWaiter: Waiter {
-	fileprivate let maitreD: MaitreD
+	private let maitreD: MaitreD
 	
-	fileprivate var
+	private var
 	customer: CustomerForWaiter!,
 	headChef: HeadChefForWaiter!,
 	carte_: CarteForCustomer?

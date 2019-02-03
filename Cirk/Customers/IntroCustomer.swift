@@ -46,19 +46,6 @@ extension IntroCustomer {
 	}
 }
 
-extension IntroCustomer: CustomerForWaiter {
-	func presentCheck() {
-		if let restaurantTable = viewController {
-			restaurantTable.languageButton.removeTarget(self, action: #selector(languageButtonTarget), for: .touchUpInside)
-			restaurantTable.levelsButton.removeTarget(self, action: #selector(levelsButtonTarget), for: .touchUpInside)
-			restaurantTable.playButton.removeTarget(self, action: #selector(playButtonTarget), for: .touchUpInside)
-		}
-		shapeLayer?.path = nil
-		waiter = nil
-		viewController = nil
-	}
-}
-
 extension IntroCustomer: CustomerForCustomer {
 	func showToTable() {
 		guard let restaurantTable = viewController else { return }
@@ -84,14 +71,15 @@ extension IntroCustomer: CustomerForCustomer {
 extension IntroCustomer: CustomerForMaitreD {
 	var restaurantTable: RestaurantTable? { return viewController }
 	
-	func menuReturnedToWaiter(_ chosenDishId: String?) {
-		guard chosenDishId != nil else { return }
+	func menuReturnedToWaiter(_ order: CustomerOrder? = nil) {
+		guard order?.ticket == Tickets.setLevel else { return }
 		maitreD.seat(Views.game)
 	}
 }
 
 extension IntroCustomer: CustomerForRestaurantTable {
 	func isSeated() {
+		shapeLayer?.path = nil
 		guard let restaurantTable = viewController else { return }
 		
 		restaurantTable.languageButton.addTarget(self, action: #selector(languageButtonTarget), for: .touchUpInside)
@@ -139,5 +127,18 @@ extension IntroCustomer: CustomerForSommelier {
 		guard let restaurantTable = viewController else { return }
 		restaurantTable.descriptionLabel.text = sommelier?[SommelierKeys.gameDescription]
 		restaurantTable.playButton.setTitle(sommelier?[SommelierKeys.play], for: .normal)
+	}
+}
+
+extension IntroCustomer: CustomerForWaiter {
+	func presentCheck() {
+		if let restaurantTable = viewController {
+			restaurantTable.languageButton.removeTarget(self, action: #selector(languageButtonTarget), for: .touchUpInside)
+			restaurantTable.levelsButton.removeTarget(self, action: #selector(levelsButtonTarget), for: .touchUpInside)
+			restaurantTable.playButton.removeTarget(self, action: #selector(playButtonTarget), for: .touchUpInside)
+		}
+		shapeLayer?.path = nil
+		waiter = nil
+		viewController = nil
 	}
 }

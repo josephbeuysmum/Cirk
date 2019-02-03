@@ -37,7 +37,7 @@ public protocol MaitreDProtocol: MaitreDRegistrar {
 //	func greet(firstCustomer customerId: String, through window: UIWindow, from storyboard: String?)
 //	func present(popoverMenu menuId: String, inside rect: CGRect?, from storyboard: String?)
 //	// todo is there a better solution to getting popover results to the underlying VC than passing chosenDishId?
-//	func removeMenu(_ chosenDishId: String?)
+//	func removeMenu(_ order: CustomerOrder?)
 //	func seat(_ customerId: String, via transitionStyle: UIModalTransitionStyle?, from storyboard: String?)
 //	func usherOutCurrentCustomer()
 }
@@ -165,17 +165,17 @@ extension MaitreD: MaitreDProtocol {
 		resource.beginShift()
 	}
 	
-	public func removeMenu(_ chosenDishId: String? = nil) {
+	public func removeMenu(_ order: CustomerOrder? = nil) {
 		guard menuRelationships != nil else { return }
 		menuRelationships!.customer?.restaurantTable?.dismiss(animated: true) { [unowned self] in
-			self.currentRelationships?.customer?.menuReturnedToWaiter(chosenDishId)
+			self.currentRelationships?.customer?.menuReturnedToWaiter(order)
 		}
 		endShift(for: menuRelationships)
 		menuRelationships = nil
 		guard currentRelationships != nil else { return }
 		currentRelationships!.headChef?.endBreak()
 		currentRelationships!.waiter?.endBreak()
-		currentRelationships!.customer?.returnMenuToWaiter(chosenDishId)
+		currentRelationships!.customer?.returnMenuToWaiter(order)
 		currentRelationships!.customer?.regionChosen()
 	}
 	

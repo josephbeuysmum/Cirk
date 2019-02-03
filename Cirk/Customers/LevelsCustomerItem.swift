@@ -20,8 +20,6 @@ class LevelsCustomerItem: RestaurantTableViewCell, CircleRenderable {
 	@IBOutlet weak var personalBestLabel: UILabel!
 	@IBOutlet weak var diagramImage: UIImageView!
 	
-//	fileprivate var level_: Level?
-	
 	override func serve<T>(with data: T?) {
 		if  let level = data as? Level {
 			populate(with: level)

@@ -36,17 +36,6 @@ extension LevelsCustomer {
 	}
 }
 
-extension LevelsCustomer: CustomerForWaiter {
-	func presentCheck() {
-		waiter = nil
-		viewController = nil
-	}
-}
-
-extension LevelsCustomer: CustomerForMaitreD {
-	var restaurantTable: RestaurantTable? { return viewController }
-}
-
 extension LevelsCustomer: CustomerForCustomer {
 	func showToTable() {
 		guard let restaurantTable = viewController else { return }
@@ -59,7 +48,17 @@ extension LevelsCustomer: CustomerForCustomer {
 		restaurantTable.dismissButton.addTarget(self, action: #selector(dismissButtonTarget), for: .touchUpInside)
 	}
 }
-	
+
+extension LevelsCustomer: CustomerForMaitreD {
+	var restaurantTable: RestaurantTable? { return viewController }
+}
+
+extension LevelsCustomer: CustomerForWaiter {
+	func presentCheck() {
+		waiter = nil
+		viewController = nil
+	}
+}
 
 extension LevelsCustomer: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -92,8 +91,8 @@ extension LevelsCustomer: UITableViewDataSource {
 
 extension LevelsCustomer: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let row = indexPath.row
-		waiter?.give(CustomerOrder(Tickets.setLevel, row))
-		maitreD.removeMenu("\(row)")
+		let order = CustomerOrder(Tickets.setLevel, indexPath.row)
+		waiter?.give(order)
+		maitreD.removeMenu(order)
 	}
 }

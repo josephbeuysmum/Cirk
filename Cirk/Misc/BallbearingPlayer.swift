@@ -9,7 +9,7 @@
 import AVFoundation
 
 class BallbearingPlayer: NSObject {
-	fileprivate var
+	private var
 	audioIsOn: Bool,
 	level: Level?,
 	effectPlayer: AVAudioPlayer?,

@@ -14,8 +14,8 @@ public protocol CustomerForCustomer {
 public protocol CustomerForMaitreD: class {
 	var restaurantTable: RestaurantTable? { get }
 	func peruseMenu()
-	func returnMenuToWaiter(_ chosenDishId: String?)
-	func menuReturnedToWaiter(_ chosenDishId: String?)
+	func returnMenuToWaiter(_ order: CustomerOrder?)
+	func menuReturnedToWaiter(_ order: CustomerOrder?)
 }
 
 public protocol CustomerForSommelier {
@@ -46,8 +46,8 @@ public extension CustomerForCustomer {
 
 public extension CustomerForMaitreD {
 	public func peruseMenu() {}
-	public func returnMenuToWaiter(_ chosenDishId: String?) {}
-	public func menuReturnedToWaiter(_ chosenDishId: String?) {}
+	public func returnMenuToWaiter(_ order: CustomerOrder? = nil) {}
+	public func menuReturnedToWaiter(_ order: CustomerOrder? = nil) {}
 }
 
 public extension CustomerForRestaurantTable {

@@ -42,9 +42,6 @@ class GameHeadChef: HeadChef {
 extension GameHeadChef: CigaretteBreakable {
 	func endBreak() {
 		sousChef?.headChef = self
-		DispatchQueue.main.async { [weak self] in
-			self?.setLevel()
-		}
 	}
 	
 	func startBreak() {

@@ -91,7 +91,7 @@ extension GameCustomer {
 		unlocked = !nextLevelAlreadyUnlocked && roundedGameTime <= unlockTime,
 		newPersonalBest = !hasPersonalBest || roundedGameTime < personalBest,
 		lastLevelComplete = (levelIndex + 1 == countLevels) && unlocked,
-		levelWasAlreadyUnlocked = personalBest <= unlockTime,
+		levelWasAlreadyUnlocked = personalBest > 0 && personalBest <= unlockTime,
 		almostUnlocked = roundedGameTime < unlockTime + Metrics.closeMarginOfError,
 		textColor: CircleColors,
 		title: String
@@ -313,7 +313,6 @@ extension GameCustomer {
 	
 	private func getCancelAction() -> UIAlertAction {
 		return UIAlertAction(title: sommelier[SommelierKeys.cancel], style: .cancel) { [weak self] _ in
-			lo()
 			self?.maitreD.usherOutCurrentCustomer()
 		}
 	}
@@ -617,9 +616,12 @@ extension GameCustomer: CustomerForCustomer {
 }
 
 extension GameCustomer: CustomerForMaitreD {
-	func menuReturnedToWaiter(_ chosenDishId: String?) {
-		guard chosenDishId == nil else { return }
-		maitreD.usherOutCurrentCustomer()
+	func menuReturnedToWaiter(_ order: CustomerOrder? = nil) {
+		switch order?.ticket {
+		case nil:					maitreD.usherOutCurrentCustomer()
+		case Tickets.setLevel:		waiter?.give(order!)
+		default: ()
+		}
 	}
 }
 

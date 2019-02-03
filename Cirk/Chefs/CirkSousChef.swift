@@ -141,7 +141,6 @@ extension CirkSousChef {
 		}
 		self.levelsJson = LevelsJson(levels: preparedLevels)
 		freezer?.dataModelName = "CirkData"
-//		endShift(); return;
 		freezer?.retrieve(levelKey) { [weak self] managedObjects in
 			guard let strongSelf = self else { return }
 			if let strongManagedObjects = managedObjects {
