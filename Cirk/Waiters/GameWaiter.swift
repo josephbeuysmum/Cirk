@@ -57,7 +57,6 @@ extension GameWaiter: WaiterForWaiter {
 	
 	private func setCarte(with order: FulfilledOrder) {
 		guard let dishes = order.dishes else { return }
-//		lo(dishes)
 		carte_ = Carte(dishes)
 	}
 }

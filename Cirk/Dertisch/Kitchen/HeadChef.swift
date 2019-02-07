@@ -27,8 +27,8 @@ public extension HeadChef {
 }
 
 public extension HeadChefForMaitreD {
-	public func beginShift() { lo() }
-	public func endShift() { lo() }
+	public func beginShift() {}
+	public func endShift() {}
 }
 
 public extension HeadChefForSousChef {

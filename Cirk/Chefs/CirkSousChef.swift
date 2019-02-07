@@ -93,13 +93,7 @@ extension CirkSousChef {
 	
 	
 	
-	func endShift() {
-		// todo? remove this temporary deletion
-		freezer?.delete(levelKey) { [weak self] _ in
-			lo("deleted")
-			self?.levels.removeAll()
-		}
-	}
+	func endShift() {}
 	
 	func getLevel(by index: Int) -> Level? {
 		guard let level = get(level: index) else { return nil }
@@ -128,10 +122,7 @@ extension CirkSousChef {
 	}
 	
 	func beginShift() {
-		guard let rawLevelsJson = bundledJson?.decode(json: "levels", into: LevelsJson.self) else {
-			lo("LEVELS JSON ERROR NEEDS HANDLING")
-			return
-		}
+		guard let rawLevelsJson = bundledJson?.decode(json: "levels", into: LevelsJson.self) else { return }
 		var preparedLevels: [LevelJson] = []
 		let levelsCount = rawLevelsJson.levels.count
 		for i in 0..<levelsCount {
@@ -198,14 +189,7 @@ extension CirkSousChef {
 				}
 			}
 		}
-//		logLevels()
 	}
-	
-//	private func logLevels () {
-//		for i in 0..<levels.count {
-//			lo(i, levels[i].index, levels[i].mode, levels[i].nextLevelUnlocked, levels[i].personalBest)
-//		}
-//	}
 	
 	// todo: mode does nothing for now, but is foreseen as a way to make an upside-down version of the game later on
 	private func store(level index: Int) {
@@ -221,7 +205,6 @@ extension CirkSousChef {
 			levelEntity.add(mode.rawValue, by: modeKey),
 			levelEntity.add(-1.0, by: personalBestKey)
 			else { return }
-//		lo("CREATE", index, -1.0)
 		freezer?.store(levelEntity) { [weak self] objects in
 			self?.setLevels(objects)
 		}

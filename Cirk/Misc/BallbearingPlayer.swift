@@ -72,9 +72,7 @@ class BallbearingPlayer: NSObject {
 			player.numberOfLoops = loops ? -1 : 0
 			player.play()
 			return player
-		} catch let error {
-			lo(error.localizedDescription)
-		}
+		} catch {}
 		return nil
 	}
 }

@@ -25,9 +25,7 @@ public final class Sommelier {
 		// todo what should happen after the region gets re-set?
 		set {
 			guard region_ != newValue else { return }
-//			lo(customer)
 			region_ = newValue
-//			customer?.regionChosen()
 		}
 	}
 	
