@@ -31,7 +31,7 @@ class LevelsCustomer: NSObject, Customer {
 }
 
 extension LevelsCustomer {
-	@objc private func dismissButtonTarget() {
+	@IBAction private func dismissButtonTarget(_ sender: AnyObject) {
 		maitreD.removeMenu()
 	}
 }
@@ -45,7 +45,7 @@ extension LevelsCustomer: CustomerForCustomer {
 		restaurantTable.tableView.estimatedRowHeight = 64
 		restaurantTable.tableView.register(UINib(nibName: Views.levelsCell, bundle: nil), forCellReuseIdentifier: Views.levelsCell)
 		restaurantTable.dismissButton.setTitle(sommelier[SommelierKeys.close]!, for: .normal)
-		restaurantTable.dismissButton.addTarget(self, action: #selector(dismissButtonTarget), for: .touchUpInside)
+		restaurantTable.dismissButton.addTarget(self, action: #selector(dismissButtonTarget(_:)), for: .touchUpInside)
 	}
 }
 

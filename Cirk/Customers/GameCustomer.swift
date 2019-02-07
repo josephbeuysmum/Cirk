@@ -409,12 +409,12 @@ extension GameCustomer {
 		timer = nil
 	}
 
-	@objc private func levelsButtonTarget() {
+	@IBAction private func levelsButtonTarget(_ sender: AnyObject) {
 		stopLevel()
 		maitreD.present(popoverMenu: Views.levels)
 	}
 	
-	@objc private func restartButtonTarget() {
+	@IBAction private func restartButtonTarget(_ sender: AnyObject) {
 		stopLevel()
 		initilizeLevel()
 	}
@@ -610,8 +610,8 @@ extension GameCustomer: CustomerForCustomer {
 		restaurantTable.backgroundImage.contentMode = .scaleAspectFill
 		restaurantTable.backgroundImage.image = UIImage(named: ImageNames.surface)
 		
-		restaurantTable.restartButton.addTarget(self, action: #selector(restartButtonTarget), for: .touchUpInside)
-		restaurantTable.levelsButton.addTarget(self, action: #selector(levelsButtonTarget), for: .touchUpInside)
+		restaurantTable.restartButton.addTarget(self, action: #selector(restartButtonTarget(_:)), for: .touchUpInside)
+		restaurantTable.levelsButton.addTarget(self, action: #selector(levelsButtonTarget(_:)), for: .touchUpInside)
 	}
 }
 

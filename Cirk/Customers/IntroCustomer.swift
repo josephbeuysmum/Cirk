@@ -8,6 +8,7 @@
 
 // todo once we replace refs to Dertisch, we can remove all these supporting refs to UIKit etc
 //import Dertisch
+import Crashlytics
 import UIKit
 
 class IntroCustomer: Customer {
@@ -33,15 +34,15 @@ class IntroCustomer: Customer {
 }
 
 extension IntroCustomer {
-	@objc private func languageButtonTarget() {
+	@IBAction private func languageButtonTarget(_ sender: AnyObject) {
 		maitreD.present(popoverMenu: Views.language)
 	}
 	
-	@objc private func levelsButtonTarget() {
+	@IBAction private func levelsButtonTarget(_ sender: AnyObject) {
 		maitreD.present(popoverMenu: Views.levels)
 	}
 	
-	@objc private func playButtonTarget() {
+	@IBAction private func playButtonTarget(_ sender: AnyObject) {
 		maitreD.seat(Views.game)
 	}
 }
@@ -82,9 +83,9 @@ extension IntroCustomer: CustomerForRestaurantTable {
 		shapeLayer?.path = nil
 		guard let restaurantTable = viewController else { return }
 		
-		restaurantTable.languageButton.addTarget(self, action: #selector(languageButtonTarget), for: .touchUpInside)
-		restaurantTable.levelsButton.addTarget(self, action: #selector(levelsButtonTarget), for: .touchUpInside)
-		restaurantTable.playButton.addTarget(self, action: #selector(playButtonTarget), for: .touchUpInside)
+		restaurantTable.languageButton.addTarget(self, action: #selector(languageButtonTarget(_:)), for: .touchUpInside)
+		restaurantTable.levelsButton.addTarget(self, action: #selector(levelsButtonTarget(_:)), for: .touchUpInside)
+		restaurantTable.playButton.addTarget(self, action: #selector(playButtonTarget(_:)), for: .touchUpInside)
 		
 		let
 		screenBounds = restaurantTable.view.bounds,
