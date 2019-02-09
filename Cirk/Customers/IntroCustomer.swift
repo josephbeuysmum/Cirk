@@ -8,7 +8,6 @@
 
 // todo once we replace refs to Dertisch, we can remove all these supporting refs to UIKit etc
 //import Dertisch
-import Crashlytics
 import UIKit
 
 class IntroCustomer: Customer {
